@@ -25,22 +25,58 @@ for word in UNICODE:
 	STOP.append(word)
 
 
+def tokenizeParas(rawfile):
+	print "Now tokenizing into paragraphs..."
+	paras = unidecode(raw).splitlines()
+	para_index = []
+
+	for i, item in enumerate(paras):
+		if item=='':
+			para_index.append(i)
+
+	para_index.insert(0, 0)
+
+	new_paras = []
+
+	for i, item in enumerate(para_index):
+		string = ' '
+		new_string = string.join(paras[para_index[i-1]:para_index[i]])
+		new_paras.append(new_string)
+
+	print "Paragraph tokenization complete."
+	return new_paras
+
+
 with io.open(DIR + '/raw/dracula.txt', 'r', encoding='utf-8') as r:
 	raw = r.read()
 	print unidecode(raw[0:200])
 	print type(raw)
 
-	print "Now tokenizing into words and sentences..."
-	# sentences[51] is funny
-	words = nltk.word_tokenize(raw)
-	print "Word tokenization complete."
-	sentences = nltk.sent_tokenize(raw)
-	print "Sentence tokenization complete."
-
 	# Paragraph indexes
-	paras = unidecode(raw).splitlines()
-	print type(paras)
-	print paras[2000:2050]
-	# Actual paras have '' between them, hmm
+	paragraphs = tokenizeParas(raw)
+	print len(paragraphs)
+
+	textDict = []
+
+	for i, para in enumerate(paragraphs[:10]):
+		print "Now doing para " + `i`
+		paraObject = {}
+		paraObject = {
+			'rawText': para,
+			'words': nltk.word_tokenize(para),
+			'sentences': nltk.sent_tokenize(para),
+			'index': i
+			}
+
+		textDict.append(paraObject)
+
+
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(textDict)
+			
+
+
+
+
 	
 
