@@ -13,17 +13,22 @@ import random
 DIR = os.getcwd()
 pp = pprint.PrettyPrinter(indent=4)
 dataset = []
-UNICODE = nltk.corpus.stopwords.words('english')
-STOP = []
-MORESTOP = ['.', ',', 'the', '?', '-', '(', ')', ':', 
-			'[', ']', '%', ';', '\n', '\\n', '...', '\\n\\n',
-			'***\\n', '**\\n', '*\\n']
+STOP = nltk.corpus.stopwords.words('english')
+MORESTOP = [
+			u",",
+			u".",
+			u"''",
+			u";",
+			u"--",
+			u'``',
+			u'!',
+			u"'s",
+			u"*",
+			u":",
+			u"?",
+			u"'",
+			]
 STOP.extend(MORESTOP)
-
-for word in UNICODE:
-	word = word.encode('utf8')
-	STOP.append(word)
-
 
 def tokenizeParas(rawfile):
 	print "Now tokenizing into paragraphs..."
@@ -47,34 +52,71 @@ def tokenizeParas(rawfile):
 	return new_paras
 
 
-with io.open(DIR + '/raw/dracula.txt', 'r', encoding='utf-8') as r:
+def topCheck(topWords, words):
+	detupled = [x for (x, y) in topWords]
+
+	for word in detupled:
+		if word in words:
+			return 1
+		else:
+			return 0
+
+
+with io.open(DIR + '/raw/frankenstein.txt', 'r', encoding='utf-8') as r:
 	raw = r.read()
-	print unidecode(raw[0:200])
-	print type(raw)
 
-	# Paragraph indexes
-	paragraphs = tokenizeParas(raw)
-	print len(paragraphs)
 
-	textDict = []
 
-	for i, para in enumerate(paragraphs[:10]):
-		print "Now doing para " + `i`
-		paraObject = {}
-		paraObject = {
-			'rawText': para,
-			'words': nltk.word_tokenize(para),
-			'sentences': nltk.sent_tokenize(para),
-			'index': i
-			}
+print "Word tokenizing entire text to get top words..."
+words = nltk.word_tokenize(raw)
+words = [w.lower() for w in words if w not in MORESTOP]
+vocab = sorted(set(words))
+fdist = nltk.FreqDist(words)
+top_words = [(x, y) for (x,y) in fdist.most_common(100) if x not in STOP]
 
-		textDict.append(paraObject)
+print "Finished tokenizing.\n"
+# print len(vocab)
+print "The top words are:"
+print top_words
+print "\n"
 
+# Paragraph indexes
+paragraphs = tokenizeParas(raw)
+
+# Overall dict
+textDict = {
+	'title': '',
+	'author': '',
+	'wordcount': len(words),
+	'paracount': len(paragraphs),
+	'vocab': len(vocab),
+	'top_words': [x for (x, y) in top_words]
+}
+
+textList = []
+
+for i, para in enumerate(paragraphs[:200]):
+	# print "Now doing para " + `i`
+	words = nltk.word_tokenize(para)
+	sentences = nltk.sent_tokenize(para)
+
+	paraDict = {}
+	paraDict = {
+		'index': i,
+		'rawText': para,
+		'words': [{'word': x, 'length': len(x)} for x in words],
+		'sentences': [{'sent': sentence, 'length': len(sentence)} for sentence in sentences],
+		'top': topCheck(top_words, words),
+		'length': len(para)
+		}
+
+	textList.append(paraDict)
+
+
+# textDict['text'] = textList
 
 pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(textDict)
-			
-
+# pp.pprint(textDict)
 
 
 
