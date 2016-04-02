@@ -117,7 +117,7 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 		paraDict = {
 			'index': i,
 			'rawText': para,
-			'words': [{'word': x, 'length': len(x)} for x in words],
+			# 'words': [{'word': x, 'length': len(x)} for x in words], #WORDS IS THE BIG STUFF
 			'sentences': [{'sent': sentence, 'length': len(sentence)} for sentence in sentences],
 			'top': topCheck(top_words, words),
 			'length': len(para)
@@ -154,6 +154,6 @@ for txt in books:
 # pp.pprint(bigJson)
 # print len(bigJson)
 
-with open(DIR + "/processed/data.json", "w") as f:
+with open(DIR + "/processed/data2.json", "w") as f:
 	json.dump(bigJson, f)
 
