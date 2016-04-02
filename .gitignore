@@ -3,5 +3,6 @@
 *.png
 *.mov
 *.pdf
+*.json
 *_old/*
 *planning/*
