@@ -116,9 +116,9 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 		paraDict = {}
 		paraDict = {
 			'index': i,
-			'rawText': para,
+			# 'rawText': para,
 			# 'words': [{'word': x, 'length': len(x)} for x in words], #WORDS IS THE BIG STUFF
-			'sentences': [{'sent': sentence, 'length': len(sentence)} for sentence in sentences],
+			'sentences': [{'sent_index': i, 'length': len(sentence)} for i, sentence in enumerate(sentences)],
 			'top': topCheck(top_words, words),
 			'length': len(para)
 			}
@@ -134,7 +134,7 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 
 
 # Run everything
-books = os.listdir(DIR + "/raw")
+books = [x for x in os.listdir(DIR + "/raw") if x != ".DS_Store"]
 bigJson = []
 
 for txt in books:
@@ -154,6 +154,6 @@ for txt in books:
 # pp.pprint(bigJson)
 # print len(bigJson)
 
-with open(DIR + "/processed/data3.json", "w") as f:
+with open(DIR + "/processed/data5.json", "w") as f:
 	json.dump(bigJson, f)
 
