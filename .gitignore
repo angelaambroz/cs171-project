@@ -6,4 +6,4 @@
 *.json
 *_old/*
 *process-book/*
-README.html
+*README.html*
