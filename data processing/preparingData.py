@@ -154,6 +154,6 @@ for txt in books:
 # pp.pprint(bigJson)
 # print len(bigJson)
 
-with open(DIR + "/processed/data2.json", "w") as f:
+with open(DIR + "/processed/data3.json", "w") as f:
 	json.dump(bigJson, f)
 

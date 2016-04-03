@@ -1,0 +1,7 @@
+The shape of text
+
+Inspired by Kurt Vonnegut's lecture on the "shape of stories", as well as the 2015 Open Vis Conference website's agenda, this project will visualize texts from a variety of sources. Taking words and sentences as data points, I will visualize texts for their relative overall lengths, as well as the average lengths of their sentences and paragraphs. I will highlight their structures and key words, allowing users to quickly assess the visual (and content-wise) "gist" of the texts. This visualization will be applicable to text corpi from a variety of sources: fiction and non-fiction, old and new. 
+
+The motivation behind this project is my particular interest in text as a type of data. In my work, I more often work on quantitative data - "number crunching". By using visualization tools to explore and analyze textual data, I hope to begin building a new understanding for myself of how text can be similarly "crunched". I am also excited by the combination of "art" and "science". In terms of data sources, I will pull text corpi from Project Gutenberg and, if time allows, some web scraping or APIs. Ideally, I would like to have a mix of very different text "datasets": novels, academic articles, newspaper articles, fanfiction, and anything else I can find. 
+
+

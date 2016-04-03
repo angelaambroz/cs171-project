@@ -15,6 +15,11 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 ### Resources
 * [CS171 official website - Project](http://www.cs171.org/2016/project/)
 * [CS171 official website - Schedule](http://www.cs171.org/2016/schedule/)
+* Book covers:
+    * [Frankenstein](https://commons.wikimedia.org/wiki/File:CC_No_26_Frankenstein_2.JPG)
+    * [Dracula](https://en.wikipedia.org/wiki/Dracula#/media/File:Dracula1st.jpeg)
+    * [Moby Dick](https://en.wikipedia.org/wiki/File:Moby_Dick_p510_illustration.jpg)
+    * [Emma](https://en.wikipedia.org/wiki/File:Emma_title_page_1909.jpg)
 
 
 ### TODO
@@ -22,6 +27,7 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 ###### General
 * ~~Get `git` set up.~~
 * Keep taking pictures/screenshots for Process Book.
+* ~~Find CC-licensed book covers.~~
 
 ###### Data processing
 * ~~Select texts for download.~~
@@ -29,10 +35,13 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Top-level object for each text, capturing title, author, top words, etc.~~
 * ~~Paragraph-level objects capturing para text, length (sentences vs. characters?), sentences, whether they have any top words in there.~~
 * General questions:
-  1. Should I separate out each book into its own json? What would be most efficient to pull from the server?
-  2. How else can I reduce the size of the json?
+    1. Should I separate out each book into its own json? What would be most efficient to pull from the server?
+    2. How else can I reduce the size of the json?
 
 
 ###### Data visualization
-Coming soon.
+* ~~Add templates from best HWs and Labs.~~
+* ~~Set up some basic CSS and website structure.~~
+* Where to put `#main-viz` and `#link-viz`?
+
 

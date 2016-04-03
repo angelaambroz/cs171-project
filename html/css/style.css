@@ -1,0 +1,48 @@
+
+/* ADD YOUR STYLES HERE */
+
+body {
+  background-color: #f8f6f4;
+  font-family: "Menlo", sans-serif;
+}
+
+.caption, .side-note {
+  background-color: lightgray;
+  color: gray;
+}
+
+.buffer-needed {
+  margin-top: 50px;
+}
+
+.caption .tiny-header {
+  font-variant: small-caps;
+}
+
+.caption p {
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #e2e2e2;
+  text-decoration: none;
+}
+
+.caption a {
+  color: gray;
+}
+
+#chart-area {
+  margin-top: 45px;
+}
+
+#more-info {
+  background-color: #e0ddd9;
+  height: 400px;
+  top: 50px;
+}
+
