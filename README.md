@@ -34,6 +34,7 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Basic input of `txt`, output `json`.~~
 * ~~Top-level object for each text, capturing title, author, top words, etc.~~
 * ~~Paragraph-level objects capturing para text, length (sentences vs. characters?), sentences, whether they have any top words in there.~~
+* Convert all `len(x)` into word tokenizers counting words, instead of characters.
 * General questions:
     1. Should I separate out each book into its own json? What would be most efficient to pull from the server?
     2. How else can I reduce the size of the json?

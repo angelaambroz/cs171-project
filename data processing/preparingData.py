@@ -116,11 +116,11 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 		paraDict = {}
 		paraDict = {
 			'index': i,
-			# 'rawText': para,
+			'rawText': para,
 			# 'words': [{'word': x, 'length': len(x)} for x in words], #WORDS IS THE BIG STUFF
-			'sentences': [{'sent_index': i, 'length': len(sentence)} for i, sentence in enumerate(sentences)],
+			'sentences': [{'sent': sentence, 'length': len(sentence)} for i, sentence in enumerate(sentences)],
 			'top': topCheck(top_words, words),
-			'length': len(para)
+			'length': len(words)
 			}
 
 		textList.append(paraDict)
@@ -137,23 +137,38 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 books = [x for x in os.listdir(DIR + "/raw") if x != ".DS_Store"]
 bigJson = []
 
-for txt in books:
-	with io.open(DIR + "/raw/" + txt, 'r', encoding='utf-8') as r:		
-		raw = r.read()
+# Test run
+with io.open(DIR + "/raw/emma.txt", 'r', encoding='utf-8') as r:		
+	raw = r.read()
+words, vocab, top_words = overallTokenizing(raw)
+paragraphs = paraTokenizer(raw)
+title, author = TitleAuthor(paragraphs)
+bookData = buildData(title, author, words, vocab, top_words, paragraphs)
 
-	print "\nNow doing: " + txt
+pp.pprint(bookData)
 
-	words, vocab, top_words = overallTokenizing(raw)
-	paragraphs = paraTokenizer(raw)
-	title, author = TitleAuthor(paragraphs)
-	bookData = buildData(title, author, words, vocab, top_words, paragraphs)
 
-	bigJson.append(bookData)
+# Actual run
+# for txt in books:
+# 	with io.open(DIR + "/raw/" + txt, 'r', encoding='utf-8') as r:		
+# 		raw = r.read()
+
+# 	print "\nNow doing: " + txt
+
+# 	words, vocab, top_words = overallTokenizing(raw)
+# 	paragraphs = paraTokenizer(raw)
+# 	title, author = TitleAuthor(paragraphs)
+# 	bookData = buildData(title, author, words, vocab, top_words, paragraphs)
+
+# 	# bigJson.append(bookData)
+
+# 	with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
+# 		json.dump(bookData, f)
 
 
 # pp.pprint(bigJson)
 # print len(bigJson)
 
-with open(DIR + "/processed/data5.json", "w") as f:
-	json.dump(bigJson, f)
+# with open(DIR + "/processed/data6.json", "w") as f:
+# 	json.dump(bigJson, f)
 
