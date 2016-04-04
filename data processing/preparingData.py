@@ -12,7 +12,6 @@ import random
 
 DIR = os.getcwd()
 pp = pprint.PrettyPrinter(indent=4)
-dataset = []
 STOP = nltk.corpus.stopwords.words('english')
 MORESTOP = [
 			u",",
@@ -69,7 +68,7 @@ def overallTokenizing(rawFile):
 	words = [w.lower() for w in words if w not in MORESTOP]
 	vocab = sorted(set(words))
 	fdist = nltk.FreqDist(words)
-	top_words = [(x, y) for (x,y) in fdist.most_common(100) if x not in STOP]
+	top_words = [(x, y) for (x, y) in fdist.most_common(100) if x not in STOP]
 	
 	print "Finished tokenizing."
 	return words, vocab, top_words
@@ -117,9 +116,8 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 		paraDict = {
 			'index': i,
 			'rawText': para,
-			# 'words': [{'word': x, 'length': len(x)} for x in words], #WORDS IS THE BIG STUFF
-			'sentences': [{'sent': sentence, 'length': len(sentence)} for i, sentence in enumerate(sentences)],
-			'top': topCheck(top_words, words),
+			'sentences': [{'sent': i, 'length': len(nltk.word_tokenize(sentence)), 'top': topCheck(top_words, nltk.word_tokenize(sentence))} for i, sentence in enumerate(sentences)],
+			# 'top': topCheck(top_words, words),
 			'length': len(words)
 			}
 
