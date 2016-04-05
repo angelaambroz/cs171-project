@@ -5,6 +5,15 @@ var allData = [];
 var selectedBook, mainData, linkData, mainChart, linkChart; 
 
 
+// Is the user scrolling?
+$w = $(window);
+
+$w.scroll(function() {
+	console.log("Wheeee");
+	console.log($w.scrollTop());
+});
+
+
 // load default data
 // update if new data is selected
 
@@ -16,6 +25,7 @@ d3.selectAll(".choose").on("click", function() {
 
 
 function loadData() {
+
 	d3.json("data/all-books.json", function(error, jsonData) {
 
 		if (!error) {
@@ -47,7 +57,9 @@ function loadData() {
 
 function createVis() {
 
-	mainchart = new textChart("main-viz", mainData);
+	console.log("Making the vizzes.");
+
+	mainChart = new textChart("main-viz", mainData);
 	// TODO: link viz
 
 }
@@ -56,9 +68,12 @@ window.addEventListener("resize", function() {
 		
 		// On resizing, resize main viz
 		d3.select("#main-viz").selectAll("svg").remove();
-		mainchart.initVis();
+		mainChart.initVis();
 
 		// ...and linked viz
 
 	}, false);
+
+
+
 

@@ -21,6 +21,8 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
     * [Moby Dick](https://en.wikipedia.org/wiki/File:Moby_Dick_p510_illustration.jpg)
     * [Emma](https://en.wikipedia.org/wiki/File:Emma_title_page_1909.jpg)
 * [d3 Scalability – Virtual Scrolling for Large Visualizations](http://www.billdwhite.com/wordpress/2014/05/17/d3-scalability-virtual-scrolling-for-large-visualizations/)
+* [Tony Hschu - Scroll linked animations](http://blog.tonyhschu.ca/post/49488608263/technical-write-up-scroll-linked-animations)
+* [Jim Valladingham - Scroller.js](http://vallandingham.me/scroller.html)
 
 
 
