@@ -53,13 +53,16 @@ def paraTokenizer(rawfile):
 
 
 def topCheck(topWords, words):
-	detupled = [x for (x, y) in topWords]
+	detupled = [unidecode(x) for (x, y) in topWords]
+	words = [w.lower() for w in words if w not in MORESTOP]
 
-	for word in detupled:
-		if word in words:
-			return 1
-		else:
-			return 0
+	var = [1 for x in detupled if x in words]
+	tops = sum(var)
+
+	if tops > 0:
+		return 1
+	else: 
+		return 0
 
 
 def overallTokenizing(rawFile):
@@ -94,6 +97,8 @@ def TitleAuthor(paras):
 def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 	print "Now building data..."
 
+	print topWords
+
 	# Overall dict
 	textDict = {
 		'title': titleText,
@@ -109,7 +114,6 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 
 	for i, para in enumerate(paragraphs):
 		# print "Now doing para " + `i`
-		words = nltk.word_tokenize(para)
 		sentences = nltk.sent_tokenize(para)
 
 		paraDict = {}
@@ -117,7 +121,6 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 			'index': i,
 			'rawText': para,
 			'sentences': [{'sent': i, 'length': len(nltk.word_tokenize(sentence)), 'top': topCheck(top_words, nltk.word_tokenize(sentence))} for i, sentence in enumerate(sentences)],
-			# 'top': topCheck(top_words, words),
 			'length': len(words)
 			}
 
