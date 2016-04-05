@@ -48,9 +48,10 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Set up some basic CSS and website structure.~~
 * Where to put `#main-viz` and `#link-viz`?
 * Data summary box - get that started.
-* Get `main.js`, `textChart.js` and `linkChart.js` set up.
-* User choice covers: CSS, functions. 
+* Get ~~`main.js`~~, ~~`textChart.js`~~ and `linkChart.js` set up.
+* ~~User choice covers: CSS, functions.~~ 
 * How to replicate Sublime Text's brushed sidebar? 
     * How to determine height of what the viewer is seeing? Highest data point and lowest data point?
+* Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
 
 

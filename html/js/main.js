@@ -27,8 +27,9 @@ function loadData() {
 				}
 			});
 
+			
+
 			console.log(allData);
-			console.log(mainData);
 
 			/*
 			Pseudo-code:

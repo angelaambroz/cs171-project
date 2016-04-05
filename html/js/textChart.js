@@ -20,7 +20,7 @@ textChart.prototype.initVis = function() {
 	vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
 
 	vis.divWidth = $("#main-viz").width();
-	console.log(vis.divWidth);
+	// console.log(vis.divWidth);
 
 	vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
 	vis.height = 2000 - vis.margin.top - vis.margin.bottom;
@@ -30,6 +30,8 @@ textChart.prototype.initVis = function() {
 	    .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
 	  .append("g")
 	    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+	console.log(vis.data);
 
 }
 
