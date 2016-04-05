@@ -161,13 +161,13 @@ for txt in books:
 	title, author = TitleAuthor(paragraphs)
 	bookData = buildData(title, author, words, vocab, top_words, paragraphs)
 
-	# bigJson.append(bookData)
+	bigJson.append(bookData)
 
-	with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
-		json.dump(bookData, f)
+	# with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
+	# 	json.dump(bookData, f)
 
 # pp.pprint(bigJson)
 
-# with open(DIR + "/processed/data7.json", "w") as f:
-# 	json.dump(bigJson, f)
+with open(DIR + "/processed/data7.json", "w") as f:
+	json.dump(bigJson, f)
 

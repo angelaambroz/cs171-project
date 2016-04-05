@@ -20,6 +20,8 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
     * [Dracula](https://en.wikipedia.org/wiki/Dracula#/media/File:Dracula1st.jpeg)
     * [Moby Dick](https://en.wikipedia.org/wiki/File:Moby_Dick_p510_illustration.jpg)
     * [Emma](https://en.wikipedia.org/wiki/File:Emma_title_page_1909.jpg)
+* [d3 Scalability – Virtual Scrolling for Large Visualizations](http://www.billdwhite.com/wordpress/2014/05/17/d3-scalability-virtual-scrolling-for-large-visualizations/)
+
 
 
 ### TODO
@@ -34,15 +36,20 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Basic input of `txt`, output `json`.~~
 * ~~Top-level object for each text, capturing title, author, top words, etc.~~
 * ~~Paragraph-level objects capturing para text, length (sentences vs. characters?), sentences, whether they have any top words in there.~~
-* Convert all `len(x)` into word tokenizers counting words, instead of characters.
+* ~~Convert all `len(x)` into word tokenizers counting words, instead of characters.~~
 * General questions:
-    1. Should I separate out each book into its own json? What would be most efficient to pull from the server?
-    2. How else can I reduce the size of the json?
+    1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
+    2. ~~How else can I reduce the size of the json?~~
 
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
 * ~~Set up some basic CSS and website structure.~~
 * Where to put `#main-viz` and `#link-viz`?
+* Data summary box - get that started.
+* Get `main.js`, `textChart.js` and `linkChart.js` set up.
+* User choice covers: CSS, functions. 
+* How to replicate Sublime Text's brushed sidebar? 
+    * How to determine height of what the viewer is seeing? Highest data point and lowest data point?
 
 
