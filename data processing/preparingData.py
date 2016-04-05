@@ -121,7 +121,7 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 						'length': len(cleanWordTokenize(sentence)), 
 						'top': topCheck(top_words, cleanWordTokenize(sentence), sentence)} 
 						for i, sentence in enumerate(sentences)],
-			'length': len(words)
+			'length': len(cleanWordTokenize(para))
 			}
 
 		textList.append(paraDict)
@@ -141,10 +141,10 @@ bigJson = []
 # Test run
 # with io.open(DIR + "/raw/emma.txt", 'r', encoding='utf-8') as r:		
 # 	raw = r.read()
-# words, vocab, top_words = overallTokenizing(raw)
+# new_words, vocab, top_words = overallTokenizing(raw)
 # paragraphs = paraTokenizer(raw)
 # title, author = TitleAuthor(paragraphs)
-# bookData = buildData(title, author, words, vocab, top_words, paragraphs)
+# bookData = buildData(title, author, new_words, vocab, top_words, paragraphs)
 
 # pp.pprint(bookData)
 
@@ -168,6 +168,6 @@ for txt in books:
 
 # pp.pprint(bigJson)
 
-with open(DIR + "/processed/data7.json", "w") as f:
+with open(DIR + "/processed/data9.json", "w") as f:
 	json.dump(bigJson, f)
 

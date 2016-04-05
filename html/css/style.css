@@ -46,3 +46,7 @@ a:hover {
   top: 50px;
 }
 
+.choose:hover{
+  cursor: pointer;
+}
+
