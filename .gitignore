@@ -3,7 +3,6 @@
 *.png
 *.mov
 *.pdf
-*.json
 *_old/*
 *process-book/*
 *README.html*
