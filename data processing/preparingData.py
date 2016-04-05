@@ -29,6 +29,10 @@ MORESTOP = [
 			]
 STOP.extend(MORESTOP)
 
+def cleanWordTokenize(rawWords):
+	words = nltk.word_tokenize(rawWords)
+	words = [w.lower() for w in words if w not in MORESTOP]
+	return words
 
 def paraTokenizer(rawfile):
 	print "Now tokenizing into paragraphs..."
@@ -52,23 +56,21 @@ def paraTokenizer(rawfile):
 	return new_paras
 
 
-def topCheck(topWords, words):
+def topCheck(topWords, words, sentence):
 	detupled = [unidecode(x) for (x, y) in topWords]
-	words = [w.lower() for w in words if w not in MORESTOP]
 
 	var = [1 for x in detupled if x in words]
 	tops = sum(var)
 
 	if tops > 0:
-		return 1
+		return sentence
 	else: 
 		return 0
 
 
 def overallTokenizing(rawFile):
-	print "Word tokenizing entire text to get top words..."
-	words = nltk.word_tokenize(rawFile)
-	words = [w.lower() for w in words if w not in MORESTOP]
+	print "Word tokenizing entire text to get top words..."	
+	words = cleanWordTokenize(rawFile)
 	vocab = sorted(set(words))
 	fdist = nltk.FreqDist(words)
 	top_words = [(x, y) for (x, y) in fdist.most_common(100) if x not in STOP]
@@ -97,8 +99,6 @@ def TitleAuthor(paras):
 def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 	print "Now building data..."
 
-	print topWords
-
 	# Overall dict
 	textDict = {
 		'title': titleText,
@@ -113,14 +113,14 @@ def buildData(titleText, authorName, allWords, textVocab, topWords, paras):
 	textList = []
 
 	for i, para in enumerate(paragraphs):
-		# print "Now doing para " + `i`
 		sentences = nltk.sent_tokenize(para)
 
-		paraDict = {}
 		paraDict = {
 			'index': i,
-			'rawText': para,
-			'sentences': [{'sent': i, 'length': len(nltk.word_tokenize(sentence)), 'top': topCheck(top_words, nltk.word_tokenize(sentence))} for i, sentence in enumerate(sentences)],
+			'sentences': [{'index': i, 
+						'length': len(cleanWordTokenize(sentence)), 
+						'top': topCheck(top_words, cleanWordTokenize(sentence), sentence)} 
+						for i, sentence in enumerate(sentences)],
 			'length': len(words)
 			}
 
@@ -139,37 +139,35 @@ books = [x for x in os.listdir(DIR + "/raw") if x != ".DS_Store"]
 bigJson = []
 
 # Test run
-with io.open(DIR + "/raw/emma.txt", 'r', encoding='utf-8') as r:		
-	raw = r.read()
-words, vocab, top_words = overallTokenizing(raw)
-paragraphs = paraTokenizer(raw)
-title, author = TitleAuthor(paragraphs)
-bookData = buildData(title, author, words, vocab, top_words, paragraphs)
+# with io.open(DIR + "/raw/emma.txt", 'r', encoding='utf-8') as r:		
+# 	raw = r.read()
+# words, vocab, top_words = overallTokenizing(raw)
+# paragraphs = paraTokenizer(raw)
+# title, author = TitleAuthor(paragraphs)
+# bookData = buildData(title, author, words, vocab, top_words, paragraphs)
 
-pp.pprint(bookData)
+# pp.pprint(bookData)
 
 
 # Actual run
-# for txt in books:
-# 	with io.open(DIR + "/raw/" + txt, 'r', encoding='utf-8') as r:		
-# 		raw = r.read()
+for txt in books:
+	with io.open(DIR + "/raw/" + txt, 'r', encoding='utf-8') as r:		
+		raw = r.read()
 
-# 	print "\nNow doing: " + txt
+	print "\nNow doing: " + txt
 
-# 	words, vocab, top_words = overallTokenizing(raw)
-# 	paragraphs = paraTokenizer(raw)
-# 	title, author = TitleAuthor(paragraphs)
-# 	bookData = buildData(title, author, words, vocab, top_words, paragraphs)
+	words, vocab, top_words = overallTokenizing(raw)
+	paragraphs = paraTokenizer(raw)
+	title, author = TitleAuthor(paragraphs)
+	bookData = buildData(title, author, words, vocab, top_words, paragraphs)
 
-# 	# bigJson.append(bookData)
+	# bigJson.append(bookData)
 
-# 	with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
-# 		json.dump(bookData, f)
-
+	with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
+		json.dump(bookData, f)
 
 # pp.pprint(bigJson)
-# print len(bigJson)
 
-# with open(DIR + "/processed/data6.json", "w") as f:
+# with open(DIR + "/processed/data7.json", "w") as f:
 # 	json.dump(bigJson, f)
 
