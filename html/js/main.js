@@ -2,15 +2,14 @@
 
 var allData = [];
 
-var selectedBook, mainData, linkData, mainChart, linkChart; 
+var selectedBook, mainData, linkData, mainChart, linkChart, scrollPoint; 
 
 
 // Is the user scrolling?
 $w = $(window);
 
 $w.scroll(function() {
-	console.log("Wheeee");
-	console.log($w.scrollTop());
+	scrollPoint = $w.scrollTop();
 });
 
 
@@ -20,6 +19,7 @@ $w.scroll(function() {
 d3.selectAll(".choose").on("click", function() {
 	selectedBook = this.childNodes[0].id;
 	
+	d3.select("#main-viz").selectAll("svg").remove();
 	loadData();
 });
 
@@ -37,9 +37,7 @@ function loadData() {
 				}
 			});
 
-			
-
-			console.log(allData);
+			// console.log(allData);
 
 			/*
 			Pseudo-code:
