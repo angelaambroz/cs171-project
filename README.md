@@ -39,7 +39,7 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Top-level object for each text, capturing title, author, top words, etc.~~
 * ~~Paragraph-level objects capturing para text, length (sentences vs. characters?), sentences, whether they have any top words in there.~~
 * ~~Convert all `len(x)` into word tokenizers counting words, instead of characters.~~
-* Fix above -- specifically, fix `cleanWordTokenize()`. 
+* ~~Fix above -- specifically, fix `cleanWordTokenize()`.~~ 
 * General questions:
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
@@ -56,6 +56,6 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
     * How to determine height of what the viewer is seeing? Highest data point and lowest data point?
 * Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
 * Jane Austen `maxParaLength` seems way too high.
-* Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`. 
+* ~~Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`.~~ (Did this manually.)
 
 

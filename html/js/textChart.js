@@ -35,10 +35,6 @@ textChart.prototype.initVis = function() {
 	vis.x = d3.scale.linear().range([0, vis.width]);
 	vis.y = d3.scale.linear().range([vis.height, 0]);
 
-
-	// Converting data for stacking
-	vis.stack = d3.layout.stack().values(function(d) { return d.length; });
-
 	// Not making axes.
 
 	// TODO: Update data summary
@@ -61,8 +57,8 @@ textChart.prototype.updateVis = function() {
 		vis.maxParaLength = (elem.length > vis.maxParaLength) ? elem.length : vis.maxParaLength;
 
 		elem.sentences.forEach(function(sent, index) {
-			sent.y0 = (index == 0) ? 0 : elem.sentences[index - 1].length;
-			sent.y1 = (index == 0) ? sent.length : elem.sentences[index - 1].length + sent.length;
+			sent.x0 = (index == 0) ? 0 : elem.sentences[index - 1].length;
+			sent.x1 = (index == 0) ? sent.length : elem.sentences[index - 1].length + sent.length;
 		})
 
 	})
