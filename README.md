@@ -56,6 +56,6 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
     * How to determine height of what the viewer is seeing? Highest data point and lowest data point?
 * Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
 * Jane Austen `maxParaLength` seems way too high.
-
+* Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`. 
 
 

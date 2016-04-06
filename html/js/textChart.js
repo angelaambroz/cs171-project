@@ -35,6 +35,10 @@ textChart.prototype.initVis = function() {
 	vis.x = d3.scale.linear().range([0, vis.width]);
 	vis.y = d3.scale.linear().range([vis.height, 0]);
 
+
+	// Converting data for stacking
+	vis.stack = d3.layout.stack().values(function(d) { return d.length; });
+
 	// Not making axes.
 
 	// TODO: Update data summary
@@ -50,14 +54,20 @@ textChart.prototype.updateVis = function() {
 
 	vis.paraArray = vis.data[0].text;
 
-	// console.log(vis.paraArray);
 
 	vis.maxParaLength = 0;
 
-	vis.paraArray.forEach(function(elem, index) {
+	vis.paraArray.forEach(function(elem) {
 		vis.maxParaLength = (elem.length > vis.maxParaLength) ? elem.length : vis.maxParaLength;
+
+		elem.sentences.forEach(function(sent, index) {
+			sent.y0 = (index == 0) ? 0 : elem.sentences[index - 1].length;
+			sent.y1 = (index == 0) ? sent.length : elem.sentences[index - 1].length + sent.length;
+		})
+
 	})
 
+	console.log(vis.paraArray);
 	console.log(vis.maxParaLength);
 
 	vis.y.domain([0, vis.paraArray.length]);
@@ -71,22 +81,20 @@ textChart.prototype.updateVis = function() {
 		.attr("id", function(d) { return "para-" + d.index; })
 		.attr("transform", function(d) { return "translate(0," + vis.y(d.index) + ")"; });
 
-	console.log(vis.paraArray);
-
-	vis.para.selectAll("rect")
-		.data(function(d) { return d.sentences; })
-		.enter()
-		.append("rect")
-		.attr("width", function(d) { 
-			return vis.x(50);
-			// return vis.x(d.length); 
-		})
-		.attr("x", function(d, i) { 
-			console.log("The data is " + d);
-			console.log("The index is " + i);
-		})
-		.attr("height", function(d) { return vis.y(60); })
-		.attr("fill", "navy");
+	// vis.para.selectAll("rect")
+	// 	.data(function(d) { return d.sentences; })
+	// 	.enter()
+	// 	.append("rect")
+	// 	.attr("width", function(d) { 
+	// 		// return vis.x(50);
+	// 		return vis.x(d.length); 
+	// 	})
+	// 	.attr("x", function(d, i) { 
+	// 		console.log("The data is " + d);
+	// 		console.log("The index is " + i);
+	// 	})
+	// 	.attr("height", function(d) { return vis.y(60) / vis.maxParaLength; })
+	// 	.attr("fill", "gray");
 
 
 	// state.selectAll("rect")
