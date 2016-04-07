@@ -4,7 +4,6 @@ var allData = [];
 
 var selectedBook, mainData, linkData, mainChart, linkChart, scrollPoint; 
 
-
 // Is the user scrolling?
 $w = $(window);
 
