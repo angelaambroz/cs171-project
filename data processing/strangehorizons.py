@@ -2,12 +2,14 @@
 
 import urllib2
 import pprint
+import ast
 import csv
-from bs4 import BeautifulSoup
-from unidecode import unidecode
 import nltk
 import os
 import json
+from bs4 import BeautifulSoup
+from unidecode import unidecode
+from nesting import Nest
 
 #############
 #	Globals	#
@@ -34,7 +36,8 @@ MORESTOP = [
 			]
 STOP.extend(MORESTOP)
 CLEAN = ["CDATA", "comments found", "following HTML tags"]
-
+SPACE = " "
+pp = pprint.PrettyPrinter(indent=4)
 
 
 #########################
@@ -63,13 +66,6 @@ def overallTokenizing(rawFile):
 	print "Finished tokenizing."
 	return words, vocab, top_words
 
-def cleanPara(elem):
-	if elem.get('class') != None:
-		return False
-	# if "CDATA" in unidecode(elem.text):
-	# 	return False
-	# or "No comments found." or "The following HTML tags"
-
 
 #################################
 #	Data collection functions	#
@@ -85,10 +81,18 @@ def oldStories(souped):
 
 	return old_stories
 
+
 def storyContent(top_url, story_links):
+
+	# Saving all text to run top_words on it
+	yearObjects = []
+	storyObjects = []
+
+	# Pulling text from all stories
+	print "Pulling text from stories..."
 	for story_url in story_links:
 		story_soup = Souping(top_url + story_url)
-		
+
 		# If podcast, skip
 		if "Podcast" not in unidecode(story_soup.h1.text):
 			story_title = unidecode(story_soup.h1.text)
@@ -99,13 +103,30 @@ def storyContent(top_url, story_links):
 							and "comments found" not in unidecode(p.text)
 							and "following HTML tags" not in unidecode(p.text)
 							and "Archived Fiction Dating" not in unidecode(p.text)]
+			story_text = SPACE.join(story_text)
 			story_year = unidecode(story_soup.find_all(class_="content-date")[0].text[-4:])
-			
+			num_words = len(cleanWordTokenize(story_text))
+
+			yearObjects.append({
+					'year': story_year,
+					'raw': story_text
+				})
+
+			# storyObjects.append({
+			# 	'title': story_title,
+			# 	'author': story_author,
+			# 	'wordcount': num_words,
+			# 	'year': story_year,
+			# 	'raw': story_text
+			# 	})
 
 
-			# print story_text
-			# for p in story_text:
-			# 	print unidecode(p)
+
+			# allText.append(story_text)
+
+	return yearObjects, storyObjects
+
+
 
 
 #############
@@ -114,7 +135,22 @@ def storyContent(top_url, story_links):
 
 soup = Souping(SH)
 stories = oldStories(soup)
-storyContent(TOP, stories[0:5])
+years, stobjects = storyContent(TOP, stories[0:5])
+
+test = (Nest()
+		.key('year')
+		.entries(years))
+
+print type(years)
+print type(test)
+print type(test[0])
+print dir(test[0])
+# print test[0].key
+# print test[0].values
+
+# print type(ast.literal_eval(test[0]))
+# pp.pprint(test)
+
 
 
 
