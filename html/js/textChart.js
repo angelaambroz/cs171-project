@@ -63,7 +63,7 @@ textChart.prototype.updateVis = function() {
 
 	})
 
-	console.log(vis.paraArray);
+	// console.log(vis.paraArray);
 	// console.log(vis.maxParaLength);
 
 	vis.y.domain([vis.paraArray.length, 0]);
@@ -85,15 +85,16 @@ textChart.prototype.updateVis = function() {
 		.attr("x", function(d) { return vis.x(d.x0); })
 		.attr("height", function(d, i) { return vis.height /vis.paraArray.length; })
 		.attr("fill", function(d) {
-			if (d.top == 0) {
+			if (d.top == 0 || d.top.search("Emma") == -1) {
 				return "gray";	
-			} else {
-				return "gray";
+			} else if (d.top.search("Emma") > -1) {
+				console.log(d.top);
+				return "yellow";
 				// return "#"+Math.floor(Math.random()*16777215).toString(16);
 			}
 		})
 		.attr("stroke-width", 0.75)
-		.attr("stroke", "pink");
+		.attr("stroke", "orange");
 
 
 }
