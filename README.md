@@ -32,6 +32,11 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Get `git` set up.~~
 * Keep taking pictures/screenshots for Process Book.
 * ~~Find CC-licensed book covers.~~
+* New design idea: User can search for something in the text.
+* New design idea: Tooltip _not_ on hover - but rather, once top word or user word appears, reveal that line to the right of the charts.
+* New design idea: The long scroll is boring:
+      * Collapse paras into chapter objects? (Using average sentence length per para?)
+
 
 ###### Data processing
 * ~~Select texts for download.~~
@@ -50,6 +55,7 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Set up some basic CSS and website structure.~~
 * ~~Where to put `#main-viz` and `#link-viz`?~~
 * Data summary box - get that started.
+* Top words buttons. 
 * Get ~~`main.js`~~, ~~`textChart.js`~~ and `linkChart.js` set up.
 * ~~User choice covers: CSS, functions.~~ 
 * How to replicate Sublime Text's brushed sidebar? 
@@ -57,5 +63,6 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
 * Jane Austen `maxParaLength` seems way too high.
 * ~~Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`.~~ (Did this manually.)
-
-
+* Resize isn't re-loading `mainChart` in the correct way.
+* ~~Figure out `height` on `mainChart`.`~~
+* Center `mainChart`. 
