@@ -3,7 +3,7 @@ CS171 Project: The shape of text
 
 ### Summary
 
-Spring 2016. This project will visualize the story shapes of a variety of 19th century novels. Ideally, I'd like to build something that's extendable to a wide variety of texts. This is the final project for [CS171 Spring 2016](http://www.cs171.org/2016/). 
+Spring 2016. This project will visualize the story shapes of a ~~variety of 19th century novels~~ about 300 science fiction short stories. Ideally, I'd like to build something that's extendable to a wide variety of texts. This is the final project for [CS171 Spring 2016](http://www.cs171.org/2016/). 
 
 
 ### Inspiration

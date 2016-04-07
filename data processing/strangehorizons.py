@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 import nltk
 import os
+import json
 
 #############
 #	Globals	#
@@ -32,6 +33,8 @@ MORESTOP = [
 			u"'",
 			]
 STOP.extend(MORESTOP)
+CLEAN = ["CDATA", "comments found", "following HTML tags"]
+
 
 
 #########################
@@ -61,10 +64,10 @@ def overallTokenizing(rawFile):
 	return words, vocab, top_words
 
 def cleanPara(elem):
-	if elem.get('class') == None:
+	if elem.get('class') != None:
 		return False
-	if "CDATA" in unidecode(elem.text):
-		return False
+	# if "CDATA" in unidecode(elem.text):
+	# 	return False
 	# or "No comments found." or "The following HTML tags"
 
 
@@ -90,12 +93,19 @@ def storyContent(top_url, story_links):
 		if "Podcast" not in unidecode(story_soup.h1.text):
 			story_title = unidecode(story_soup.h1.text)
 			story_author = unidecode(story_soup.h2.text)
-			story_text = [p.text for p in story_soup.find_all("p") if cleanPara(p)]
+			story_text = [p.text for p in story_soup.find_all("p") 
+							if p.get("class") == None 
+							and "CDATA" not in unidecode(p.text)
+							and "comments found" not in unidecode(p.text)
+							and "following HTML tags" not in unidecode(p.text)
+							and "Archived Fiction Dating" not in unidecode(p.text)]
 			story_year = unidecode(story_soup.find_all(class_="content-date")[0].text[-4:])
 			
-			print story_text
-			for p in story_text:
-				print unidecode(p)
+
+
+			# print story_text
+			# for p in story_text:
+			# 	print unidecode(p)
 
 
 #############
