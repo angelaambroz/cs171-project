@@ -34,7 +34,8 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * ~~Find CC-licensed book covers.~~
 * New design idea: User can search for something in the text.
 * New design idea: Tooltip _not_ on hover - but rather, once top word or user word appears, reveal that line to the right of the charts.
-* New design idea: The long scroll is boring - collapse paras into chapter objects? Oh God...
+* New design idea: The long scroll is boring:
+      * Collapse paras into chapter objects? (Using average sentence length per para?)
 
 
 ###### Data processing
