@@ -23,7 +23,7 @@ textChart.prototype.initVis = function() {
 	// console.log(vis.divWidth);
 
 	vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-	vis.height = 2000 - vis.margin.top - vis.margin.bottom;
+	vis.height = 8000 - vis.margin.top - vis.margin.bottom;
 
 	vis.svg = d3.select("#" + vis.parentElement).append("svg")
 	    .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -64,10 +64,10 @@ textChart.prototype.updateVis = function() {
 	})
 
 	console.log(vis.paraArray);
-	console.log(vis.maxParaLength);
+	// console.log(vis.maxParaLength);
 
-	vis.y.domain([0, vis.paraArray.length]);
-	vis.x.domain([vis.maxParaLength, 0]);
+	vis.y.domain([vis.paraArray.length, 0]);
+	vis.x.domain([0, vis.maxParaLength]);
 
 	vis.para = vis.svg.selectAll(".para")
 		.data(vis.paraArray)
@@ -77,30 +77,23 @@ textChart.prototype.updateVis = function() {
 		.attr("id", function(d) { return "para-" + d.index; })
 		.attr("transform", function(d) { return "translate(0," + vis.y(d.index) + ")"; });
 
-	// vis.para.selectAll("rect")
-	// 	.data(function(d) { return d.sentences; })
-	// 	.enter()
-	// 	.append("rect")
-	// 	.attr("width", function(d) { 
-	// 		// return vis.x(50);
-	// 		return vis.x(d.length); 
-	// 	})
-	// 	.attr("x", function(d, i) { 
-	// 		console.log("The data is " + d);
-	// 		console.log("The index is " + i);
-	// 	})
-	// 	.attr("height", function(d) { return vis.y(60) / vis.maxParaLength; })
-	// 	.attr("fill", "gray");
-
-
-	// state.selectAll("rect")
-	//   .data(function(d) { return d.ages; })
-	// .enter().append("rect")
-	//   .attr("width", x.rangeBand())
-	//   .attr("y", function(d) { return y(d.y1); })
-	//   .attr("height", function(d) { return y(d.y0) - y(d.y1); })
-	//   .style("fill", function(d) { return color(d.name); });
-
+	vis.para.selectAll("rect")
+		.data(function(d) { return d.sentences; })
+		.enter()
+		.append("rect")
+		.attr("width", function(d) { return vis.x(d.length); })
+		.attr("x", function(d) { return vis.x(d.x0); })
+		.attr("height", function(d, i) { return vis.height /vis.paraArray.length; })
+		.attr("fill", function(d) {
+			if (d.top == 0) {
+				return "gray";	
+			} else {
+				return "gray";
+				// return "#"+Math.floor(Math.random()*16777215).toString(16);
+			}
+		})
+		.attr("stroke-width", 0.75)
+		.attr("stroke", "pink");
 
 
 }

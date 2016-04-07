@@ -57,5 +57,7 @@ Spring 2016. This project will visualize the story shapes of a variety of 19th c
 * Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
 * Jane Austen `maxParaLength` seems way too high.
 * ~~Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`.~~ (Did this manually.)
+* Resize isn't re-loading `mainChart` in the correct way.
+* Figure out `height` on `mainChart`. 
 
 
