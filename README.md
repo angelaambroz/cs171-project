@@ -45,7 +45,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Paragraph-level objects capturing para text, length (sentences vs. characters?), sentences, whether they have any top words in there.~~
 * ~~Convert all `len(x)` into word tokenizers counting words, instead of characters.~~
 * ~~Fix above -- specifically, fix `cleanWordTokenize()`.~~ 
-* General questions:
+* **Design 2 (SH scrape)**: Fix 2003 story.
+* ~~General questions:~~
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
 
@@ -55,14 +56,16 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Set up some basic CSS and website structure.~~
 * ~~Where to put `#main-viz` and `#link-viz`?~~
 * Data summary box - get that started.
-* Top words buttons. 
+* Top words ~~buttons~~ word cloud. 
 * Get ~~`main.js`~~, ~~`textChart.js`~~ and `linkChart.js` set up.
 * ~~User choice covers: CSS, functions.~~ 
 * How to replicate Sublime Text's brushed sidebar? 
     * How to determine height of what the viewer is seeing? Highest data point and lowest data point?
 * Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
-* Jane Austen `maxParaLength` seems way too high.
+* ~~Jane Austen `maxParaLength` seems way too high.~~
 * ~~Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`.~~ (Did this manually.)
 * Resize isn't re-loading `mainChart` in the correct way.
 * ~~Figure out `height` on `mainChart`.`~~
-* Center `mainChart`. 
+* ~~Center `mainChart`.~~
+* Heat map of complexity (using `vocab`).
+

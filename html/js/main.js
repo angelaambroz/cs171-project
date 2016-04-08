@@ -15,36 +15,30 @@ $w.scroll(function() {
 // load default data
 // update if new data is selected
 
-d3.selectAll(".choose").on("click", function() {
-	selectedBook = this.childNodes[0].id;
+loadData();
+
+// d3.selectAll(".choose").on("click", function() {
+// 	selectedBook = this.childNodes[0].id;
 	
-	d3.select("#main-viz").selectAll("svg").remove();
-	loadData();
-});
+// 	d3.select("#main-viz").selectAll("svg").remove();
+// 	loadData();
+// });
 
 
 function loadData() {
 
-	d3.json("data/all-books.json", function(error, jsonData) {
+	d3.json("data/sh-textless.json", function(error, jsonData) {
 
 		if (!error) {
 			allData = jsonData;
 
-			mainData = allData.filter(function(elem) {
-				if (elem.title == selectedBook) {
-					return elem;
-				}
-			});
+			// mainData = allData.filter(function(elem) {
+			// 	if (elem.title == selectedBook) {
+			// 		return elem;
+			// 	}
+			// });
 
-			// console.log(allData);
-
-			/*
-			Pseudo-code:
-				1. Users click on a book cover -- DONE
-				2. allData is filtered by the book cover's ID (e.g. allData[title]==book[ID]) -- DONE
-				3. filtered data is used for main viz -- DONE
-				4. allData is then simplified (all text removed, only lengths) for the line chart
-			*/
+			console.log(allData);
 
 			createVis();
 
@@ -56,7 +50,7 @@ function createVis() {
 
 	console.log("Making the vizzes.");
 
-	mainChart = new textChart("main-viz", mainData);
+	mainChart = new textChart("main-viz", allData);
 	// TODO: link viz
 
 }
