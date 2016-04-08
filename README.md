@@ -70,4 +70,5 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Center `mainChart`.~~
 * Heat map of complexity (using `vocab`).
 * Hyperlink each square.
+* Smoother transition on `#sh-age`. 
 

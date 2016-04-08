@@ -111,13 +111,14 @@ def storyContent(top_url, story_links):
 							and "following HTML tags" not in unidecode(p.text)
 							and "Archived Fiction Dating" not in unidecode(p.text)]
 			story_text = SPACE.join(story_text)
+			story_words, story_vocab, story_top = overallTokenizing(story_text)
 
 			try:
 				story_year = unidecode(story_soup.find_all(class_="content-date")[0].text[-4:])
 			except: 
 				story_year = story_soup.find_all(class_="content-date")
 
-			num_words = len(cleanWordTokenize(story_text))
+			# num_words = len(cleanWordTokenize(story_text))
 
 			allObject.append({
 					'year': story_year,
@@ -127,10 +128,12 @@ def storyContent(top_url, story_links):
 			storyObjects.append({
 				'title': story_title,
 				'author': story_author,
-				'wordcount': num_words,
+				'wordcount': len(story_words),
+				'vocab': len(story_vocab),
 				'year': story_year,
 				# 'raw': story_text,
-				'url': top_url + story_url
+				'url': top_url + story_url,
+				'top_within': [{'word': x, 'count': y } for (x, y) in story_top]
 				})
 
 
@@ -138,10 +141,9 @@ def storyContent(top_url, story_links):
 
 
 
-
-#############
-#	Demo	#
-#############
+#########
+#  Run	#
+#########
 
 soup = Souping(SH)
 stories = oldStories(soup)
@@ -173,7 +175,7 @@ for year in years:
 			year['stories'].append(story)
 
 
-with open(DIR + "/processed/sh-data1-no-text.json", "w") as f:
+with open(DIR + "/processed/sh-data2-no-text.json", "w") as f:
 	json.dump(years, f)
 
 

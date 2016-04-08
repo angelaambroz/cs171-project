@@ -11,19 +11,19 @@
 </head>
 <body>
 
-	<div class="container">
+<div class="container">
 
 	<div class="row buffer-needed">
 
 		<div class="col-md-1"></div>
 
-		<div class="col-md-5 side-note" id="scrolled">
+		<div class="col-md-10 side-note">
 			<h2><code>the shape of text</code></h2>
 			<h4 class="caption">by <a href="http://angelaambroz.com/menu.html">angela ambroz</a></h4>
 			<h5>spring 2016 (<a href="http://www.cs171.org/2016/" target="_blank">cs171 (harvard extension school)</a>)</h5>
 			<hr>
-			<p>Hello!</p>
-			<p>Welcome to <code>the shape of text</code>, a text visualization of 19th century novels.</p>
+			<p>Hello, world!</p>
+			<p>Welcome to <code>the shape of text</code>, a text visualization of all the stories (including <a href="http://www.strangehorizons.com/2009/20090112/kampala-f.shtml" target="_blank">mine</a>!) available on <a href="http://www.strangehorizons.com" target="_blank">Strange Horizons</a>, a prominent online speculative fiction magazine. Strange Horizons launched in September 2000, and has been going strong ever since - <span id="sh-age">15.5</span> (approximately) years!</p>
 			<p>This project was built using:
 				<ul>
 					<li><a href="https://d3js.org/" target="_blank">d3.js</a> (data visualization)</li>
@@ -39,30 +39,24 @@
 			<hr>
 		</div>
 
-		<div class="col-md-6">
-			
-			<div class="row">
-				<div class="col-md-1"></div>
-				<a href="#main-viz"><div class="col-md-5 choose"><img src="img/mobydick.jpg" alt="The one about the big fish." class="img-responsive" id="Moby Dick; or The Whale"></div></a>
-				<a href="#main-viz"><div class="col-md-5 choose"><img src="img/emma.jpg" alt="The 19th century first world problems one." class="img-responsive" id="Emma"></div></a>
-				<div class="col-md-1"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-1"></div>
-				<a href="#main-viz"><div class="col-md-5 choose"><img src="img/dracula.jpg" alt="The one about the creepy guy." class="img-responsive"id="Dracula"></div></a>
-				<a href="#main-viz"><div class="col-md-5 choose"><img src="img/frankenstein.jpg" alt="The massive science fail." class="img-responsive" id="Frankenstein or The Modern Prometheus"></div></a>
-				<div class="col-md-1"></div>
-			</div>
+			<div class="col-md-1"></div>
 
+	</div>
+
+	<div class="row buffer-needed">
+
+		<div class="col-md-1"></div>
+		
+		<div class="col-md-10">
+			<h3 id="main-viz-title">viz 1: complexity</h3>
+			<div id="main-viz"></div>	
 		</div>
+
+		<div class="col-md-1"></div>
 
 	</div>
 
 	<div class="row">
-		<div class="col-md-8">
-			<div id="main-viz"></div>	
-		</div>
-
 		<div class="col-md-4">
 			<div id="data-summary"></div>
 			<div id="link-viz"></div>

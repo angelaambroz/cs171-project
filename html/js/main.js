@@ -12,6 +12,23 @@ $w.scroll(function() {
 });
 
 
+// Age of Strange Horizons
+
+function ageOfStrangeHorizons() {
+    var now = new Date(),
+    	launched = new Date('9/1/2000'),
+    	age = now.getTime() - launched.getTime(),
+		diffDays = Math.ceil(age / (1000 * 3600 * 24 * 365)),
+		diff = age / (1000 * 3600 * 24 * 365); 
+
+	d3.select("#sh-age").transition().text(diff);
+
+    setTimeout(ageOfStrangeHorizons, 3000);
+}
+
+ageOfStrangeHorizons();
+
+
 // load default data
 // update if new data is selected
 
