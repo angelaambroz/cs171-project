@@ -46,6 +46,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Convert all `len(x)` into word tokenizers counting words, instead of characters.~~
 * ~~Fix above -- specifically, fix `cleanWordTokenize()`.~~ 
 * **Design 2 (SH scrape)**: Fix 2003 story.
+* Re-run to get `word-count` objects in year object.
 * ~~General questions:~~
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
@@ -68,4 +69,5 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Figure out `height` on `mainChart`.`~~
 * ~~Center `mainChart`.~~
 * Heat map of complexity (using `vocab`).
+* Hyperlink each square.
 

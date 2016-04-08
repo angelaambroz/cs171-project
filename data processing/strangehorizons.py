@@ -160,7 +160,7 @@ for key, group in itertools.groupby(alltext, lambda item: item["year"]):
 		'words': len(yearWords),
 		'num_stories': len(yearStories),
 		'vocab': len(yearVocab),
-		'top': [x for (x, y) in yearTop]
+		'top': [{'word': x, 'count': y } for (x, y) in yearTop]
 		})
 
 for year in years:
