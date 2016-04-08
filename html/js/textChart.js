@@ -10,13 +10,6 @@ textChart = function(_parentElement, _data) {
 	this.parentElement = _parentElement;
 	this.data = _data;
 
-	this.color = d3.scale.linear()
-		.range(["#feebe2",
-			"#fbb4b9",
-			"#f768a1",
-			"#c51b8a",
-			"#7a0177"]);
-
 	this.initVis();
 
 }
@@ -39,8 +32,12 @@ textChart.prototype.initVis = function() {
 	    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 	// Scales
-	vis.x = d3.scale.linear().range([0, vis.width]);
-	vis.y = d3.scale.linear().range([vis.height, 0]);
+	vis.color = d3.scale.linear()
+		.range(["#feebe2",
+			"#fbb4b9",
+			"#f768a1",
+			"#c51b8a",
+			"#7a0177"]);
 
 	// y-axis: stories, x-axis: years
 
@@ -55,16 +52,14 @@ textChart.prototype.initVis = function() {
 textChart.prototype.updateVis = function() {
 	var vis = this;
 
-	vis.maxStories = 0,
-	vis.minVocab = 0,
 	vis.maxVocab = 0;
 
 	vis.data.forEach(function(year) {
 
-		vis.maxStories = (year.stories.length > vis.maxStories) ? year.stories.length : vis.maxStories;
-		vis.maxVocab = (year.stories.vocab > vis.maxVocab) ? year.stories.vocab : vis.maxVocab;
-		// vis.minVocab = ();
-
+		year.stories.forEach(function(story) {
+			vis.maxVocab = (story.vocab > vis.maxVocab) ? story.vocab : vis.maxVocab;
+			vis.minVocab = (vis.minVocab <= vis.maxVocab) ? vis.minVocab : 0;
+		})
 
 		// year.sentences.forEach(function(sent, index) {
 		// 	sent.x0 = (index == 0) ? 0 : year.sentences[index - 1].length;
@@ -73,12 +68,11 @@ textChart.prototype.updateVis = function() {
 
 	})
 
-	// console.log(vis.maxStories);
-	// console.log(vis.data.length);
+	console.log(vis.minVocab);
+	console.log(vis.maxVocab);
 
-	vis.y.domain([vis.maxStories, 0]);
-	vis.x.domain([0, vis.data.length]);
-	vis.color.domain(d3.extent(vis.data, function(d) { return d.vocab; })); //this is using yearly vocab, not storyly
+	// vis.x.domain([0, vis.data.length]);
+	vis.color.domain([vis.minVocab, vis.maxVocab]); //this is using yearly vocab, not storyly
 
 	vis.year = vis.svg.selectAll(".year")
 		.data(vis.data)
