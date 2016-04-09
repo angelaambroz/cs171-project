@@ -74,7 +74,9 @@ function loadData() {
 			  // Flatten the JSON into an array of stories
 			cleanData.forEach(function(year) {
 				year.storiesClean.forEach(function(story) {
-					flatStories.push(story);  
+					if (story.date) {
+						flatStories.push(story);  	
+					}
 				})
 			})
 
@@ -86,6 +88,12 @@ function loadData() {
 					return story;
 				}
 			})
+
+			cleanStories.sort(function(a, b) {
+				return b.date - a.date;
+			})
+
+			console.log(cleanStories);
 
 			createVis();
 		}
