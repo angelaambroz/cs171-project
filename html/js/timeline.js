@@ -1,11 +1,11 @@
 
 /*
- * Scatterplot - Object constructor function
+ * Timeline - Object constructor function
  * @param _parentElement 	-- the HTML element in which to draw the visualization
  * @param _data						-- the  
  */
 
-scatterChart = function(_parentElement, _data){
+timeline = function(_parentElement, _data){
 	this.parentElement = _parentElement;
   this.data = _data;
 
@@ -15,7 +15,7 @@ scatterChart = function(_parentElement, _data){
 
 
 
-scatterChart.prototype.initVis = function(){
+timeline.prototype.initVis = function(){
   var vis = this; 
 
   // Draw the canvas
@@ -29,13 +29,17 @@ scatterChart.prototype.initVis = function(){
   // console.log(vis.data);
 
   // Scales and axes
-  vis.x = d3.scale.linear()
+  vis.x = d3.time.scale()
       .range([0, vis.width])
-    	.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
+      .domain(d3.extent(vis.data, function(d) { return d.date; }));
+
+      console.log(vis.x.domain());
 
   vis.y = d3.scale.linear()
   		.range([vis.height, 0])
-      .domain(d3.extent(vis.data, function(d) { return d.wordcount; }));
+      .domain(d3.extent(vis.data, function(d) { return d.vocab; }));
+
+  console.log(vis.y.domain());
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
@@ -55,19 +59,14 @@ scatterChart.prototype.initVis = function(){
     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 
-  // Draw scatterplot
-  vis.r = 1;
-
-  vis.svg.selectAll(".storycircle")
-    .data(vis.data)
-    .enter()
-    .append("circle")
-    .attr("class", "storycircle")
-    .attr("id", function(d) { return d.title + "-" + d.year; })
-    .attr("r", vis.r)
-    .attr("cx", function(d) { return vis.x(d.vocab); })
-    .attr("cy", function(d) { return vis.y(d.wordcount); });
-
+  // Draw line chart
+  vis.line = d3.svg.line()
+    .x(function(d) { return vis.x(d.date); })
+    .y(function(d) { return vis.y(d.vocab); });
+  
+  vis.svg.append("path")
+    .attr("class", "line")
+    .attr("d", vis.line(vis.data));
 
   vis.svg.append("g")
       .attr("class", "x-axis axis")

@@ -4,7 +4,7 @@ var allData = [],
 	cleanData = [],
 	flatStories = [];
 
-var selectedBook, mainData, linkData, mainChart, linkChart, scrollPoint; 
+var selectedBook, mainData, linkData, mainChart, lineChart, scatter, scrollPoint; 
 
 // Is the user scrolling?
 $w = $(window);
@@ -35,6 +35,9 @@ ageOfStrangeHorizons();
 loadData();
 
 function loadData() {
+
+	var formatDate = d3.time.format("%e %B %Y");
+
 	d3.json("data/sh-textless.json", function(error, jsonData) {
 		if (!error) {
 			allData = jsonData;
@@ -62,6 +65,8 @@ function loadData() {
 					story['year'] = +story['year'];
 					story['vocab'] = +story['vocab'];
 					story['words'] = +story['words'];
+					story['date'] = formatDate.parse(story['date']);
+
 			})
 			
 			});
@@ -91,8 +96,7 @@ function createVis() {
 	console.log("Making the vizzes.");
 	mainChart = new textChart("main-viz", cleanData);
 	scatter = new scatterChart("scatterplot", cleanStories);
-	// TODO: link viz: line chart
-	// TODO: link viz: scatter plot
+	lineChart = new timeline("line-chart", cleanStories);
 }
 
 window.addEventListener("resize", function() {

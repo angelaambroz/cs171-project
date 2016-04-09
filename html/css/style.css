@@ -66,3 +66,8 @@ a:hover {
 
 /* SIDE VIZ 2: LINE CHART */
 
+.line {
+  fill: none;
+  stroke-width: 0.5px;
+  stroke: #894b00;
+}

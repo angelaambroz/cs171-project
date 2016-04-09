@@ -38,6 +38,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
       * ~~Collapse paras into chapter objects? (Using average sentence length per para?)~~
 
 
+
 ###### Data processing
 * ~~Select texts for download.~~
 * ~~Basic input of `txt`, output `json`.~~
@@ -50,7 +51,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~General questions:~~
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
-
+* I need full date-time objects for each story for the line chart.
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
