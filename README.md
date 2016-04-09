@@ -74,7 +74,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Tooltip each story: title, author (URL?). 
 * Special outline for my story? (vanity button?)
 * Why is `words` appearing in the story objects?
-* `#scatterplot`: axes, lines.
+* `#scatterplot`: ~~axes, lines~~, labels.
 * `#linechart`: get it started.
-* Linking
+* Linking the charts together...!
 

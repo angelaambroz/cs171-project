@@ -24,7 +24,7 @@ scatterChart.prototype.initVis = function(){
   vis.divWidth = $("#" + vis.parentElement).width();
 
   vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-  vis.height = 400 - vis.margin.top - vis.margin.bottom;
+  vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
   // console.log(vis.data);
 
@@ -37,10 +37,15 @@ scatterChart.prototype.initVis = function(){
   		.range([vis.height, 0])
       .domain(d3.extent(vis.data, function(d) { return d.wordcount; }));
 
+  vis.xAxis = d3.svg.axis()
+  	  .scale(vis.x)
+  	  .orient("bottom")
+      .ticks(3);
 
-  // vis.xAxis = d3.svg.axis()
-  // 	  .scale(vis.x)
-  // 	  .orient("bottom");
+  vis.yAxis = d3.svg.axis()
+      .scale(vis.y)
+      .orient("left")
+      .ticks(4);
 
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -51,7 +56,7 @@ scatterChart.prototype.initVis = function(){
 
 
   // Draw scatterplot
-  vis.r = 2;
+  vis.r = 1;
 
   vis.svg.selectAll(".storycircle")
     .data(vis.data)
@@ -62,6 +67,17 @@ scatterChart.prototype.initVis = function(){
     .attr("r", vis.r)
     .attr("cx", function(d) { return vis.x(d.vocab); })
     .attr("cy", function(d) { return vis.y(d.wordcount); });
+
+
+  vis.svg.append("g")
+      .attr("class", "x-axis axis")
+      .attr("transform", "translate(0," + vis.height + ")")
+      .call(vis.xAxis);
+
+    vis.svg.append("g")
+    .attr("class", "y-axis axis")
+    .call(vis.yAxis);
+    // .attr("transform", "translate(")
 
 }
 

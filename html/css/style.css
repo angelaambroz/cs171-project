@@ -46,9 +46,21 @@ a:hover {
 /* SIDE VIZ 1: SCATTERPLOT */
 
 .storycircle {
-  stroke: "orange";
+  stroke: #894b00;
   stroke-width: 0.5;
-  fill: "#bcbddc";
+  fill: white;
+}
+
+.axis {
+  font-size: 9px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 0.25;
+  shape-rendering: crispEdges;
 }
 
 
