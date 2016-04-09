@@ -1,6 +1,8 @@
 // Global variables
 
-var allData = [];
+var allData = [],
+	cleanData = [],
+	flatStories = [];
 
 var selectedBook, mainData, linkData, mainChart, linkChart, scrollPoint; 
 
@@ -30,41 +32,74 @@ ageOfStrangeHorizons();
 
 
 // load default data
-// update if new data is selected
-
 loadData();
 
-
-
 function loadData() {
-
 	d3.json("data/sh-textless.json", function(error, jsonData) {
-
 		if (!error) {
 			allData = jsonData;
 
-			createVis();
+			// Get rid of weird stories (to clean in Python later)
+			cleanData = allData.filter(function(year) {
+				if (year.year != 0) { 
+					year.storiesClean = year.stories.filter(function(story) {
+						if (story.vocab > 0) {
+							return story;
+						}
+					})
 
+					delete year.stories;
+					return year;
+				}
+			});
+
+			cleanData.forEach(function(year) {
+				year['year'] = +year['year'];
+				year['vocab'] = +year['vocab'];
+				year['words'] = +year['words'];
+
+				year.storiesClean.forEach(function(story) {
+					story['year'] = +story['year'];
+					story['vocab'] = +story['vocab'];
+					story['words'] = +story['words'];
+			})
+			
+			});
+
+			  // Flatten the JSON into an array of stories
+			cleanData.forEach(function(year) {
+				year.storiesClean.forEach(function(story) {
+					flatStories.push(story);  
+				})
+			})
+
+			// Getting rid of an outlier... :/ 
+			var storyOutlier = d3.max(flatStories, function(d) { return d.wordcount; });
+
+			cleanStories = flatStories.filter(function(story) {
+				if (story.wordcount != storyOutlier) {
+					return story;
+				}
+			})
+
+			createVis();
 		}
 	})
 }
 
 function createVis() {
-
 	console.log("Making the vizzes.");
-
-	mainChart = new textChart("main-viz", allData);
-	// TODO: link viz
-
+	mainChart = new textChart("main-viz", cleanData);
+	scatter = new scatterChart("scatterplot", cleanStories);
+	// TODO: link viz: line chart
+	// TODO: link viz: scatter plot
 }
 
 window.addEventListener("resize", function() {
-		
 		// On resizing, resize main viz
 		// d3.select("#main-viz").selectAll("svg").remove();
 		mainChart.updateVis();
-
-		// ...and linked viz
+		// ...and scatterplot and line chart
 
 	}, false);
 

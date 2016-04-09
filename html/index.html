@@ -20,19 +20,22 @@
 		<div class="col-md-10 side-note">
 			<h2><code>the shape of text</code></h2>
 			<h4 class="caption">by <a href="http://angelaambroz.com/menu.html">angela ambroz</a></h4>
-			<h5>spring 2016 (<a href="http://www.cs171.org/2016/" target="_blank">cs171 (harvard extension school)</a>)</h5>
+			<h5>may 2016</h5>
+			<h5><a href="http://www.cs171.org/2016/" target="_blank">cs171 (harvard extension school)</a></h5>
 			<hr>
 			<p>Hello, world!</p>
-			<p>Welcome to <code>the shape of text</code>, a text visualization of all the stories (including <a href="http://www.strangehorizons.com/2009/20090112/kampala-f.shtml" target="_blank">mine</a>!) available on <a href="http://www.strangehorizons.com" target="_blank">Strange Horizons</a>, an online speculative fiction magazine. Strange Horizons launched in September 2000, and has been going strong ever since - approximately <span id="sh-age">15.5</span> years. They publish a story a week, and their <a href="http://www.strangehorizons.com/guidelines/fiction.php" target="_blank">word limit</a> is 10,000. That's over 8 million words! What can these 8 million words tell us about how speculative fiction has evolved these last 15 point something years? That's what I was interested in finding out.</p>
+			<p>Welcome to <code>the shape of text</code>, a text visualization of all the stories (including <a href="http://www.strangehorizons.com/2009/20090112/kampala-f.shtml" target="_blank">mine</a>!) available on <a href="http://www.strangehorizons.com" target="_blank">Strange Horizons</a>, an online speculative fiction magazine.</p> 
+			<p>Strange Horizons launched in September 2000, and has been going strong ever since - approximately <span id="sh-age">15.5</span> years. They publish a story a week, and their <a href="http://www.strangehorizons.com/guidelines/fiction.php" target="_blank">word limit</a> is 10,000. That's over 8 million words! What can these 8 million words tell us about how speculative fiction has evolved these last 15 years?</p>
+
+			<hr>
 			<p>This project was built using:
 				<ul>
-					<li><a href="https://d3js.org/" target="_blank">d3.js</a> (data visualization)</li>
+					<li><a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">BeautifulSoup</a> (web scraping)</li>
 					<li><a href="http://www.nltk.org/" target="_blank">nltk</a> (text processing)</li>
-					<li><a href="https://www.gutenberg.org/" target="_blank">The Gutenberg Project</a> (original text)</li>
+					<li><a href="https://d3js.org/" target="_blank">d3.js</a> (data visualization)</li>
 					<li><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> (pretty website)</li>
 				</ul>
 			</p>
-			<hr>
 			<p>Full code is available <a href="https://github.com/angelaambroz/cs171-project">here on GitHub</a>.</p> 
 			<hr>
 			<p>For a narrative about the project, including decisions, dead-ends, pictures and tutorials, see the <a href="#">process book</a>.</p>
@@ -47,14 +50,21 @@
 
 		<div class="col-md-1"></div>
 		
-		<div class="col-md-10">
+		<div class="col-md-6">
 			<h3 id="main-viz-title">viz 1: complexity</h3>
 			<h6>(as defined by <code id="main-viz-subtitle">vocab</code>)</h6>
-			
+
 			<div id="main-viz"></div>	
 		</div>
 
-		<div class="col-md-1"></div>
+		<div class="col-md-5 extra-buffer-needed">
+			
+			<div id="line-chart"></div>
+			<div id="scatterplot"></div>
+
+		</div>
+
+		<!-- <div class="col-md-1"></div> -->
 
 	</div>
 
@@ -75,6 +85,7 @@
 
 	<!-- Visualization objects -->
 	<script src="js/textChart.js"></script>
+	<script src="js/scatterplot.js"></script>
 
 	<!-- Load data, create visualizations -->
 	<script src="js/main.js"></script>

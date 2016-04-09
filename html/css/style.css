@@ -1,5 +1,5 @@
 
-/* ADD YOUR STYLES HERE */
+/* MAIN STYLES */
 
 body {
   background-color: #f8f6f4;
@@ -13,6 +13,10 @@ body {
 
 .buffer-needed {
   margin-top: 50px;
+}
+
+.extra-buffer-needed {
+  margin-top: 100px;
 }
 
 .caption .tiny-header {
@@ -36,17 +40,17 @@ a:hover {
   color: gray;
 }
 
-#chart-area {
-  margin-top: 45px;
+/* MAIN VIZ: HEAT MAP */
+
+
+/* SIDE VIZ 1: SCATTERPLOT */
+
+.storycircle {
+  stroke: "orange";
+  stroke-width: 0.5;
+  fill: "#bcbddc";
 }
 
-#more-info {
-  background-color: #e0ddd9;
-  height: 400px;
-  top: 50px;
-}
 
-.choose:hover{
-  cursor: pointer;
-}
+/* SIDE VIZ 2: LINE CHART */
 

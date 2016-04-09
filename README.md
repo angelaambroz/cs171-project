@@ -32,10 +32,10 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Get `git` set up.~~
 * Keep taking pictures/screenshots for Process Book.
 * ~~Find CC-licensed book covers.~~
-* New design idea: User can search for something in the text.
-* New design idea: Tooltip _not_ on hover - but rather, once top word or user word appears, reveal that line to the right of the charts.
-* New design idea: The long scroll is boring:
-      * Collapse paras into chapter objects? (Using average sentence length per para?)
+* ~~New design idea: User can search for something in the text.~~
+* ~~New design idea: Tooltip _not_ on hover - but rather, once top word or user word appears, reveal that line to the right of the charts.~~
+* ~~New design idea: The long scroll is boring:~~
+      * ~~Collapse paras into chapter objects? (Using average sentence length per para?)~~
 
 
 ###### Data processing
@@ -46,7 +46,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Convert all `len(x)` into word tokenizers counting words, instead of characters.~~
 * ~~Fix above -- specifically, fix `cleanWordTokenize()`.~~ 
 * **Design 2 (SH scrape)**: Fix 2003 story.
-* Re-run to get `word-count` objects in year object.
+* ~~Re-run to get `word-count` objects in year object.~~
 * ~~General questions:~~
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
@@ -56,7 +56,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Add templates from best HWs and Labs.~~
 * ~~Set up some basic CSS and website structure.~~
 * ~~Where to put `#main-viz` and `#link-viz`?~~
-* Data summary box - get that started.
+* ~~Data summary box - get that started.~~
 * Top words ~~buttons~~ word cloud. 
 * Get ~~`main.js`~~, ~~`textChart.js`~~ and `linkChart.js` set up.
 * ~~User choice covers: CSS, functions.~~ 
@@ -68,10 +68,13 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Resize isn't re-loading `mainChart` in the correct way.
 * ~~Figure out `height` on `mainChart`.`~~
 * ~~Center `mainChart`.~~
-* Heat map of complexity (using `vocab`).
+* ~~Heat map of complexity (using `vocab`).~~
 * Hyperlink each square.
 * Smoother transition on `#sh-age`. 
-* Tooltip: title, author (URL?). 
+* Tooltip each story: title, author (URL?). 
 * Special outline for my story? (vanity button?)
 * Why is `words` appearing in the story objects?
+* `#scatterplot`: axes, lines.
+* `#linechart`: get it started.
+* Linking
 
