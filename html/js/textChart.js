@@ -33,18 +33,61 @@ textChart.prototype.initVis = function() {
 
 	// Scales
 	vis.color = d3.scale.linear()
-		.range(["#feebe2",
-			"#fbb4b9",
-			"#f768a1",
-			"#c51b8a",
-			"#7a0177"]);
+		.range(["#efedf5",
+				"#bcbddc",
+				"#756bb1"]);
 
 	// y-axis: stories, x-axis: years
 
 	// TODO: Update data summary
 
 	// Draw viz
+	vis.wrangleData();
+
+}
+
+textChart.prototype.wrangleData = function() {
+	var vis = this;
+
+	// Get rid of weird stories (to clean later)
+	vis.cleaned = vis.data.filter(function(year) {
+		if (year.year != 0) {
+
+			console.log("Now cleaning year " + year.year); 
+			
+			year.storiesClean = year.stories.filter(function(story) {
+				if (story.vocab > 0) {
+					return story;
+				}
+			})
+
+			delete year.stories;
+			return year;
+		}
+
+
+	});
+
+
+
+	console.log(vis.cleaned);
+
+
+	vis.cleaned.forEach(function(year) {
+		year['year'] = +year['year'];
+		year['vocab'] = +year['vocab'];
+		year['words'] = +year['words'];
+
+		year.storiesClean.forEach(function(story) {
+			story['year'] = +story['year'];
+			story['vocab'] = +story['vocab'];
+			story['words'] = +story['words'];
+		})
+
+	});
+
 	vis.updateVis();
+
 
 }
 
@@ -52,30 +95,26 @@ textChart.prototype.initVis = function() {
 textChart.prototype.updateVis = function() {
 	var vis = this;
 
-	vis.maxVocab = 0;
+	vis.maxVocab = 0,
+	vis.minVocab = 400;
 
-	vis.data.forEach(function(year) {
+	vis.cleaned.forEach(function(year) {
+		// console.log("Now doing " + year['year']);
 
-		year.stories.forEach(function(story) {
+		year.storiesClean.forEach(function(story) {
+
 			vis.maxVocab = (story.vocab > vis.maxVocab) ? story.vocab : vis.maxVocab;
-			vis.minVocab = (vis.minVocab <= vis.maxVocab) ? vis.minVocab : 0;
+			vis.minVocab = (story.vocab <= vis.minVocab) ? story.vocab : vis.minVocab;
+
 		})
-
-		// year.sentences.forEach(function(sent, index) {
-		// 	sent.x0 = (index == 0) ? 0 : year.sentences[index - 1].length;
-		// 	sent.x1 = (index == 0) ? sent.length : year.sentences[index - 1].length + sent.length;
-		// })
-
 	})
 
-	console.log(vis.minVocab);
-	console.log(vis.maxVocab);
 
 	// vis.x.domain([0, vis.data.length]);
 	vis.color.domain([vis.minVocab, vis.maxVocab]); //this is using yearly vocab, not storyly
 
 	vis.year = vis.svg.selectAll(".year")
-		.data(vis.data)
+		.data(vis.cleaned)
 		.enter()
 		.append("g")
 		.attr("class", "g")
@@ -83,9 +122,10 @@ textChart.prototype.updateVis = function() {
 		.attr("transform", function(d, i) { return "translate(" + i*37 + ", 0)"; });
 
 	vis.year.selectAll("rect")
-		.data(function(d) { return d.stories; })
+		.data(function(d) { return d.storiesClean; })
 		.enter()
 		.append("rect")
+		.attr("class", "story")
 		.attr("width", function(d) { return vis.width / vis.data.length ; })
 		.attr("x", function(d) { return 0; })
 		.attr("y", function(d, i) { return 20*i; })

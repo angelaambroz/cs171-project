@@ -71,4 +71,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Heat map of complexity (using `vocab`).
 * Hyperlink each square.
 * Smoother transition on `#sh-age`. 
+* Tooltip: title, author (URL?). 
+* Special outline for my story? (vanity button?)
+* Why is `words` appearing in the story objects?
 

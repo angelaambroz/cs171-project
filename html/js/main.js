@@ -34,12 +34,6 @@ ageOfStrangeHorizons();
 
 loadData();
 
-// d3.selectAll(".choose").on("click", function() {
-// 	selectedBook = this.childNodes[0].id;
-	
-// 	d3.select("#main-viz").selectAll("svg").remove();
-// 	loadData();
-// });
 
 
 function loadData() {
@@ -48,14 +42,6 @@ function loadData() {
 
 		if (!error) {
 			allData = jsonData;
-
-			// mainData = allData.filter(function(elem) {
-			// 	if (elem.title == selectedBook) {
-			// 		return elem;
-			// 	}
-			// });
-
-			console.log(allData);
 
 			createVis();
 
@@ -75,8 +61,8 @@ function createVis() {
 window.addEventListener("resize", function() {
 		
 		// On resizing, resize main viz
-		d3.select("#main-viz").selectAll("svg").remove();
-		mainChart.initVis();
+		// d3.select("#main-viz").selectAll("svg").remove();
+		mainChart.updateVis();
 
 		// ...and linked viz
 
