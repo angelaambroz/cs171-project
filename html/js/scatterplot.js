@@ -60,39 +60,18 @@ scatterChart.prototype.initVis = function() {
 
 
   // Draw scatterplot
-  vis.r = 1;
+  vis.r = 2;
 
   vis.circles = vis.svg.selectAll(".storycircle")
     .data(vis.data)
     .enter()
     .append("circle")
-      .datum(function(d) {
-        return { x: d.vocab, y: d.wordcount };
-      })
     .attr("class", "storycircle")
     .attr("id", function(d) { return d.title + "-" + d.year; })
     .attr("r", vis.r)
-    .attr("cx", function(d) { return vis.x(d.x); })
-    .attr("cy", function(d) { return vis.y(d.y); })
+    .attr("cx", function(d) { return vis.x(d.vocab); })
+    .attr("cy", function(d) { return vis.y(d.wordcount); })
     .on("mouseover", linkHighlight);
-
-  vis.svg.on("mousemove", function() {
-    console.log("hello");
-    vis.fisheye.focus(d3.mouse(this));
-
-    vis.circles.each(function(d) { d.fisheye = vis.fisheye(d); })
-      .attr("cx", function(d) { return d.fisheye.x; })
-      .attr("cy", function(d) { return d.fisheye.y; })
-      .attr("r", function(d) { return d.fisheye.z * 2; });
-   })
-
-
-  // .append("circle")
-  //   .datum( function(d) {
-  //       return {x: d.pages, y: d.books} // change data, to feed to the fisheye plugin
-  //   })
-  //   .attr("cx", function (d) {return d.x}) // changed data can be used here as well
-  //   .attr("cy", function (d) {return d.y}) // ...and here
 
 
   vis.svg.append("g")

@@ -26,7 +26,7 @@ timeline.prototype.initVis = function(){
   vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
   vis.height = 225 - vis.margin.top - vis.margin.bottom;
 
-  vis.r = 2;
+  vis.r = 1.5;
 
   // console.log(vis.data);
 

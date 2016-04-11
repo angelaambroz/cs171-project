@@ -23,6 +23,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * [d3 Scalability – Virtual Scrolling for Large Visualizations](http://www.billdwhite.com/wordpress/2014/05/17/d3-scalability-virtual-scrolling-for-large-visualizations/)
 * [Tony Hschu - Scroll linked animations](http://blog.tonyhschu.ca/post/49488608263/technical-write-up-scroll-linked-animations)
 * [Jim Valladingham - Scroller.js](http://vallandingham.me/scroller.html)
+* [StackOverflow - Fisheye distortion on simple scatterplot](https://stackoverflow.com/questions/23407421/d3-fisheye-distortion-on-simple-scatter-plot)
 
 
 
