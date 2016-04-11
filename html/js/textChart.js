@@ -27,6 +27,7 @@ textChart.prototype.initVis = function() {
 	vis.svg = d3.select("#" + vis.parentElement).append("svg")
 	    .attr("width", vis.width + vis.margin.left + vis.margin.right)
 	    .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+	    .attr("id", "textchart-svg")
 	  .append("g")
 	    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
@@ -86,8 +87,6 @@ textChart.prototype.updateVis = function() {
 		.attr("y", function(d, i) { return vis.rectHeight*i; })
 		.attr("height", vis.rectHeight)
 		.attr("fill", function(d) { return vis.color(d.vocab)})
-		.attr("stroke-width", 0.75)
-		.attr("stroke", "orange");
-
+		.on("mouseover", linkHighlight);
 
 }

@@ -19,12 +19,14 @@ timeline.prototype.initVis = function(){
   var vis = this; 
 
   // Draw the canvas
-  vis.margin = {top: 50, right: 50, bottom: 30, left: 50};
+  vis.margin = {top: 10, right: 50, bottom: 30, left: 50};
 
   vis.divWidth = $("#" + vis.parentElement).width();
 
   vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-  vis.height = 200 - vis.margin.top - vis.margin.bottom;
+  vis.height = 225 - vis.margin.top - vis.margin.bottom;
+
+  vis.r = 2;
 
   // console.log(vis.data);
 
@@ -33,13 +35,9 @@ timeline.prototype.initVis = function(){
       .range([0, vis.width])
       .domain(d3.extent(vis.data, function(d) { return d.date; }));
 
-      console.log(vis.x.domain());
-
   vis.y = d3.scale.linear()
   		.range([vis.height, 0])
       .domain(d3.extent(vis.data, function(d) { return d.vocab; }));
-
-  console.log(vis.y.domain());
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
@@ -67,6 +65,17 @@ timeline.prototype.initVis = function(){
   vis.svg.append("path")
     .attr("class", "line")
     .attr("d", vis.line(vis.data));
+
+  vis.svg.selectAll(".storycircle")
+    .data(vis.data)
+    .enter()
+    .append("circle")
+    .attr("class", "storycircle")
+    .attr("id", function(d) { return d.title + "-" + d.year; })
+    .attr("r", vis.r)
+    .attr("cx", function(d) { return vis.x(d.date); })
+    .attr("cy", function(d) { return vis.y(d.vocab); })
+    .on("mouseover", linkHighlight);
 
   vis.svg.append("g")
       .attr("class", "x-axis axis")

@@ -93,8 +93,6 @@ function loadData() {
 				return b.date - a.date;
 			})
 
-			console.log(cleanStories);
-
 			createVis();
 		}
 	})
@@ -107,11 +105,33 @@ function createVis() {
 	lineChart = new timeline("line-chart", cleanStories);
 }
 
+function linkHighlight(d) {
+	
+	// Use URL as unique identifier
+	// console.log(this);
+
+	// Identify which chart you're in
+
+	// Highlight this item
+	// d3.select(this).classed("highlighted", true);
+
+	// Find URL in the other charts
+
+	// Highlight item (IDed by URL) in other charts
+
+}
+
+
+// On resizing, resize all three vizzes
 window.addEventListener("resize", function() {
-		// On resizing, resize main viz
-		// d3.select("#main-viz").selectAll("svg").remove();
-		mainChart.updateVis();
-		// ...and scatterplot and line chart
+		d3.select("#main-viz").selectAll("svg").remove();
+		mainChart.initVis();
+
+		d3.select("#scatterplot").selectAll("svg").remove();
+		scatter.initVis();
+
+		d3.select("#line-chart").selectAll("svg").remove();
+		lineChart.initVis();
 
 	}, false);
 

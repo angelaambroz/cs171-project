@@ -42,6 +42,17 @@ a:hover {
 
 /* MAIN VIZ: HEAT MAP */
 
+.story {
+  stroke-width: 0.75;
+  stroke: orange;
+}
+
+rect.highlighted {
+ stroke-width: 1;
+ stroke: yellow;
+ fill: yellow; 
+}
+
 
 /* SIDE VIZ 1: SCATTERPLOT */
 
@@ -52,7 +63,7 @@ a:hover {
 }
 
 .axis {
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .axis path,
@@ -63,11 +74,17 @@ a:hover {
   shape-rendering: crispEdges;
 }
 
+circle.highlighted {
+  stroke-width: 1;
+  stroke: purple;
+  fill: yellow;
+}
+
 
 /* SIDE VIZ 2: LINE CHART */
 
 .line {
   fill: none;
   stroke-width: 0.5px;
-  stroke: #894b00;
+  stroke: #ffdbb0;
 }

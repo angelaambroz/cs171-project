@@ -5,7 +5,7 @@
  * @param _data						-- the  
  */
 
-scatterChart = function(_parentElement, _data){
+scatterChart = function(_parentElement, _data) {
 	this.parentElement = _parentElement;
   this.data = _data;
 
@@ -15,16 +15,20 @@ scatterChart = function(_parentElement, _data){
 
 
 
-scatterChart.prototype.initVis = function(){
+scatterChart.prototype.initVis = function() {
   var vis = this; 
 
+  // I'll need a magnifying glass here...
+  vis.fisheye = d3.fisheye.circular()
+    .radius(10);
+
   // Draw the canvas
-  vis.margin = {top: 50, right: 50, bottom: 30, left: 50};
+  vis.margin = {top: 10, right: 50, bottom: 30, left: 50};
 
   vis.divWidth = $("#" + vis.parentElement).width();
 
   vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-  vis.height = 200 - vis.margin.top - vis.margin.bottom;
+  vis.height = 225 - vis.margin.top - vis.margin.bottom;
 
   // console.log(vis.data);
 
@@ -58,15 +62,37 @@ scatterChart.prototype.initVis = function(){
   // Draw scatterplot
   vis.r = 1;
 
-  vis.svg.selectAll(".storycircle")
+  vis.circles = vis.svg.selectAll(".storycircle")
     .data(vis.data)
     .enter()
     .append("circle")
+      .datum(function(d) {
+        return { x: d.vocab, y: d.wordcount };
+      })
     .attr("class", "storycircle")
     .attr("id", function(d) { return d.title + "-" + d.year; })
     .attr("r", vis.r)
-    .attr("cx", function(d) { return vis.x(d.vocab); })
-    .attr("cy", function(d) { return vis.y(d.wordcount); });
+    .attr("cx", function(d) { return vis.x(d.x); })
+    .attr("cy", function(d) { return vis.y(d.y); })
+    .on("mouseover", linkHighlight);
+
+  vis.svg.on("mousemove", function() {
+    console.log("hello");
+    vis.fisheye.focus(d3.mouse(this));
+
+    vis.circles.each(function(d) { d.fisheye = vis.fisheye(d); })
+      .attr("cx", function(d) { return d.fisheye.x; })
+      .attr("cy", function(d) { return d.fisheye.y; })
+      .attr("r", function(d) { return d.fisheye.z * 2; });
+   })
+
+
+  // .append("circle")
+  //   .datum( function(d) {
+  //       return {x: d.pages, y: d.books} // change data, to feed to the fisheye plugin
+  //   })
+  //   .attr("cx", function (d) {return d.x}) // changed data can be used here as well
+  //   .attr("cy", function (d) {return d.y}) // ...and here
 
 
   vis.svg.append("g")

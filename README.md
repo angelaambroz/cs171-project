@@ -78,4 +78,5 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * `#scatterplot`: ~~axes, lines~~, labels (use Bootstrap `.code` class).
 * `#linechart`: get it started.
 * Linking the charts together...!
+* `mouseout` function.
 
