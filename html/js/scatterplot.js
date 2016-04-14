@@ -94,7 +94,9 @@ scatterChart.prototype.updateVis = function() {
   console.log("Updating the viz with length: " + vis.displayData.length);
 
   vis.circles = vis.svg.selectAll(".storycircle")
-    .data(vis.displayData);
+    .data(vis.displayData, function(d) { return d.id; });
+
+  vis.circles.exit().transition().remove();
 
   vis.circles
     .enter()
@@ -109,8 +111,6 @@ scatterChart.prototype.updateVis = function() {
     .attr("id", function(d) { return "story" + d.id; })
     .attr("cx", function(d) { return vis.x(d.vocab); })
     .attr("cy", function(d) { return vis.y(d.wordcount); })
-
-  vis.circles.exit().transition().remove();
 
   vis.svg.select(".x-axis").call(vis.xAxis);      
   vis.svg.select(".y-axis").call(vis.yAxis);
