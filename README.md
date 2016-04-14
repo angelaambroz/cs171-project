@@ -37,7 +37,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~New design idea: Tooltip _not_ on hover - but rather, once top word or user word appears, reveal that line to the right of the charts.~~
 * ~~New design idea: The long scroll is boring:~~
       * ~~Collapse paras into chapter objects? (Using average sentence length per para?)~~
-
+* `font-awesome`?
 
 
 ###### Data processing
@@ -52,7 +52,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~General questions:~~
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
-* I need full date-time objects for each story for the line chart.
+* ~~I need full date-time objects for each story for the line chart.~~
+* ~~Make unique identifier for all stories.~~ Used index - but why is it 100+ stories over?! 
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
@@ -71,13 +72,17 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Figure out `height` on `mainChart`.`~~
 * ~~Center `mainChart`.~~
 * ~~Heat map of complexity (using `vocab`).~~
-* Hyperlink each square.
+* ~~Hyperlink each square.~~
 * Smoother transition on `#sh-age`. 
 * Tooltip each story: title, author (URL?). 
 * Special outline for my story? (vanity button?)
 * Why is `words` appearing in the story objects?
 * `#scatterplot`: ~~axes, lines~~, labels (use Bootstrap `.code` class).
 * `#linechart`: get it started.
-* Linking the charts together...!
+* Linking the charts together...! ~~Highlights~~, brushed.
 * `mouseout` function.
+* Highlighting is not working on 2003 column (`textChart.js`). 2003 is repeating. 
+* Fix ordering of years in `textChart.js`. 
+* What's a better color scheme?
+
 

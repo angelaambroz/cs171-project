@@ -67,11 +67,12 @@ scatterChart.prototype.initVis = function() {
     .enter()
     .append("circle")
     .attr("class", "storycircle")
-    .attr("id", function(d) { return d.title + "-" + d.year; })
+    .attr("id", function(d) { return "story" + d.id; })
     .attr("r", vis.r)
     .attr("cx", function(d) { return vis.x(d.vocab); })
     .attr("cy", function(d) { return vis.y(d.wordcount); })
-    .on("mouseover", linkHighlight);
+    .on("mouseover", linkHighlight)
+    .on("click", clicked);;
 
 
   vis.svg.append("g")

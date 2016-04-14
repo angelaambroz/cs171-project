@@ -97,7 +97,7 @@ def storyContent(top_url, story_links):
 
 	# Pulling text from all stories
 	print "Pulling text from stories..."
-	for story_url in story_links:
+	for index, story_url in enumerate(story_links):
 
 		# If podcast, skip
 		if "podcast" not in story_url:
@@ -127,6 +127,7 @@ def storyContent(top_url, story_links):
 				})
 
 			storyObjects.append({
+				'id': index,
 				'title': story_title,
 				'author': story_author,
 				'wordcount': len(story_words),
@@ -177,7 +178,7 @@ for year in years:
 			year['stories'].append(story)
 
 
-with open(DIR + "/processed/sh-data3-no-text.json", "w") as f:
+with open(DIR + "/processed/sh-data4-no-text.json", "w") as f:
 	json.dump(years, f)
 
 

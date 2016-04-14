@@ -13,6 +13,8 @@ $w.scroll(function() {
 	scrollPoint = $w.scrollTop();
 });
 
+$(".fa-refresh").on("click", refresh);
+
 
 // Age of Strange Horizons
 
@@ -108,17 +110,25 @@ function createVis() {
 function linkHighlight(d) {
 	
 	// Use URL as unique identifier
-	// console.log(this);
-
-	// Identify which chart you're in
-
-	// Highlight this item
-	// d3.select(this).classed("highlighted", true);
+	console.log(d);
 
 	// Find URL in the other charts
+	d3.select("#story" + d.id + ".storyrect").classed("highlighted", true);
+	d3.selectAll("#story" +  d.id + ".storycircle").classed("highlighted", true);
+	d3.selectAll("#story" +  d.id + ".linecircle").classed("highlighted", true);
 
-	// Highlight item (IDed by URL) in other charts
+	// basic idea will be:
+	// d3.selectAll(".storycircle")
 
+
+}
+
+function refresh() {
+	d3.selectAll(".highlighted").classed("highlighted", false);
+}
+
+function clicked(d) {
+	window.open(d.url); 
 }
 
 

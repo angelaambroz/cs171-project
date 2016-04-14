@@ -40,17 +40,24 @@ a:hover {
   color: gray;
 }
 
+.fa-refresh:hover {
+  cursor: pointer;
+}
+
 /* MAIN VIZ: HEAT MAP */
 
-.story {
+.storyrect {
   stroke-width: 0.75;
   stroke: orange;
 }
 
-rect.highlighted {
+.storyrect:hover {
+  cursor: pointer;
+}
+
+.storyrect.highlighted {
  stroke-width: 1;
- stroke: yellow;
- fill: yellow; 
+ stroke: red;
 }
 
 
@@ -60,6 +67,10 @@ rect.highlighted {
   stroke: #894b00;
   stroke-width: 0.5;
   fill: white;
+}
+
+.storycircle:hover {
+  cursor: pointer;
 }
 
 .axis {
@@ -74,10 +85,10 @@ rect.highlighted {
   shape-rendering: crispEdges;
 }
 
-circle.highlighted {
+.storycircle.highlighted {
   stroke-width: 1;
-  stroke: purple;
-  fill: yellow;
+  stroke: red;
+  fill: red;
 }
 
 
@@ -86,5 +97,22 @@ circle.highlighted {
 .line {
   fill: none;
   stroke-width: 0.5px;
-  stroke: #ffdbb0;
+  stroke: #ffeda0;
 }
+
+.linecircle {
+  stroke: #894b00;
+  stroke-width: 0.5;
+  fill: white;
+}
+
+.linecircle:hover {
+  cursor: pointer;
+}
+
+.linecircle.highlighted {
+  stroke-width: 1;
+  stroke: red;
+  fill: red;
+}
+

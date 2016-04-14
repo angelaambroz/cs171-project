@@ -33,9 +33,9 @@ textChart.prototype.initVis = function() {
 
 	// Scales
 	vis.color = d3.scale.linear()
-		.range(["#efedf5",
-				"#bcbddc",
-				"#756bb1"]);
+		.range(["#ffeda0",
+				"#feb24c",
+				"#f03b20"]);
 
 	// y-axis: stories, x-axis: years
 
@@ -81,12 +81,14 @@ textChart.prototype.updateVis = function() {
 		.data(function(d) { return d.storiesClean; })
 		.enter()
 		.append("rect")
-		.attr("class", "story")
+		.attr("id", function(d) { return "story" + d.id; })
+		.attr("class", "storyrect")
 		.attr("width", vis.rectWidth)
 		.attr("x", function(d) { return 0; })
 		.attr("y", function(d, i) { return vis.rectHeight*i; })
 		.attr("height", vis.rectHeight)
 		.attr("fill", function(d) { return vis.color(d.vocab)})
-		.on("mouseover", linkHighlight);
+		.on("mouseover", linkHighlight)
+		.on("click", clicked);
 
 }

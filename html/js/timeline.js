@@ -66,16 +66,17 @@ timeline.prototype.initVis = function(){
     .attr("class", "line")
     .attr("d", vis.line(vis.data));
 
-  vis.svg.selectAll(".storycircle")
+  vis.circles = vis.svg.selectAll(".linecircle")
     .data(vis.data)
     .enter()
     .append("circle")
-    .attr("class", "storycircle")
-    .attr("id", function(d) { return d.title + "-" + d.year; })
+    .attr("class", "linecircle")
+    .attr("id", function(d) { return "story" + d.id; })
     .attr("r", vis.r)
     .attr("cx", function(d) { return vis.x(d.date); })
     .attr("cy", function(d) { return vis.y(d.vocab); })
-    .on("mouseover", linkHighlight);
+    .on("mouseover", linkHighlight)
+    .on("click", clicked);
 
   vis.svg.append("g")
       .attr("class", "x-axis axis")
