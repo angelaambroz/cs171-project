@@ -58,6 +58,12 @@ a:hover {
 .storyrect.highlighted {
  stroke-width: 1;
  stroke: red;
+ fill: #ff8989;
+}
+
+.storyrect.bookmarked {
+  fill: #bac7ff;
+  stroke: #00187f;;
 }
 
 
@@ -91,6 +97,11 @@ a:hover {
   fill: red;
 }
 
+.storycircle.bookmarked {
+  fill: #bac7ff;
+  stroke: #bac7ff;;
+}
+
 
 /* SIDE VIZ 2: LINE CHART */
 
@@ -115,4 +126,17 @@ a:hover {
   stroke: red;
   fill: red;
 }
+
+.linecircle.bookmarked {
+  fill: #bac7ff;
+  stroke: #bac7ff;;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+
 

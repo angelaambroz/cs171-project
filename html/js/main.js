@@ -108,9 +108,7 @@ function createVis() {
 }
 
 function linkHighlight(d) {
-	d3.select("#story" + d.id + ".storyrect").classed("highlighted", true);
-	d3.selectAll("#story" +  d.id + ".storycircle").classed("highlighted", true);
-	d3.selectAll("#story" +  d.id + ".linecircle").classed("highlighted", true);
+	d3.selectAll("#story" + d.id).classed("highlighted", true);
 }
 
 function refresh() {
@@ -123,15 +121,17 @@ function clicked(d) {
 
 function tooltip(d) {
 
+	var dataPoint = this;
+	console.log(dataPoint);
+
 	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
 
-	var html = "Author: " + d.author + ".";
+	var html = "<p>" + d.author + "</p> <div id='tooltip-viz'></div>";
 
 	swal({
 	  title: title,
 	  text: html,
 	  html: true,
-	  type: "info",
 	  "allowOutsideClick": true, 
 	  showCancelButton: true,
 	  confirmButtonColor: "#bac7ff",
@@ -143,11 +143,31 @@ function tooltip(d) {
 	function(isConfirm){
 		  if (isConfirm) {
 		  	console.log("#story" + d.id);
+		  	d3.selectAll("#story" + d.id).classed("highlighted", false);
+		  	d3.selectAll("#story" + d.id).classed("bookmarked", true);
 		    console.log("Blue button!");
 		  } else {
 			console.log("Gray button!");
 		  }
 		});
+
+}
+
+function brushed() {
+
+	scatter.brushToggle = lineChart.brush.empty();
+	scatter.brushData = scatter.data.filter(function(story) {
+		if (story.date >= lineChart.brush.extent()[0] && story.date <= lineChart.brush.extent()[1]) {
+			return story;
+		}
+	})
+
+	scatter.wrangleData();
+
+
+	// TODO: Filter heatmap.d if dates within brush.extent() 
+
+
 
 }
 

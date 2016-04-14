@@ -76,7 +76,7 @@ timeline.prototype.initVis = function(){
     .attr("cx", function(d) { return vis.x(d.date); })
     .attr("cy", function(d) { return vis.y(d.vocab); })
     .on("mouseover", linkHighlight)
-    .on("click", tooltip);
+    .on("click", clicked);
 
   vis.svg.append("g")
       .attr("class", "x-axis axis")
@@ -86,19 +86,6 @@ timeline.prototype.initVis = function(){
     vis.svg.append("g")
     .attr("class", "y-axis axis")
     .call(vis.yAxis);
-
-    // Brushing component
-    vis.brush = d3.svg.brush()
-        .x(vis.x)
-        .on("brush", brushed);
-
-    vis.svg.append("g")
-         .attr("class", "x brush")
-         .call(vis.brush)
-       .selectAll("rect")
-         .attr("y", -6)
-         .attr("height", vis.height + 7);
-
 
 }
 
