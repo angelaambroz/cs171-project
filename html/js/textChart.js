@@ -89,6 +89,6 @@ textChart.prototype.updateVis = function() {
 		.attr("height", vis.rectHeight)
 		.attr("fill", function(d) { return vis.color(d.vocab)})
 		.on("mouseover", linkHighlight)
-		.on("click", clicked);
+		.on("click", tooltip);
 
 }

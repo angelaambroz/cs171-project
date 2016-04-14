@@ -74,7 +74,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Heat map of complexity (using `vocab`).~~
 * ~~Hyperlink each square.~~
 * Smoother transition on `#sh-age`. 
-* Tooltip each story: title, author (URL?). 
+* ~~Tooltip each story: title, author (URL?).~~ 
 * Special outline for my story? (vanity button?)
 * Why is `words` appearing in the story objects?
 * `#scatterplot`: ~~axes, lines~~, labels (use Bootstrap `.code` class).
@@ -83,6 +83,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * `mouseout` function.
 * Highlighting is not working on 2003 column (`textChart.js`). 2003 is repeating. 
 * Fix ordering of years in `textChart.js`. 
-* What's a better color scheme?
+* ~~What's a better color scheme?~~
+* Bookmark interesting stories (from the popup). 
+* **Tooltip**: Random image, `"science fiction " + d.top_word[0]` Google CC-license image search!?
 
 

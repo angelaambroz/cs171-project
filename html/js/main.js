@@ -108,19 +108,9 @@ function createVis() {
 }
 
 function linkHighlight(d) {
-	
-	// Use URL as unique identifier
-	console.log(d);
-
-	// Find URL in the other charts
 	d3.select("#story" + d.id + ".storyrect").classed("highlighted", true);
 	d3.selectAll("#story" +  d.id + ".storycircle").classed("highlighted", true);
 	d3.selectAll("#story" +  d.id + ".linecircle").classed("highlighted", true);
-
-	// basic idea will be:
-	// d3.selectAll(".storycircle")
-
-
 }
 
 function refresh() {
@@ -129,6 +119,36 @@ function refresh() {
 
 function clicked(d) {
 	window.open(d.url); 
+}
+
+function tooltip(d) {
+
+	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
+
+	var html = "Author: " + d.author + ".";
+
+	swal({
+	  title: title,
+	  text: html,
+	  html: true,
+	  type: "info",
+	  "allowOutsideClick": true, 
+	  showCancelButton: true,
+	  confirmButtonColor: "#bac7ff",
+	  confirmButtonText: "Bookmark",
+	  cancelButtonText: "OK",
+	  closeOnConfirm: true,
+	  closeOnCancel: true
+	},
+	function(isConfirm){
+		  if (isConfirm) {
+		  	console.log("#story" + d.id);
+		    console.log("Blue button!");
+		  } else {
+			console.log("Gray button!");
+		  }
+		});
+
 }
 
 
