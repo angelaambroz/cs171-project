@@ -107,7 +107,7 @@ function createVis() {
 	lineChart = new timeline("line-chart", cleanStories);
 }
 
-function linkHighlight(d) {
+function mouseover(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", true);
 }
 

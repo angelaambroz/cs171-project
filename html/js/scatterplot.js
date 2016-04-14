@@ -46,6 +46,9 @@ scatterChart.prototype.initVis = function() {
   vis.y = d3.scale.linear()
   		.range([vis.height, 0]);
 
+  vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
+  vis.y.domain(d3.extent(vis.data, function(d) { return d.wordcount; }));
+
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
   	  .orient("bottom")
@@ -90,25 +93,24 @@ scatterChart.prototype.updateVis = function() {
 
   console.log("Updating the viz with length: " + vis.displayData.length);
 
-  vis.x.domain(d3.extent(vis.displayData, function(d) { return d.vocab; }));
-  vis.y.domain(d3.extent(vis.displayData, function(d) { return d.wordcount; }));
-
   vis.circles = vis.svg.selectAll(".storycircle")
     .data(vis.displayData);
 
-  vis.circles.enter()
+  vis.circles
+    .enter()
     .append("circle")
     .attr("class", "storycircle")
     .attr("r", vis.r)
-    .on("mouseover", linkHighlight)
+    .on("mouseover", mouseover)
     .on("click", tooltip);
 
-  vis.circles  
+  vis.circles
+    .transition()  
     .attr("id", function(d) { return "story" + d.id; })
     .attr("cx", function(d) { return vis.x(d.vocab); })
     .attr("cy", function(d) { return vis.y(d.wordcount); })
 
-  vis.circles.exit().remove();
+  vis.circles.exit().transition().remove();
 
   vis.svg.select(".x-axis").call(vis.xAxis);      
   vis.svg.select(".y-axis").call(vis.yAxis);

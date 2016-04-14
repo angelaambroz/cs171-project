@@ -75,7 +75,7 @@ timeline.prototype.initVis = function(){
     .attr("r", vis.r)
     .attr("cx", function(d) { return vis.x(d.date); })
     .attr("cy", function(d) { return vis.y(d.vocab); })
-    .on("mouseover", linkHighlight)
+    .on("mouseover", mouseover)
     .on("click", tooltip);
 
   vis.svg.append("g")

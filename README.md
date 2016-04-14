@@ -53,7 +53,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~
     2. ~~How else can I reduce the size of the json?~~
 * ~~I need full date-time objects for each story for the line chart.~~
-* ~~Make unique identifier for all stories.~~ Used index - but why is it 100+ stories over?! 
+* ~~Make unique identifier for all stories.~~ Used index - but why is it 100+ stories over?! (2003 duplicates?)
+* Sentence length variance. 
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
@@ -86,5 +87,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~What's a better color scheme?~~
 * Bookmark interesting stories (from the popup). 
 * **Tooltip**: Random image, `"science fiction " + d.top_word[0]` Google CC-license image search!?
+* ~~Brushing in `scatterplot.js`: keep scale the same, just filter data points.~~
+* `scatterplot.js`: `.data(displayData, function(d) { return d.id; })`... points by index.
 
 
