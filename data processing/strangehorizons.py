@@ -1,8 +1,9 @@
-#!/usr/local/bin/python 
+# !/usr/local/bin/python 
 
 import itertools
 import urllib2
 import pprint
+import numpy
 import nltk
 import json
 import csv
@@ -73,6 +74,18 @@ def overallTokenizing(rawFile):
 	print "Finished tokenizing."
 	return words, vocab, top_words
 
+def sentenceLengths(rawFile):
+	print "Sentence tokenizing..."
+	sentences = nltk.sent_tokenize(rawFile)
+	sent_lengths = []
+
+	for sentence in sentences:
+		length = len(nltk.word_tokenize(sentence))
+		sent_lengths.append(length)
+
+	return sent_lengths
+
+
 
 #################################
 #	Data collection functions	#
@@ -112,6 +125,10 @@ def storyContent(top_url, story_links):
 							and "Archived Fiction Dating" not in unidecode(p.text)]
 			story_text = SPACE.join(story_text)
 			story_words, story_vocab, story_top = overallTokenizing(story_text)
+			story_sents = sentenceLengths(story_text)
+			story_sent_mean = numpy.mean(story_sents)
+			story_sent_sd = numpy.std(story_sents)
+
 
 			try:
 				story_year = unidecode(story_soup.find_all(class_="content-date")[0].text[-4:])
@@ -134,6 +151,8 @@ def storyContent(top_url, story_links):
 				'vocab': len(story_vocab),
 				'year': story_year,
 				'date': story_date,
+				'mean_sentence_length': str(story_sent_mean),
+				'stdv_sentence_length': str(story_sent_sd),
 				# 'raw': story_text,
 				'url': top_url + story_url,
 				'top_within': [{'word': x, 'count': y } for (x, y) in story_top]
@@ -178,7 +197,7 @@ for year in years:
 			year['stories'].append(story)
 
 
-with open(DIR + "/processed/sh-data4-no-text.json", "w") as f:
+with open(DIR + "/processed/sh-data5-no-text.json", "w") as f:
 	json.dump(years, f)
 
 

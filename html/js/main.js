@@ -36,9 +36,12 @@ ageOfStrangeHorizons();
 // load default data
 loadData();
 
+
 function loadData() {
 
 	var formatDate = d3.time.format("%e %B %Y");
+
+
 
 	d3.json("data/sh-textless.json", function(error, jsonData) {
 		if (!error) {
@@ -58,6 +61,9 @@ function loadData() {
 				}
 			});
 
+			// console.log("hi");
+			console.log(allData);
+
 			cleanData.forEach(function(year) {
 				year['year'] = +year['year'];
 				year['vocab'] = +year['vocab'];
@@ -67,6 +73,8 @@ function loadData() {
 					story['year'] = +story['year'];
 					story['vocab'] = +story['vocab'];
 					story['words'] = +story['words'];
+					story['stdv_sentence_length'] = +story['stdv_sentence_length'];
+					story['mean_sentence_length'] = +story['mean_sentence_length'];
 					story['date'] = formatDate.parse(story['date']);
 
 			})
@@ -96,7 +104,12 @@ function loadData() {
 			})
 
 			createVis();
+		} else {
+			console.log(error);
 		}
+
+
+
 	})
 }
 
@@ -166,8 +179,6 @@ function brushed() {
 
 
 	// TODO: Filter heatmap.d if dates within brush.extent() 
-
-
 
 }
 

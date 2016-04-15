@@ -54,7 +54,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
     2. ~~How else can I reduce the size of the json?~~
 * ~~I need full date-time objects for each story for the line chart.~~
 * ~~Make unique identifier for all stories.~~ Used index - but why is it 100+ stories over?! (2003 duplicates?)
-* Sentence length variance. 
+* ~~Sentence length variance.~~ Did `mean`, `std`.  
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
@@ -64,12 +64,12 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Top words ~~buttons~~ word cloud. 
 * Get ~~`main.js`~~, ~~`textChart.js`~~ and `linkChart.js` set up.
 * ~~User choice covers: CSS, functions.~~ 
-* How to replicate Sublime Text's brushed sidebar? 
-    * How to determine height of what the viewer is seeing? Highest data point and lowest data point?
+* ~~How to replicate Sublime Text's brushed sidebar?~~
+    * ~~How to determine height of what the viewer is seeing? Highest data point and lowest data point?~~
 * Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
 * ~~Jane Austen `maxParaLength` seems way too high.~~
 * ~~Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`.~~ (Did this manually.)
-* Resize isn't re-loading `mainChart` in the correct way.
+* ~~Resize isn't re-loading `mainChart` in the correct way.~~
 * ~~Figure out `height` on `mainChart`.`~~
 * ~~Center `mainChart`.~~
 * ~~Heat map of complexity (using `vocab`).~~
@@ -80,14 +80,14 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Why is `words` appearing in the story objects?
 * `#scatterplot`: ~~axes, lines~~, labels (use Bootstrap `.code` class).
 * `#linechart`: get it started.
-* Linking the charts together...! ~~Highlights~~, brushed.
+* ~~Linking the charts together...! Highlights, brushed.~~
 * `mouseout` function.
 * Highlighting is not working on 2003 column (`textChart.js`). 2003 is repeating. 
 * Fix ordering of years in `textChart.js`. 
 * ~~What's a better color scheme?~~
-* Bookmark interesting stories (from the popup). 
+* ~~Bookmark interesting stories (from the popup).~~ 
 * **Tooltip**: Random image, `"science fiction " + d.top_word[0]` Google CC-license image search!?
 * ~~Brushing in `scatterplot.js`: keep scale the same, just filter data points.~~
-* `scatterplot.js`: `.data(displayData, function(d) { return d.id; })`... points by index.
+* ~~`scatterplot.js`: `.data(displayData, function(d) { return d.id; })`... points by index.~~
 
 

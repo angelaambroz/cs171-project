@@ -47,7 +47,8 @@ scatterChart.prototype.initVis = function() {
   		.range([vis.height, 0]);
 
   vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
-  vis.y.domain(d3.extent(vis.data, function(d) { return d.wordcount; }));
+  vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
+  // vis.y.domain([0,20]);
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
@@ -110,7 +111,7 @@ scatterChart.prototype.updateVis = function() {
     .transition()  
     .attr("id", function(d) { return "story" + d.id; })
     .attr("cx", function(d) { return vis.x(d.vocab); })
-    .attr("cy", function(d) { return vis.y(d.wordcount); })
+    .attr("cy", function(d) { return vis.y(d.stdv_sentence_length); })
 
   vis.svg.select(".x-axis").call(vis.xAxis);      
   vis.svg.select(".y-axis").call(vis.yAxis);
