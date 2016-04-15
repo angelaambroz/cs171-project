@@ -47,8 +47,8 @@ scatterChart.prototype.initVis = function() {
   		.range([vis.height, 0]);
 
   vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
-  vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
-  // vis.y.domain([0,20]);
+  // vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
+  vis.y.domain([0,20]);
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
