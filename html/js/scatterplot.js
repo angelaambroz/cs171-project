@@ -37,6 +37,8 @@ scatterChart.prototype.initVis = function() {
 
   vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
   vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
+
+  console.log(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
   // vis.y.domain([0,20]);
 
 
@@ -81,10 +83,8 @@ scatterChart.prototype.wrangleData = function() {
   var vis = this;
 
   if (vis.brushToggle == true) {
-    console.log("No brush data.");
     vis.displayData = vis.data;  
   } else {
-    console.log("Switching to brush data.");
     vis.displayData = vis.brushData;
   }
   

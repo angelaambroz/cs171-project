@@ -133,12 +133,9 @@ function clicked(d) {
 }
 
 function tooltip(d) {
-
+	
 	var dataPoint = this;
-	console.log(dataPoint);
-
 	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
-
 	var html = "<p>" + d.author + "</p> <div id='tooltip-viz'></div>";
 
 	swal({
@@ -155,13 +152,9 @@ function tooltip(d) {
 	},
 	function(isConfirm){
 		  if (isConfirm) {
-		  	console.log("#story" + d.id);
 		  	d3.selectAll("#story" + d.id).classed("highlighted", false);
 		  	d3.selectAll("#story" + d.id).classed("bookmarked", true);
-		    console.log("Blue button!");
-		  } else {
-			console.log("Gray button!");
-		  }
+		  } 
 		});
 
 }
@@ -177,23 +170,18 @@ function brushed() {
 
 	scatter.wrangleData();
 
-
 	// TODO: Filter heatmap.d if dates within brush.extent() 
 
 }
 
 
 function zoom() {
-
     scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
 
     scatter.circles
-        .attr("transform", transform);
-}
-
-function transform(d) {
-  return "translate(" + scatter.x(d.vocab) + "," + scatter.y(d.stdv_sentence_length) + ")";
+        .attr("cx", function(d) { return scatter.x(d.vocab)})
+        .attr("cy", function(d) { return scatter.y(d.stdv_sentence_length)});
 }
 
 
