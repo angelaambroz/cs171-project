@@ -24,6 +24,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * [Tony Hschu - Scroll linked animations](http://blog.tonyhschu.ca/post/49488608263/technical-write-up-scroll-linked-animations)
 * [Jim Valladingham - Scroller.js](http://vallandingham.me/scroller.html)
 * [StackOverflow - Fisheye distortion on simple scatterplot](https://stackoverflow.com/questions/23407421/d3-fisheye-distortion-on-simple-scatter-plot)
+* [bl.ocks - Zoomable plot](http://bl.ocks.org/peterssonjonas/4a0e7cb8d23231243e0e)
 
 
 

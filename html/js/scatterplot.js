@@ -12,9 +12,6 @@ scatterChart = function(_parentElement, _data) {
   this.initVis();
 }
 
-
-
-
 scatterChart.prototype.initVis = function() {
   var vis = this;
 
@@ -31,24 +28,33 @@ scatterChart.prototype.initVis = function() {
   vis.height = 225 - vis.margin.top - vis.margin.bottom;
 
 
+  // Scales and axes
+  vis.x = d3.scale.linear()
+      .range([0, vis.width]);
+
+  vis.y = d3.scale.linear()
+      .range([vis.height, 0]);
+
+  vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
+  vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
+  // vis.y.domain([0,20]);
+
+
+    // Zoom
+  // vis.zoomIt = d3.behavior.zoom()
+  //   .x(vis.x)
+  //   .y(vis.y)
+  //   .scaleExtent([0, 500])
+  //   .on("zoom", zoom);
+
+
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
     .attr("width", vis.width + vis.margin.left + vis.margin.right)
     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
     .append("g")
     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
-
-  // Scales and axes
-  vis.x = d3.scale.linear()
-      .range([0, vis.width]);
-
-  vis.y = d3.scale.linear()
-  		.range([vis.height, 0]);
-
-  vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
-  // vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
-  vis.y.domain([0,20]);
+    // .call(vis.zoomIt);
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
@@ -91,6 +97,7 @@ scatterChart.prototype.wrangleData = function() {
 scatterChart.prototype.updateVis = function() { 
 
   var vis = this;
+  console.log(vis);
 
   console.log("Updating the viz with length: " + vis.displayData.length);
 
@@ -117,4 +124,3 @@ scatterChart.prototype.updateVis = function() {
   vis.svg.select(".y-axis").call(vis.yAxis);
 
 }
-

@@ -183,6 +183,20 @@ function brushed() {
 }
 
 
+// function zoom() {
+
+//     scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
+//     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
+
+//     scatter.circles
+//         .attr("transform", transform);
+// }
+
+// function transform(d) {
+//   return "translate(" + scatter.x(d.vocab) + "," + scatter.y(d.stdv_sentence_length) + ")";
+// }
+
+
 // On resizing, resize all three vizzes
 window.addEventListener("resize", function() {
 		d3.select("#main-viz").selectAll("svg").remove();
