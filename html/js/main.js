@@ -183,18 +183,18 @@ function brushed() {
 }
 
 
-// function zoom() {
+function zoom() {
 
-//     scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
-//     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
+    scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
+    scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
 
-//     scatter.circles
-//         .attr("transform", transform);
-// }
+    scatter.circles
+        .attr("transform", transform);
+}
 
-// function transform(d) {
-//   return "translate(" + scatter.x(d.vocab) + "," + scatter.y(d.stdv_sentence_length) + ")";
-// }
+function transform(d) {
+  return "translate(" + scatter.x(d.vocab) + "," + scatter.y(d.stdv_sentence_length) + ")";
+}
 
 
 // On resizing, resize all three vizzes

@@ -41,11 +41,10 @@ scatterChart.prototype.initVis = function() {
 
 
     // Zoom
-  // vis.zoomIt = d3.behavior.zoom()
-  //   .x(vis.x)
-  //   .y(vis.y)
-  //   .scaleExtent([0, 500])
-  //   .on("zoom", zoom);
+  vis.zoomed = d3.behavior.zoom()
+    .x(vis.x)
+    .y(vis.y)
+    .on("zoom", zoom);
 
 
   // SVG drawing area
@@ -53,8 +52,8 @@ scatterChart.prototype.initVis = function() {
     .attr("width", vis.width + vis.margin.left + vis.margin.right)
     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-    // .call(vis.zoomIt);
+    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")")
+    .call(vis.zoomed);
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
@@ -97,9 +96,6 @@ scatterChart.prototype.wrangleData = function() {
 scatterChart.prototype.updateVis = function() { 
 
   var vis = this;
-  console.log(vis);
-
-  console.log("Updating the viz with length: " + vis.displayData.length);
 
   vis.circles = vis.svg.selectAll(".storycircle")
     .data(vis.displayData, function(d) { return d.id; });
