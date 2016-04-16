@@ -38,9 +38,6 @@ scatterChart.prototype.initVis = function() {
   vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
   vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
 
-  console.log(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
-  // vis.y.domain([0,20]);
-
 
     // Zoom
   vis.zoomed = d3.behavior.zoom()

@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>tsot: process book</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/sweetalert.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+	<div class="row buffer-needed">
+
+		<!-- <div class="col-md-1"></div> -->
+
+		<div class="col-md-6 side-note">
+			<h2><code>the shape of text</code>: process book</h2>
+			<h4 class="caption">by <a href="http://angelaambroz.com/menu.html">angela ambroz</a></h4>
+			<h5><a href="http://www.cs171.org/2016/" target="_blank">cs171 (harvard extension school)</a></h5>
+			<h5>spring 2016</h5>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 side-note">
+			<hr>
+			<h4 id="toc">Table of Contents</h4>
+			<ul>
+				<li><a href="#background">Background and motivation</a></li>
+				<li><a href="#inspiration1">Inspiration: A great vis</a></li>
+				<li><a href="#inspiration2">More inspiration: Narrative theory + machine learning</a></li>
+				<li><a href="#objectives">Project objectives and goals</a></li>
+				<li><a href="#data">Data</a></li>
+				<li><a href="#redesign">Never mind: The big redesign</a></li>
+				<li><a href="#data2">Data 2.0</a></li>
+			</ul>
+			<hr>
+			<br>
+			<h4 id="background">Background and motivation <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>The written word is one of our most important and rich sources of data; yet natural language analysis is a field mostly restrained to artificial intelligence and the digital humanities. Extending the tools of data visualization to natural language seems an especially interesting area to explore.</p>
+
+			<p>In terms of my personal background and motivation, my <a href="http://angelaambroz.com/dayjob.html" target="_blank">"day job"</a> is international development, where we often work with household survey data from developing countries - running linear regressions, examining distributions, worrying about standard errors. It's very quantitative, very numerical. By night, I enjoy <a href="http://angelaambroz.com/scifi.html" target="_blank">writing science fiction</a>. Very wordy. This project provides me with a unique opportunity to use methods which normally take numerical data, and apply them to text.</p>
+			<br>
+		</div>
+
+		<div class="col-md-6" id="vonnegut">
+			<iframe width="420" height="315" src="https://www.youtube.com/embed/oP3c1h8v2ZQ" frameborder="0" allowfullscreen></iframe>
+			<p class="text-muted aside">Kurt Vonnegut, <em>The Shape of Stories</em> (excerpt)</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 side-note">
+			<h4 id="inspiration1">Inspiration: A great vis <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>First, I was inspired by the <a href="https://openvisconf.com/2015/#videos" target="_blank">OpenVis Conference 2015 video archive</a>, which used an innovative visualization style to visualize all of the 2015 talks. Quickly, one could see the relative duration of the talks, how "dense" the talks are (or how long the words being used are), and how often certain words appeared. I fell in love with this visualization! My plan was to replicate and extend this idea.</p>
+			<br>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 side-note">
+			<h4 id="inspiration2">More inspiration: Narrative theory + machine learning <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>Another related work was <a href="#vonnegut">Kurt Vonnegut’s lecture on "The Shape of Stories"</a>, and a data science project inspired by that lecture. In the lecture, Vonnegut says: "There’s no reason why these simple shapes of stories can’t be fed into computers." The <a href="https://indico.io/blog/plotlines/" target="_blank">data scientists at indico.io</a> put this into action by applying sentiment analysis to Disney scripts, and then mapping those sentiments. The emerging "story shapes" were fascinating to see - especially since they resembled each other across films, indicating that there was a quantifiable "shape", at least to the Disney corpus.</p>
+			<br>
+		</div>
+		<div class="col-md-6">
+			<a href="https://openvisconf.com/2015/#videos" target="_blank"><img src="img/open-vis.png" alt="Screenshot of OpenVis 2015 agenda." class="img-responsive">
+			<p class="aside">OpenVis Conference 2015 video archive</p></a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 side-note">
+			<h4 id="objectives">Project objectives and goals <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>My initial plan was to make a "poor man’s" shape of stories, one that did not rely on predictive analytics - but rather only visualization (and possibly descriptive analytics; such as the standard deviation of sentence length within a text).</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 side-note">
+			<p>Specific questions I wanted to answer were:</p>
+			<ul>
+				<li>Do certain types of texts (e.g. novels, academic articles) have predictable "shapes"?</li>
+				<li>In a novel, can we visually tell - using a visualization of the text, rather than the text itself - when a character enters, exits, or dies?</li>
+				<li>Can we see a writer’s style visually? For example, how complex their prose is?</li>
+				<li>Can a text corpus have a visual "gist"?</li>
+				<li>Can we tell, from a visual gist, when an action scene is happening (short, abrupt sentences, lots of verbs) versus a scene setting description (long sentences, lots of adjectives)?</li>
+			</ul>
+			<p>Longer term goals would be to extend this to visualizing languages, more broadly, by examining the length of words, the length and structure of sentences, grammatical rules, and so on. Something to make Chomsky proud!</p>
+			<br>
+
+			<h4 id="data">Data <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>The original sources of data were:</p>
+			<ul>
+				<li><a href="https://www.gutenberg.org/" target="_blank">Project Gutenberg</a></li>
+				<li>Academic journal articles scraped from the American Economic Review, Quarterly Journal of Economics, and Econometrica (thanks to another side-project I had at the time)</li>
+			</ul>
+			<p>I started by focusing on a limited set of novels from Project Gutenberg. However, I intended to build something that would be easily adaptable to other texts.</p>
+
+			<p>I selected four 19th century novels as my initial text sources:</p>
+			<ul>
+				<li>Dracula, by Bram Stoker</li>
+				<li>Frankenstein, by Mary Shelley</li>
+				<li>Emma, by Jane Austen</li>
+				<li>Moby Dick, by Herman Melville</li>
+			</ul>
+		</div>
+
+		<div class="col-md-6">
+	
+		<p class="aside">Early designs</p>
+			<div class="row">
+				<div class="col-md-6"><img src="img/early-sketch1.jpg" alt="An early sketch." class="img-responsive"></div>
+				<div class="col-md-6"><img src="img/interm-sketch1.jpg" alt="An intermediate sketch." class="img-responsive"></div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+				<img src="img/early-sketch2.jpg" alt="Another early sketch." class="img-responsive"></div>
+				<div class="col-md-6"><img src="img/interm-sketch2.jpg" alt="An intermediate sketch." class="img-responsive"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 side-note">
+			<p>These four were selected because of their length (lots of data to visualize), their verbal complexity (high vocab counts), and their dual cross-cutting similarities (all 19th century, some genre overlap, gender balance) and differences (Moby Dick likely an outlier on a bunch of dimensions).</p>
+
+			<p>In Python, I used the <a href="http://www.nltk.org/">Natural Language Toolkit (nltk)</a> to tokenize each text into words, sentences, and paragraphs; as well as to generate some basic descriptive statistics (for example, the size of vocabulary). The objective was to create an array of <code>book</code> objects. Each <code>book</code> object would have top-level key-value pairs like <code>title</code>, <code>author</code>, <code>top words</code>, <code>vocab</code> and <code>word_count</code>. For example, for <a href="https://www.gutenberg.org/ebooks/158" target="_blank">Emma</a>:</p>
+			<img src="img/emma-top-words.png" alt="Screenshot: Emma's top words." class="img-responsive">
+			<p class="aside">Top word is "Mr."! Feminism despair.</p>
+			<br>
+			<p>In addition, each book object would have a key-value pair, <code>text</code>, which was a giant array of all the paragraphs, indexed and analyzed for their length.</p>
+			<p>Here, the first challenge arose: including both the text and their natural language meta-data ballooned the file size up to 31MB. There were a number of attempts to bring it down - 
+			<img src="img/screenshot-folders.png" alt="Screenshot: folders, huge file sizes." class="img-responsive">
+			-- by removing duplicated text, or by removing text entirely, so that the <code>text</code> array in each <code>book</code> object became just a series of indexes and lengths.</p>
+			<img src="img/screenshot-with-text.png" alt="Screenshot: JSON data with text." class="img-responsive">
+			<br>
+			<img src="img/screenshot-without-text.png" alt="Screenshot: JSON data without text." class="img-responsive">
+			<br>
+			<p>This seemed like a bummer, to be honest. What if users wanted to hover on any point in the viz and see the original text behind it? One compromise idea was to only keep sentences which had top words in them - allowing, at least, "top word sentences" to be displayed on hover. This didn't seem like a huge efficiency gain, though, since - by definition - many sentences will have top words in them.</p>
+			<br>
+		</div>
+		<div class="col-md-6"><img src="img/early-data-sketch.jpg" alt="Early plan for data." class="img-responsive"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6"></div>
+		<div class="col-md-6 side-note">
+			<br>
+			<h4 id="redesign">Never mind: The big redesign <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>Following the <a href="http://www.cs171.org/2016/schedule/" target="_blank">CS171 individual vis exploration, the poster, and the expert evaluation</a>, as well as achieving the first prototype of my original design, I decided to radically re-envision the project. While still concentrating on story shapes, I realized that visualizing paragraph lengths was too similar to the immediate visual gist a user gets from looking at a text document itself. What additional value did my visualization provide?</p>
+
+			<p>Here are a series of the original designs, as they took shape:</p>
+			<div class="row">
+				<div class="col-md-6"><img src="img/boring.png" alt="Original design: very boring." class="img-responsive"></div>
+				<div class="col-md-6"><img src="img/boring2.png" alt="Original design: very boring." class="img-responsive"></div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6"><img src="img/boring3.png" alt="Original design: very boring." class="img-responsive"></div>
+				<div class="col-md-6"><img src="img/boring4.png" alt="Original design: very boring." class="img-responsive"></div>
+			</div>
+			<br>
+			<p>Very boring.</p>
+
+			<p>The original four books visualized were simply too long and too intra-textually diverse for clear patterns to emerge. Users had to scroll for long periods over similar-looking terrain. It didn’t seem to add much value beyond scrolling quickly through a text, as in a Word document or book.</p>
+
+			<p>I therefore decided to go back to first principles: Why was I interested in visualizing text? How can a text be visualized in a meaningful, insightful way? And, a more practical question: was trying to visualize a novel simply not going to work, because of its length? How could I find the visual patterns in the jumble of words?</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<p class="aside">An early redesign sketch <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></p>
+			<img src="img/redesign-aliens.jpg" alt="Redesign: Early ideas." class="img-responsive">
+		</div>
+		<div class="col-md-6 side-note">
+			<p>After several iterations, I decided to capture the same idea - the shape of stories - using a new design, and a new data source. (For more discussion on the data source, see the below section; <a href="#data2">Data 2.0</a>). In this redesign, <b>I would use the 700+ short stories available on <a href="http://strangehorizons.com/" target="_blank">Strange Horizons</a> (one of my favorite online science fiction magazines) and analyze their complexity over time</b>. Strange Horizons has published a story a week since September 2000 until today; that was a huge amount of data, and I had several ideas on how to visualize how the types of stories changed over time.</p>
+			<p>In terms of user interaction, <b>must haves</b> were:</p>
+			<ul>
+				<li>On-hover tooltips of the story-rectangles and story-circles in each graph, with more information about each story: title, author, year, and top words.</li>
+				<li>On-click hyperlinks of the story-rectangles to the stories themselves.</li>
+				<li>On-hover or on-click focuses of each year-column in the heat chart, which would illuminate the relevant stories in the scatter plot and line chart.</li>
+			</ul>
+			<p><b>Nice to haves</b> were:</p>		
+			<ul>
+				<li>Radio buttons for users to adjust the reverse bar chart/heat chart such that story-rectangle height encodes for number of words.</li>
+				<li>Sort button for users to sort year-columns in the bar chart according to years with most complexity, or most words written, or most stories (already visible).</li>
+				<li>User search text box, where users can search for author names, titles, or any word which could appear in the text, and those stories are highlighted in all three visualizations. (This is a matter of finding an efficient solution to serving the data from the server; including story text for all 700+ stories in the JSON resulted in a large file size (18MB).)</li>
+				<li>A "vanity" radio button, to highlight my own story in all three visualizations.</li>
+				<li>On-hover tooltips include word clouds of top words.</li>
+				<li>On-hover for each year-column also brings up a word cloud of top words for that year.</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<img src="img/redesign-sketch1.jpg" alt="Redesign sketch." class="img-responsive">
+		</div>
+		<div class="col-md-6 side-note">
+			<p>From the CS171 assignments of individual viz exploration, wherein I was tasked with researching text visualizations (hooray), I was struck by the "literature fingerprints" idea in <a href="https://www.uni-konstanz.de/mmsp/pubsys/publishedFiles/KeOe07.pdf" target="_blank">Keim and Oelke (2007)</a> - this clearly influenced my idea of a <a href="http://www.github.com" target="_blank">GitHub</a>-style heat map encoding a text’s complexity (in my case, the unique set of words, or <code>vocab</code>).</p>
+			<br>
+
+			<h4 id="data2">Data 2.0 <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>Following my redesign, I needed to scrape all the stories available on Strange Horizons since its launch in September 2000. I followed the same process as above, using <a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">BeautifulSoup</a> to parse the Strange Horizons website, and <a href="http://www.nltk.org/" target="_blank">nltk</a> to tokenize the text and calculate basic summary statistics. As with the original four novels in my first data scrape, I calculated the most popular words for each story, as well as the year as a whole.</p>
+			<br>
+			<img src="img/scrapin.gif" alt="Scraping the Strange Horizons website." class="img-responsive">
+			<br>
+			<p class="aside">An aside: My <a href="http://www.strangehorizons.com/2009/20090112/kampala-f.shtml" target="_blank">pride and joy</a>...</p>
+			<img src="img/pride-and-joy.png" alt="Screenshot of my own story." class="img-responsive">
+			<br>
+			<p>This time, I also got a bit fancier, and calculated the mean length of sentences, as well as the standard deviation of sentence length, for each story. The idea being that better writers vary their sentence lengths more. And those stories which had, for example, both high unique word count (<code>vocab</code>) <em>and</em> high sentence length standard deviation would be - well - really good stories! Of course, in the eye of the beholder, blah blah.</p>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6">
+			<img src="img/working.jpg" alt="My desk." class="img-responsive">
+		</div>
+		
+		<div class="col-md-6 side-note">
+			<p>More to come...</p>
+			<br>
+		</div>
+	</div>
+	
+
+
+	</div>
+
+
+		<!-- Load JS libraries -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/d3.min.js"></script>
+	<script src="js/sweetalert.min.js"></script>
+
+	<!-- Visualization objects -->
+<!-- 	<script src="js/textChart.js"></script>
+	<script src="js/scatterplot.js"></script>
+	<script src="js/timeline.js"></script> -->
+
+	<!-- Load data, create visualizations -->
+	<!-- <script src="js/main.js"></script> -->
+	
+
+
+</body>
+</html>

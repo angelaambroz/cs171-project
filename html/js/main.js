@@ -133,7 +133,7 @@ function clicked(d) {
 }
 
 function tooltip(d) {
-	
+
 	var dataPoint = this;
 	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
 	var html = "<p>" + d.author + "</p> <div id='tooltip-viz'></div>";
@@ -178,7 +178,6 @@ function brushed() {
 function zoom() {
     scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
-
     scatter.circles
         .attr("cx", function(d) { return scatter.x(d.vocab)})
         .attr("cy", function(d) { return scatter.y(d.stdv_sentence_length)});

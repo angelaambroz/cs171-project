@@ -91,4 +91,9 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Brushing in `scatterplot.js`: keep scale the same, just filter data points.~~
 * ~~`scatterplot.js`: `.data(displayData, function(d) { return d.id; })`... points by index.~~
 * `scatterplot.js`: Let the user select the scale (zoom).
+* User selects y-axis of scatterplot (update `y-label` in `index.html`). 
+* Beef up `tooltip`. 
+* Custom refresh for each viz ()
+
+
 
