@@ -63,11 +63,11 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Where to put `#main-viz` and `#link-viz`?~~
 * ~~Data summary box - get that started.~~
 * Top words ~~buttons~~ word cloud. 
-* Get ~~`main.js`~~, ~~`textChart.js`~~ and `linkChart.js` set up.
+* ~~Get `main.js`, `textChart.js` and `linkChart.js` set up.~~
 * ~~User choice covers: CSS, functions.~~ 
 * ~~How to replicate Sublime Text's brushed sidebar?~~
     * ~~How to determine height of what the viewer is seeing? Highest data point and lowest data point?~~
-* Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)
+* ~~Filter linkData, based on book selected. (Essentially, just remove all `sentences` objects from `text`.)~~
 * ~~Jane Austen `maxParaLength` seems way too high.~~
 * ~~Apply `d3.stack.layout()` data transformation to `paraArray` in `textChart.js`.~~ (Did this manually.)
 * ~~Resize isn't re-loading `mainChart` in the correct way.~~
@@ -82,9 +82,9 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * `#scatterplot`: ~~axes, lines~~, labels (use Bootstrap `.code` class).
 * `#linechart`: get it started.
 * ~~Linking the charts together...! Highlights, brushed.~~
-* `mouseout` function.
+* ~~`mouseout` function.~~
 * Highlighting is not working on 2003 column (`textChart.js`). 2003 is repeating. 
-* Fix ordering of years in `textChart.js`. 
+* ~~Fix ordering of years in `textChart.js`.~~
 * ~~What's a better color scheme?~~
 * ~~Bookmark interesting stories (from the popup).~~ 
 * **Tooltip**: Random image, `"science fiction " + d.top_word[0]` Google CC-license image search!?
@@ -93,7 +93,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~`scatterplot.js`: Let the user select the scale (zoom).~~
 * User selects y-axis of scatterplot (update `y-label` in `index.html`). 
 * ~~Beef up `tooltip`.~~
-* Custom refresh for each viz ()
-* Show bookmarked stories on "See bookmarks" click.
+* Custom refresh for each viz.
+* ~~Show bookmarked stories on "See bookmarks" click.~~
 * ~~Get year-week for y-axis on `textChart.js`.~~ 
 

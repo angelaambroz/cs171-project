@@ -151,6 +151,7 @@ function tooltip(d) {
 	  title: title,
 	  text: html,
 	  html: true,
+	  animation: false,
 	  "allowOutsideClick": true, 
 	  showCancelButton: true,
 	  confirmButtonColor: "#bac7ff",

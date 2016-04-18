@@ -34,17 +34,14 @@ scatterChart.prototype.initVis = function() {
       .domain([0, 1]);
 
   vis.y = d3.scale.linear()
-      .range([vis.height, 0]);
-
-  vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
-
+      .range([vis.height, 0])
+      .domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
 
     // Zoom
   vis.zoomed = d3.behavior.zoom()
     .x(vis.x)
     .y(vis.y)
     .on("zoom", zoom);
-
 
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
