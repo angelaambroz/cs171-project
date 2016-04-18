@@ -32,10 +32,11 @@ textChart.prototype.initVis = function() {
 	    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 	// Scales
-	vis.color = d3.scale.linear()
+	vis.color = d3.scale.quantize()
 		.range(["#ffeda0",
 				"#feb24c",
-				"#f03b20"]);
+				"#f03b20"])
+		.domain([0, 1]);
 
 	// Scales and axes
 	vis.x = d3.time.scale()
@@ -82,21 +83,6 @@ textChart.prototype.updateVis = function() {
 
 	vis.rectWidth = vis.width / vis.data.length;
 	vis.rectHeight = vis.rectWidth / 4;
-
-	vis.maxVocab = 0;
-	vis.minVocab = 0;
-	vis.maxDate = new Date('4/16/2016');
-	vis.minDate = new Date('9/1/2000');
-
-	vis.data.forEach(function(year) {
-		year.storiesClean.forEach(function(story) {
-			vis.maxVocab = (story.vocab > vis.maxVocab) ? story.vocab : vis.maxVocab;
-			vis.minVocab = (story.vocab <= vis.minVocab) ? story.vocab : vis.minVocab;
-		})
-	})
-
-	vis.color.domain([vis.minVocab, vis.maxVocab]); //this is using yearly vocab, not storyly
-
 	
 	vis.year = vis.svg.selectAll(".year")
 		.data(vis.data)
@@ -104,7 +90,6 @@ textChart.prototype.updateVis = function() {
 		.append("g")
 		.attr("class", "g")
 		.attr("id", function(d) { return "year " + d.year; });
-		// .attr("transform", function(d, i) { return "translate(" + i*vis.rectWidth + ", 0)"; });
 
 	// New idea: circles!
 	vis.circles = vis.year.selectAll("circle")
@@ -116,7 +101,7 @@ textChart.prototype.updateVis = function() {
 		.attr("cx", function(d) { return vis.x(d.year); })
 		.attr("cy", function(d) { return vis.y(d.week); })
 		.attr("r", function(d) { return vis.radius(d.wordcount); })
-		.attr("fill", function(d) { return vis.color(d.vocab); })
+		.attr("fill", function(d) { return vis.color(d.vocab_demeaned); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout)
 		.on("click", tooltip);

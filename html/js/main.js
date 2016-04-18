@@ -71,6 +71,7 @@ function loadData() {
 					story['stdv_sentence_length'] = +story['stdv_sentence_length'];
 					story['mean_sentence_length'] = +story['mean_sentence_length'];
 					story['date'] = formatDate.parse(story['date']);
+					story['vocab_demeaned'] = story['vocab'] / story['wordcount'];
 
 					if (!story.date) {
 						// TODO: Make this not an awful hack!!
@@ -178,9 +179,6 @@ function brushed() {
 
 	scatter.wrangleData();
 
-	console.log(lineChart.brush.empty());
-	console.log(lineChart.brush.extent());
-
 	// TODO: Filter heatmap.d if dates within brush.extent()
 	mainChart.circles.classed("grayed", function(d) {
 			if (lineChart.brush.empty()) {
@@ -195,8 +193,6 @@ function brushed() {
 }
 
 function bookmarks() {
-	// TODO: Show only bookmarks
-	// console.log(d3.selectAll(".maincircle"));
 	d3.selectAll(".maincircle").classed("hidden", true);
 	d3.selectAll(".storycircle").classed("hidden", true);
 	d3.selectAll(".linecircle").classed("hidden", true);

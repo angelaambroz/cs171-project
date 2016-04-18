@@ -37,7 +37,7 @@ timeline.prototype.initVis = function(){
 
   vis.y = d3.scale.linear()
   		.range([vis.height, 0])
-      .domain(d3.extent(vis.data, function(d) { return d.vocab; }));
+      .domain([0, 1]);
 
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
@@ -47,7 +47,7 @@ timeline.prototype.initVis = function(){
   vis.yAxis = d3.svg.axis()
       .scale(vis.y)
       .orient("left")
-      .ticks(4);
+      .ticks(2);
 
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -60,7 +60,7 @@ timeline.prototype.initVis = function(){
   // Draw line chart
   vis.line = d3.svg.line()
     .x(function(d) { return vis.x(d.date); })
-    .y(function(d) { return vis.y(d.vocab); });
+    .y(function(d) { return vis.y(d.vocab_demeaned); });
   
   vis.svg.append("path")
     .attr("class", "line")
@@ -74,7 +74,7 @@ timeline.prototype.initVis = function(){
     .attr("id", function(d) { return "story" + d.id; })
     .attr("r", vis.r)
     .attr("cx", function(d) { return vis.x(d.date); })
-    .attr("cy", function(d) { return vis.y(d.vocab); })
+    .attr("cy", function(d) { return vis.y(d.vocab_demeaned); })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
     .on("click", tooltip);

@@ -30,12 +30,12 @@ scatterChart.prototype.initVis = function() {
 
   // Scales and axes
   vis.x = d3.scale.linear()
-      .range([0, vis.width]);
+      .range([0, vis.width])
+      .domain([0, 1]);
 
   vis.y = d3.scale.linear()
       .range([vis.height, 0]);
 
-  vis.x.domain(d3.extent(vis.data, function(d) { return d.vocab; }));
   vis.y.domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
 
 
@@ -111,7 +111,7 @@ scatterChart.prototype.updateVis = function() {
   vis.circles
     .transition()  
     .attr("id", function(d) { return "story" + d.id; })
-    .attr("cx", function(d) { return vis.x(d.vocab); })
+    .attr("cx", function(d) { return vis.x(d.vocab_demeaned); })
     .attr("cy", function(d) { return vis.y(d.stdv_sentence_length); })
 
   vis.svg.select(".x-axis").call(vis.xAxis);      
