@@ -9,6 +9,7 @@ var selectedBook, mainData, linkData, mainChart, lineChart, scatter, scrollPoint
 
 
 $(".fa-refresh").on("click", refresh);
+$("#showBookmarks").on("click", bookmarks);
 
 
 // Age of Strange Horizons
@@ -129,14 +130,13 @@ function mouseover(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", true);
 }
 
-function refresh() {
-	d3.selectAll(".highlighted").classed("highlighted", false);
-	d3.selectAll(".grayed").classed("grayed", false);
+function mouseout(d) {
+	d3.selectAll("#story" + d.id).classed("highlighted", false);
 }
 
 function tooltip(d) {
 
-	console.log(d.date.toDateString());
+	// console.log(d.date.toDateString());
 	var dataPoint = this;
 	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
 
@@ -183,11 +183,10 @@ function brushed() {
 
 	// TODO: Filter heatmap.d if dates within brush.extent()
 	mainChart.circles.classed("grayed", function(d) {
-			if (d.date < lineChart.brush.extent()[0] || d.date > lineChart.brush.extent()[1]) {
-				return true;
-			} else if (lineChart.brush.empty()) {
-				console.log("no brush");
+			if (lineChart.brush.empty()) {
 				return false;
+			} else if (d.date < lineChart.brush.extent()[0] || d.date > lineChart.brush.extent()[1]) {
+				return true;
 			} else {
 				return false;
 			}
@@ -197,7 +196,18 @@ function brushed() {
 
 function bookmarks() {
 	// TODO: Show only bookmarks
-	d3.selectAll(".bookmarked");
+	// console.log(d3.selectAll(".maincircle"));
+	d3.selectAll(".maincircle").classed("hidden", true);
+	d3.selectAll(".storycircle").classed("hidden", true);
+	d3.selectAll(".linecircle").classed("hidden", true);
+	d3.selectAll(".bookmarked").classed("hidden", false);
+}
+
+function refresh() {
+	d3.selectAll(".highlighted").classed("highlighted", false);
+	d3.selectAll(".grayed").classed("grayed", false);
+	d3.selectAll(".bookmarked").classed("bookmarked", false);
+	d3.selectAll("circle").classed("hidden", false);
 }
 
 

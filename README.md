@@ -90,12 +90,10 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * **Tooltip**: Random image, `"science fiction " + d.top_word[0]` Google CC-license image search!?
 * ~~Brushing in `scatterplot.js`: keep scale the same, just filter data points.~~
 * ~~`scatterplot.js`: `.data(displayData, function(d) { return d.id; })`... points by index.~~
-* `scatterplot.js`: Let the user select the scale (zoom).
+* ~~`scatterplot.js`: Let the user select the scale (zoom).~~
 * User selects y-axis of scatterplot (update `y-label` in `index.html`). 
-* Beef up `tooltip`. 
+* ~~Beef up `tooltip`.~~
 * Custom refresh for each viz ()
 * Show bookmarked stories on "See bookmarks" click.
-* Get year-week for y-axis on `textChart.js`. 
-
-
+* ~~Get year-week for y-axis on `textChart.js`.~~ 
 

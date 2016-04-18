@@ -66,7 +66,7 @@ a:hover {
 }
 
 .maincircle.highlighted {
- stroke-width: 1;
+ stroke-width: 3;
  stroke: red;
 }
 

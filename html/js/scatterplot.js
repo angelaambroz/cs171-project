@@ -105,6 +105,7 @@ scatterChart.prototype.updateVis = function() {
     .attr("class", "storycircle")
     .attr("r", vis.r)
     .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
     .on("click", tooltip);
 
   vis.circles

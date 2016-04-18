@@ -118,6 +118,7 @@ textChart.prototype.updateVis = function() {
 		.attr("r", function(d) { return vis.radius(d.wordcount); })
 		.attr("fill", function(d) { return vis.color(d.vocab); })
 		.on("mouseover", mouseover)
+		.on("mouseout", mouseout)
 		.on("click", tooltip);
 
 
