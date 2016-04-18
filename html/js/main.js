@@ -212,7 +212,7 @@ function zoom() {
     scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
     scatter.circles
-        .attr("cx", function(d) { return scatter.x(d.vocab)})
+        .attr("cx", function(d) { return scatter.x(d.vocab_demeaned)})
         .attr("cy", function(d) { return scatter.y(d.stdv_sentence_length)});
 }
 

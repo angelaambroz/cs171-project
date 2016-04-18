@@ -91,6 +91,9 @@ scatterChart.prototype.updateVis = function() {
 
   var vis = this;
 
+  vis.svg.select(".x-axis").call(vis.xAxis);      
+  vis.svg.select(".y-axis").call(vis.yAxis);
+
   vis.circles = vis.svg.selectAll(".storycircle")
     .data(vis.displayData, function(d) { return d.id; });
 
@@ -110,8 +113,5 @@ scatterChart.prototype.updateVis = function() {
     .attr("id", function(d) { return "story" + d.id; })
     .attr("cx", function(d) { return vis.x(d.vocab_demeaned); })
     .attr("cy", function(d) { return vis.y(d.stdv_sentence_length); })
-
-  vis.svg.select(".x-axis").call(vis.xAxis);      
-  vis.svg.select(".y-axis").call(vis.yAxis);
 
 }
