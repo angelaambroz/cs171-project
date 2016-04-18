@@ -17,7 +17,7 @@ textChart = function(_parentElement, _data) {
 textChart.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = { top: 60, right: 20, bottom: 50, left: 20 };
+	vis.margin = { top: 60, right: 50, bottom: 50, left: 30 };
 
 	vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -37,7 +37,35 @@ textChart.prototype.initVis = function() {
 				"#feb24c",
 				"#f03b20"]);
 
-	// y-axis: stories, x-axis: years
+	// Scales and axes
+	vis.x = d3.time.scale()
+	  .range([0, vis.width])
+	  .domain(d3.extent(vis.data, function(d) { return d.year; }));
+
+	vis.y = d3.scale.linear()
+	  .range([vis.height, 0])
+	  .domain([11, 0]);
+
+	vis.radius = d3.scale.sqrt()
+				.domain([0, 10000]) //TODO: function of total word count over all stories
+				.range([0, 10]);
+
+	vis.xAxis = d3.svg.axis()
+		.scale(vis.x)
+		.orient("top")
+		.ticks(5);
+
+	vis.svg.append("g").attr("class", "x-axis axis")
+		.call(vis.xAxis);
+
+	vis.yAxis = d3.svg.axis()
+		.scale(vis.y)
+		.orient("left")
+		.ticks(12);
+
+	vis.svg.append("g")
+		.attr("class", "y-axis axis")
+		.call(vis.yAxis);
 
 	// legend: draw a rect = story, which transitions colors over time
 
@@ -55,40 +83,65 @@ textChart.prototype.updateVis = function() {
 	vis.rectWidth = vis.width / vis.data.length;
 	vis.rectHeight = vis.rectWidth / 4;
 
-	vis.maxVocab = 0,
+	vis.maxVocab = 0;
 	vis.minVocab = 0;
+	vis.maxDate = new Date('4/16/2016');
+	vis.minDate = new Date('9/1/2000');
 
 	vis.data.forEach(function(year) {
 		year.storiesClean.forEach(function(story) {
 			vis.maxVocab = (story.vocab > vis.maxVocab) ? story.vocab : vis.maxVocab;
 			vis.minVocab = (story.vocab <= vis.minVocab) ? story.vocab : vis.minVocab;
+
+			if (!story.date) {
+				// TODO: Make this not an awful hack!!
+				story.date = new Date('9/21/2009');
+			}
 		})
 	})
 
-
-	// vis.x.domain([0, vis.data.length]);
 	vis.color.domain([vis.minVocab, vis.maxVocab]); //this is using yearly vocab, not storyly
 
+	
 	vis.year = vis.svg.selectAll(".year")
 		.data(vis.data)
 		.enter()
 		.append("g")
 		.attr("class", "g")
-		.attr("id", function(d) { return "year " + d.year; })
-		.attr("transform", function(d, i) { return "translate(" + i*vis.rectWidth + ", 0)"; });
+		.attr("id", function(d) { return "year " + d.year; });
+		// .attr("transform", function(d, i) { return "translate(" + i*vis.rectWidth + ", 0)"; });
 
-	vis.year.selectAll("rect")
+	// New idea: circles!
+	vis.circles = vis.year.selectAll("circle")
 		.data(function(d) { return d.storiesClean; })
 		.enter()
-		.append("rect")
+		.append("circle")
 		.attr("id", function(d) { return "story" + d.id; })
-		.attr("class", "storyrect")
-		.attr("width", vis.rectWidth)
-		.attr("x", function(d) { return 0; })
-		.attr("y", function(d, i) { return vis.rectHeight*i; })
-		.attr("height", vis.rectHeight)
-		.attr("fill", function(d) { return vis.color(d.vocab)})
+		.attr("class", "maincircle")
+		.attr("cx", function(d) { return vis.x(d.year); })
+		.attr("cy", function(d) { 
+			// console.log(d.date.getDay());
+			// console.log(vis.y(d.date.getDay()));
+			return vis.y(d.date.getMonth()); 
+		})
+		.attr("r", function(d) { return vis.radius(d.wordcount); })
+		.attr("fill", function(d) { return vis.color(d.vocab); })
 		.on("mouseover", mouseover)
 		.on("click", tooltip);
+
+
+	// vis.year.selectAll("rect")
+	// 	.data(function(d) { return d.storiesClean; })
+	// 	.enter()
+	// 	.append("rect")
+	// 	.attr("id", function(d) { return "story" + d.id; })
+	// 	.attr("class", "storyrect")
+	// 	.attr("width", vis.rectWidth)
+	// 	.attr("x", function(d) { return 0; })
+	// 	.attr("y", function(d, i) { return vis.rectHeight*i; })
+	// 	.attr("height", vis.rectHeight)
+	// 	.attr("fill", function(d) { return vis.color(d.vocab)})
+	// 	.on("mouseover", mouseover)
+	// 	.on("click", tooltip);
 
 }

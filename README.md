@@ -38,7 +38,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~New design idea: Tooltip _not_ on hover - but rather, once top word or user word appears, reveal that line to the right of the charts.~~
 * ~~New design idea: The long scroll is boring:~~
       * ~~Collapse paras into chapter objects? (Using average sentence length per para?)~~
-* `font-awesome`?
+* ~~`font-awesome`?~~
 
 
 ###### Data processing
@@ -94,6 +94,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * User selects y-axis of scatterplot (update `y-label` in `index.html`). 
 * Beef up `tooltip`. 
 * Custom refresh for each viz ()
+* Show bookmarked stories on "See bookmarks" click.
+* Get year-week for y-axis on `textChart.js`. 
 
 
 

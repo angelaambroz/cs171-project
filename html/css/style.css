@@ -48,7 +48,39 @@ a:hover {
   font-size: 12px;
 }
 
+.tiny {
+  font-size: 9px;
+  color: gray;
+}
+
+
 /* MAIN VIZ: HEAT MAP */
+
+.maincircle {
+  stroke: #894b00;
+  stroke-width: 0.5;
+}
+
+.maincircle:hover {
+  cursor: pointer;
+}
+
+.maincircle.highlighted {
+ stroke-width: 1;
+ stroke: red;
+}
+
+.maincircle.bookmarked {
+  fill: #bac7ff;
+  stroke: #00187f;;
+}
+
+.maincircle.grayed {
+  stroke: gray;
+  fill: #dbdbdb;
+}
+
+/*
 
 .storyrect {
   stroke-width: 0.75;
@@ -68,8 +100,7 @@ a:hover {
 .storyrect.bookmarked {
   fill: #bac7ff;
   stroke: #00187f;;
-}
-
+}*/
 
 /* SIDE VIZ 1: SCATTERPLOT */
 
@@ -85,6 +116,10 @@ a:hover {
 
 .axis {
   font-size: 11px;
+}
+
+.axis:hover {
+  cursor: pointer;
 }
 
 .axis path,

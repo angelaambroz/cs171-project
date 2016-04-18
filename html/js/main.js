@@ -2,22 +2,16 @@
 
 var allData = [],
 	cleanData = [],
-	flatStories = [];
+	flatStories = [],
+	commaFormat = d3.format(',');
 
 var selectedBook, mainData, linkData, mainChart, lineChart, scatter, scrollPoint; 
 
-// Is the user scrolling?
-$w = $(window);
-
-$w.scroll(function() {
-	scrollPoint = $w.scrollTop();
-});
 
 $(".fa-refresh").on("click", refresh);
 
 
 // Age of Strange Horizons
-
 function ageOfStrangeHorizons() {
     var now = new Date(),
     	launched = new Date('9/1/2000'),
@@ -126,17 +120,20 @@ function mouseover(d) {
 
 function refresh() {
 	d3.selectAll(".highlighted").classed("highlighted", false);
-}
-
-function clicked(d) {
-	window.open(d.url); 
+	d3.selectAll(".grayed").classed("grayed", false);
 }
 
 function tooltip(d) {
 
+	console.log(d.date);
 	var dataPoint = this;
 	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
-	var html = "<p>" + d.author + "</p> <div id='tooltip-viz'></div>";
+
+	// TODO: <table>
+	var html = "<p>" + d.author + "</p> <div id='tooltip-viz'></div><br>";
+		html += "<p>This story has " + commaFormat(d.wordcount) + " words, of which " +  commaFormat(d.vocab) + " are unique.";
+		html += " The average sentence is " + Math.round(d.mean_sentence_length) + " words long, with a standard deviation of " + Math.round(d.stdv_sentence_length) + ".</p>";
+		html += "<br><p>The top word in this story is <b>" + d.top_within[0].word + "</b> (said " + d.top_within[0].count + " times).</p>";
 
 	swal({
 	  title: title,
@@ -170,8 +167,26 @@ function brushed() {
 
 	scatter.wrangleData();
 
-	// TODO: Filter heatmap.d if dates within brush.extent() 
+	console.log(lineChart.brush.empty());
+	console.log(lineChart.brush.extent());
 
+	// TODO: Filter heatmap.d if dates within brush.extent()
+	mainChart.circles.classed("grayed", function(d) {
+			if (d.date < lineChart.brush.extent()[0] || d.date > lineChart.brush.extent()[1]) {
+				return true;
+			} else if (lineChart.brush.empty()) {
+				console.log("no brush");
+				return false;
+			} else {
+				return false;
+			}
+		});
+
+}
+
+function bookmarks() {
+	// TODO: Show only bookmarks
+	d3.selectAll(".bookmarked");
 }
 
 
