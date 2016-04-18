@@ -72,6 +72,7 @@ function loadData() {
 					story['mean_sentence_length'] = +story['mean_sentence_length'];
 					story['date'] = formatDate.parse(story['date']);
 					story['vocab_demeaned'] = story['vocab'] / story['wordcount'];
+					story['stdv_snt_length_demeaned'] = story['stdv_sentence_length'] / story['mean_sentence_length'];
 
 					if (!story.date) {
 						// TODO: Make this not an awful hack!!
@@ -213,7 +214,7 @@ function zoom() {
     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
     scatter.circles
         .attr("cx", function(d) { return scatter.x(d.vocab_demeaned)})
-        .attr("cy", function(d) { return scatter.y(d.stdv_sentence_length)});
+        .attr("cy", function(d) { return scatter.y(d.stdv_snt_length_demeaned)});
 }
 
 

@@ -35,7 +35,7 @@ scatterChart.prototype.initVis = function() {
 
   vis.y = d3.scale.linear()
       .range([vis.height, 0])
-      .domain(d3.extent(vis.data, function(d) { return d.stdv_sentence_length; }));
+      .domain(d3.extent(vis.data, function(d) { return d.stdv_snt_length_demeaned; }));
 
     // Zoom
   vis.zoomed = d3.behavior.zoom()
@@ -112,6 +112,6 @@ scatterChart.prototype.updateVis = function() {
     .transition()  
     .attr("id", function(d) { return "story" + d.id; })
     .attr("cx", function(d) { return vis.x(d.vocab_demeaned); })
-    .attr("cy", function(d) { return vis.y(d.stdv_sentence_length); })
+    .attr("cy", function(d) { return vis.y(d.stdv_snt_length_demeaned); })
 
 }

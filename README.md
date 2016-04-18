@@ -96,4 +96,5 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Custom refresh for each viz.
 * ~~Show bookmarked stories on "See bookmarks" click.~~
 * ~~Get year-week for y-axis on `textChart.js`.~~ 
+* De-mean the standard deviation.
 
