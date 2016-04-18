@@ -71,6 +71,17 @@ function loadData() {
 					story['mean_sentence_length'] = +story['mean_sentence_length'];
 					story['date'] = formatDate.parse(story['date']);
 
+					if (!story.date) {
+						// TODO: Make this not an awful hack!!
+						story.date = new Date('9/21/2009');
+					}
+					
+					var thisMonth = story['date'].getMonth() + 1,
+						thisDay = parseInt(story['date'].toDateString().slice(8,10)),
+						thisWeek = thisMonth * 4 + thisDay / 7;
+
+					story['week'] = thisWeek;
+
 			})
 			
 			});
@@ -125,7 +136,7 @@ function refresh() {
 
 function tooltip(d) {
 
-	console.log(d.date);
+	console.log(d.date.toDateString());
 	var dataPoint = this;
 	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
 

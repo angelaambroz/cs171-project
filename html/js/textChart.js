@@ -44,11 +44,11 @@ textChart.prototype.initVis = function() {
 
 	vis.y = d3.scale.linear()
 	  .range([vis.height, 0])
-	  .domain([11, 0]);
+	  .domain([52, 0]);
 
 	vis.radius = d3.scale.sqrt()
 				.domain([0, 10000]) //TODO: function of total word count over all stories
-				.range([0, 10]);
+				.range([0, 5]);
 
 	vis.xAxis = d3.svg.axis()
 		.scale(vis.x)
@@ -92,11 +92,6 @@ textChart.prototype.updateVis = function() {
 		year.storiesClean.forEach(function(story) {
 			vis.maxVocab = (story.vocab > vis.maxVocab) ? story.vocab : vis.maxVocab;
 			vis.minVocab = (story.vocab <= vis.minVocab) ? story.vocab : vis.minVocab;
-
-			if (!story.date) {
-				// TODO: Make this not an awful hack!!
-				story.date = new Date('9/21/2009');
-			}
 		})
 	})
 
@@ -119,11 +114,7 @@ textChart.prototype.updateVis = function() {
 		.attr("id", function(d) { return "story" + d.id; })
 		.attr("class", "maincircle")
 		.attr("cx", function(d) { return vis.x(d.year); })
-		.attr("cy", function(d) { 
-			// console.log(d.date.getDay());
-			// console.log(vis.y(d.date.getDay()));
-			return vis.y(d.date.getMonth()); 
-		})
+		.attr("cy", function(d) { return vis.y(d.week); })
 		.attr("r", function(d) { return vis.radius(d.wordcount); })
 		.attr("fill", function(d) { return vis.color(d.vocab); })
 		.on("mouseover", mouseover)
