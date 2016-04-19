@@ -54,7 +54,8 @@ scatterChart.prototype.initVis = function() {
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
   	  .orient("bottom")
-      .ticks(3);
+      .ticks(3)
+      .tickFormat(d3.format("%"));
 
   vis.svg.append("g")
     .attr("class", "x-axis axis")

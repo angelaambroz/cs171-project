@@ -17,7 +17,7 @@ textChart = function(_parentElement, _data) {
 textChart.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = { top: 60, right: 50, bottom: 50, left: 30 };
+	vis.margin = { top: 60, right: 50, bottom: 50, left: 60 };
 
 	vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -39,7 +39,7 @@ textChart.prototype.initVis = function() {
 		.domain([0, 1]);
 
 	// Scales and axes
-	vis.x = d3.time.scale()
+	vis.x = d3.scale.linear()
 	  .range([0, vis.width])
 	  .domain(d3.extent(vis.data, function(d) { return d.year; }));
 
@@ -49,26 +49,44 @@ textChart.prototype.initVis = function() {
 
 	vis.radius = d3.scale.sqrt()
 				.domain([0, 10000]) //TODO: function of total word count over all stories
-				.range([0, 5]);
+				.range([1, 6]);
 
 	vis.xAxis = d3.svg.axis()
 		.scale(vis.x)
 		.orient("top")
-		.ticks(5);
+		.ticks(5)
+		.tickFormat(function(label) { return label.toString(); });
 
 	vis.svg.append("g").attr("class", "x-axis axis")
 		.call(vis.xAxis);
 
 	vis.yAxis = d3.svg.axis()
 		.scale(vis.y)
-		.orient("left")
-		.ticks(12);
+		.orient("left");
 
 	vis.svg.append("g")
 		.attr("class", "y-axis axis")
 		.call(vis.yAxis);
 
-	// legend: draw a rect = story, which transitions colors over time
+	// legend: draw a circle = story, which transitions colors over time
+	vis.svg.append("text")
+		.attr("class", "tiny")
+		.attr("x", -60)
+		.attr("y", 30)
+		.text("Jan");
+
+	vis.svg.append("text")
+		.attr("class", "tiny")
+		.attr("x", -60)
+		.attr("y", vis.height/2)
+		.text("Jun");
+
+	vis.svg.append("text")
+		.attr("class", "tiny")
+		.attr("x", -60)
+		.attr("y", vis.height - 10)
+		.text("Dec");
+
 
 	// TODO: Update data summary
 
@@ -91,7 +109,6 @@ textChart.prototype.updateVis = function() {
 		.attr("class", "g")
 		.attr("id", function(d) { return "year " + d.year; });
 
-	// New idea: circles!
 	vis.circles = vis.year.selectAll("circle")
 		.data(function(d) { return d.storiesClean; })
 		.enter()
@@ -105,20 +122,5 @@ textChart.prototype.updateVis = function() {
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout)
 		.on("click", tooltip);
-
-
-	// vis.year.selectAll("rect")
-	// 	.data(function(d) { return d.storiesClean; })
-	// 	.enter()
-	// 	.append("rect")
-	// 	.attr("id", function(d) { return "story" + d.id; })
-	// 	.attr("class", "storyrect")
-	// 	.attr("width", vis.rectWidth)
-	// 	.attr("x", function(d) { return 0; })
-	// 	.attr("y", function(d, i) { return vis.rectHeight*i; })
-	// 	.attr("height", vis.rectHeight)
-	// 	.attr("fill", function(d) { return vis.color(d.vocab)})
-	// 	.on("mouseover", mouseover)
-	// 	.on("click", tooltip);
 
 }

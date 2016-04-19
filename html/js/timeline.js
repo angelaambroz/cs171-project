@@ -28,8 +28,6 @@ timeline.prototype.initVis = function(){
 
   vis.r = 1.5;
 
-  // console.log(vis.data);
-
   // Scales and axes
   vis.x = d3.time.scale()
       .range([0, vis.width])
@@ -47,7 +45,8 @@ timeline.prototype.initVis = function(){
   vis.yAxis = d3.svg.axis()
       .scale(vis.y)
       .orient("left")
-      .ticks(2);
+      .ticks(2)
+      .tickFormat(d3.format("%"));
 
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")

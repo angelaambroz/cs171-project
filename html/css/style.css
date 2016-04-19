@@ -49,7 +49,7 @@ a:hover {
 }
 
 .tiny {
-  font-size: 9px;
+  font-size: 12px;
   color: gray;
 }
 
@@ -59,6 +59,7 @@ a:hover {
 .maincircle {
   stroke: #894b00;
   stroke-width: 0.5;
+  opacity: 0.8;
 }
 
 .maincircle:hover {
@@ -80,28 +81,6 @@ a:hover {
   fill: #dbdbdb;
 }
 
-/*
-
-.storyrect {
-  stroke-width: 0.75;
-  stroke: orange;
-}
-
-.storyrect:hover {
-  cursor: pointer;
-}
-
-.storyrect.highlighted {
- stroke-width: 1;
- stroke: red;
- fill: #ff8989;
-}
-
-.storyrect.bookmarked {
-  fill: #bac7ff;
-  stroke: #00187f;;
-}*/
-
 /* SIDE VIZ 1: SCATTERPLOT */
 
 .storycircle {
@@ -118,7 +97,7 @@ a:hover {
   font-size: 11px;
 }
 
-.axis:hover {
+#scatterplot .axis:hover {
   cursor: pointer;
 }
 

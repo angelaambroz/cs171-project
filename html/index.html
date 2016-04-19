@@ -22,8 +22,8 @@
 		<div class="col-md-12 side-note">
 			<h2><code>the shape of text</code></h2>
 			<h4 class="caption">by <a href="http://angelaambroz.com/menu.html">angela ambroz</a></h4>
-			<h5>may 2016</h5>
 			<h5><a href="http://www.cs171.org/2016/" target="_blank">cs171 (harvard extension school)</a></h5>
+			<h5>spring 2016</h5>
 			<hr>
 			<p>Hello, world!</p>
 			<p>Welcome to <code>the shape of text</code>, a text visualization of all stories available on <a href="http://www.strangehorizons.com" target="_blank">Strange Horizons</a> (including <a href="http://www.strangehorizons.com/2009/20090112/kampala-f.shtml" target="_blank">mine</a>!), an online speculative fiction magazine.</p> 
@@ -40,7 +40,7 @@
 			</p>
 			<p>Full code is available <a href="https://github.com/angelaambroz/cs171-project" target="_blank">here on GitHub</a>.</p> 
 			<hr>
-			<p>For a narrative about the project, including decisions, dead-ends, pictures and tutorials, see the <a href="process-book.html">process book <i class="fa fa-external-link" aria-hidden="true"></i></a>. </p>
+			<p>For a narrative about the project, including decisions, dead-ends, pictures and tutorials, see the <a href="process-book.html" target="_blank">process book <i class="fa fa-external-link" aria-hidden="true"></i></a>. </p>
 			<hr>
 		</div>
 
@@ -52,8 +52,6 @@
 		
 		<div class="col-md-6">
 			<h3 id="main-viz-title">all the stories, all the complexity <i class="fa fa-refresh" aria-hidden="true"></i></h3>
-			<h6>(as defined by <code id="main-viz-subtitle">vocab</code>)</h6>
-
 			<button class="btn btn-primary btn-default" id="showBookmarks">See bookmarks</button>
 			<div id="main-viz"></div>
 
@@ -61,13 +59,13 @@
 
 		<div class="col-md-6 extra-buffer-needed">
 			
-			<h4><span id="y-label">sentence length st. dev.</span> vs. vocab <i class="fa fa-refresh" aria-hidden="true"></i></h4>
+			<h4><span id="y-label">normalized sentence variance</span> vs. <code>vocab</code> <i class="fa fa-refresh" aria-hidden="true"></i></h4>
+			<p class="tiny">Is there a relationship between how much sentences vary and how many unique words appear?</p>
 			<div id="scatterplot"></div>
-			<p class="tiny">zoomable</p>
 
-			<h4 class="buffer-needed">vocab over time <i class="fa fa-refresh" aria-hidden="true"></i></h4>
+			<h4 class="buffer-needed"><code>vocab</code> over time <i class="fa fa-refresh" aria-hidden="true"></i></h4>
+			<p class="tiny">For each story, what is the likelihood that the next word will be a new word? How does this change over time?</p>
 			<div id="line-chart"></div>
-			<p class="tiny">select range</p>
 			
 		</div>
 
