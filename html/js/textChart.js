@@ -22,7 +22,7 @@ textChart.prototype.initVis = function() {
 	vis.divWidth = $("#" + vis.parentElement).width();
 
 	vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-	vis.height = vis.divWidth * 1.1 - vis.margin.top - vis.margin.bottom;
+	vis.height = vis.divWidth * 1.3 - vis.margin.top - vis.margin.bottom;
 
 	vis.svg = d3.select("#" + vis.parentElement).append("svg")
 	    .attr("width", vis.width + vis.margin.left + vis.margin.right)
