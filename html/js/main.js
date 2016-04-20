@@ -116,8 +116,6 @@ function loadData() {
 			console.log(error);
 		}
 
-
-
 	})
 }
 
@@ -129,11 +127,35 @@ function createVis() {
 }
 
 function mouseover(d) {
+	// Highlight in red
 	d3.selectAll("#story" + d.id).classed("highlighted", true);
+
+	// Tooltip
+	var toolWidth = d.top_within[0].word.length*15 + 100;
+
+	d3.select("#tooltip").remove();
+
+	var tooltip = mainChart.svg.append("g")
+		.attr("id", "tooltip")
+		.attr("transform", "translate(" + (mainChart.x(d.year) + 15) + ", " + (mainChart.y(d.week) - 5) + ")")
+
+	tooltip
+		.append("rect")
+		.attr("width",  toolWidth)
+		.attr("height", 30)
+		.attr("fill", "white")
+		.attr("opacity", 0.8);
+
+	tooltip.append("text")	
+		.attr("x", 20)
+		.attr("y", 20)
+		.text("top word: " + d.top_within[0].word);
+
 }
 
 function mouseout(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", false);
+	d3.select("#tooltip").remove();
 }
 
 function tooltip(d) {
@@ -213,8 +235,8 @@ function zoom() {
     scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
     scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
     scatter.circles
-        .attr("cx", function(d) { return scatter.x(d.vocab_demeaned)})
-        .attr("cy", function(d) { return scatter.y(d.stdv_snt_length_demeaned)});
+        .attr("cx", function(d) { return scatter.x(d.stdv_snt_length_demeaned)})
+        .attr("cy", function(d) { return scatter.y(d.vocab_demeaned)});
 }
 
 

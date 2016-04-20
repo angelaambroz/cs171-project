@@ -5,6 +5,10 @@ CS171 Project: The shape of text
 
 Spring 2016. This project will visualize the story shapes of a ~~variety of 19th century novels~~ about ~~300~~ 800+ science fiction short stories. Ideally, I'd like to build something that's extendable to a wide variety of texts. This is the final project for [CS171 Spring 2016](http://www.cs171.org/2016/). 
 
+### Lit review
+* [Corpus linguistics](https://en.wikipedia.org/wiki/Corpus_linguistics)
+* [Hapax legomenon](https://en.wikipedia.org/wiki/Hapax_legomenon)
+
 
 ### Inspiration
 * [Kurt Vonnegut's lecture: The shape of stories](https://www.youtube.com/watch?v=oP3c1h8v2ZQ)
@@ -101,8 +105,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~De-mean the standard deviation.~~
 
 ###### Prototype v1.0 --> v2.0 (Reviewer comments)
-* less text up top and just get to the viz
-* have it take up the whole screen rather than two columns of 3 different views (like each view one after the other for now)
+* ~~less text up top and just get to the viz~~
+* ~~have it take up the whole screen rather than two columns of 3 different views (like each view one after the other for now)~~
 * include some visual keys about what the size means of each dot as well as what the colors mean
 * include trends across texts? Like what words are top throughout? What words are trending over time?
 * What do you mean by unique word anyhow? 

@@ -22,7 +22,7 @@ textChart.prototype.initVis = function() {
 	vis.divWidth = $("#" + vis.parentElement).width();
 
 	vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-	vis.height = vis.divWidth * 1.3 - vis.margin.top - vis.margin.bottom;
+	vis.height = vis.divWidth * 0.5 - vis.margin.top - vis.margin.bottom;
 
 	vis.svg = d3.select("#" + vis.parentElement).append("svg")
 	    .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -39,9 +39,12 @@ textChart.prototype.initVis = function() {
 		.domain([0, 1]);
 
 	// Scales and axes
+	vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 1;
+	vis.maxYear = d3.extent(vis.data, function(d) { return d.year; })[1] + 1;
+
 	vis.x = d3.scale.linear()
 	  .range([0, vis.width])
-	  .domain(d3.extent(vis.data, function(d) { return d.year; }));
+	  .domain([vis.minYear, vis.maxYear]);
 
 	vis.y = d3.scale.linear()
 	  .range([vis.height, 0])

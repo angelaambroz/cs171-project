@@ -31,11 +31,11 @@ scatterChart.prototype.initVis = function() {
   // Scales and axes
   vis.x = d3.scale.linear()
       .range([0, vis.width])
-      .domain([0, 1]);
+      .domain(d3.extent(vis.data, function(d) { return d.stdv_snt_length_demeaned; }));
 
   vis.y = d3.scale.linear()
       .range([vis.height, 0])
-      .domain(d3.extent(vis.data, function(d) { return d.stdv_snt_length_demeaned; }));
+      .domain([0, 1]);
 
     // Zoom
   vis.zoomed = d3.behavior.zoom()
@@ -54,8 +54,7 @@ scatterChart.prototype.initVis = function() {
   vis.xAxis = d3.svg.axis()
   	  .scale(vis.x)
   	  .orient("bottom")
-      .ticks(3)
-      .tickFormat(d3.format("%"));
+      .ticks(4);
 
   vis.svg.append("g")
     .attr("class", "x-axis axis")
@@ -64,7 +63,8 @@ scatterChart.prototype.initVis = function() {
   vis.yAxis = d3.svg.axis()
       .scale(vis.y)
       .orient("left")
-      .ticks(4);
+      .ticks(3)
+      .tickFormat(d3.format("%"));
 
   vis.svg.append("g")
     .attr("class", "y-axis axis");
@@ -112,7 +112,7 @@ scatterChart.prototype.updateVis = function() {
   vis.circles
     .transition()  
     .attr("id", function(d) { return "story" + d.id; })
-    .attr("cx", function(d) { return vis.x(d.vocab_demeaned); })
-    .attr("cy", function(d) { return vis.y(d.stdv_snt_length_demeaned); })
+    .attr("cx", function(d) { return vis.x(d.stdv_snt_length_demeaned); })
+    .attr("cy", function(d) { return vis.y(d.vocab_demeaned); })
 
 }

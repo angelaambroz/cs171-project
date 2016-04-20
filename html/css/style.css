@@ -15,9 +15,12 @@ body {
   margin-top: 50px;
 }
 
-.extra-buffer-needed {
-  margin-top: 100px;
+.padding-needed {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 50px;
 }
+
 
 .caption .tiny-header {
   font-variant: small-caps;
@@ -80,6 +83,24 @@ a:hover {
   stroke: gray;
   fill: #dbdbdb;
 }
+/*
+#tooltip {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  padding: 10px;
+  opacity: 0.8;
+  background-color: white;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+#tooltip.hidden {
+  display: none;
+}
+*/
 
 /* SIDE VIZ 1: SCATTERPLOT */
 
