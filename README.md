@@ -39,6 +39,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~New design idea: The long scroll is boring:~~
       * ~~Collapse paras into chapter objects? (Using average sentence length per para?)~~
 * ~~`font-awesome`?~~
+* **Process book**: Screencast.
+* 
 
 
 ###### Data processing
@@ -83,7 +85,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * `#linechart`: get it started.
 * ~~Linking the charts together...! Highlights, brushed.~~
 * ~~`mouseout` function.~~
-* Highlighting is not working on 2003 column (`textChart.js`). 2003 is repeating. 
+* ~~Highlighting is not working on 2003 column (`textChart.js`). 2003 is repeating.~~ 
 * ~~Fix ordering of years in `textChart.js`.~~
 * ~~What's a better color scheme?~~
 * ~~Bookmark interesting stories (from the popup).~~ 
@@ -96,5 +98,21 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Custom refresh for each viz.
 * ~~Show bookmarked stories on "See bookmarks" click.~~
 * ~~Get year-week for y-axis on `textChart.js`.~~ 
-* De-mean the standard deviation.
+* ~~De-mean the standard deviation.~~
+
+###### Prototype v1.0 --> v2.0 (Reviewer comments)
+* less text up top and just get to the viz
+* have it take up the whole screen rather than two columns of 3 different views (like each view one after the other for now)
+* include some visual keys about what the size means of each dot as well as what the colors mean
+* include trends across texts? Like what words are top throughout? What words are trending over time?
+* What do you mean by unique word anyhow? 
+* have a rollover on each dot of just the most popular unique word and then the other info comes when you click it?
+* when you say a word is unique, do you mean it is unique to that story? Or is is that the word is occurring once in that particular story?  That is, the classic interpretation of Oelke & Keim's hapax legomena?
+* It could be interesting to also see the words that are unique ​_in the corpus_​ to each story.
+* It seems like there are yellow lines in the background of the vocab over time - they are very faint, not sure what they are for. 
+* Though, for some reason, it took me a minute to realize I could click the title in the popup. It looks a bit like a title.
+* Finally, have you considered authorship analysis? Do many authors write multiple stories? Are their stories similar or different from each other?
+* What about a comparison to some canonical speculative fiction novels as a reference point?
+
+ 
 

@@ -40,6 +40,7 @@
 				<li><a href="#data">Data</a></li>
 				<li><a href="#redesign">Never mind: The big redesign</a></li>
 				<li><a href="#data2">Data 2.0</a></li>
+				<li><a href="#theory">An aside on theory</a></li>
 			</ul>
 			<hr>
 			<br>
@@ -67,7 +68,7 @@
 	<div class="row">
 		<div class="col-md-6 side-note">
 			<h4 id="inspiration2">More inspiration: Narrative theory + machine learning <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
-			<p>Another related work was <a href="#vonnegut">Kurt Vonnegut’s lecture on "The Shape of Stories"</a>, and a data science project inspired by that lecture. In the lecture, Vonnegut says: "There’s no reason why these simple shapes of stories can’t be fed into computers." The <a href="https://indico.io/blog/plotlines/" target="_blank">data scientists at indico.io</a> put this into action by applying sentiment analysis to Disney scripts, and then mapping those sentiments. The emerging "story shapes" were fascinating to see - especially since they resembled each other across films, indicating that there was a quantifiable "shape", at least to the Disney corpus.</p>
+			<p>Another related work was <a href="#vonnegut">Kurt Vonnegut's lecture on "The Shape of Stories"</a>, and a data science project inspired by that lecture. In the lecture, Vonnegut says: "There's no reason why these simple shapes of stories can't be fed into computers." The <a href="https://indico.io/blog/plotlines/" target="_blank">data scientists at indico.io</a> put this into action by applying sentiment analysis to Disney scripts, and then mapping those sentiments. The emerging "story shapes" were fascinating to see - especially since they resembled each other across films, indicating that there was a quantifiable "shape", at least to the Disney corpus.</p>
 			<br>
 		</div>
 		<div class="col-md-6">
@@ -79,7 +80,7 @@
 	<div class="row">
 		<div class="col-md-6 side-note">
 			<h4 id="objectives">Project objectives and goals <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
-			<p>My initial plan was to make a "poor man’s" shape of stories, one that did not rely on predictive analytics - but rather only visualization (and possibly descriptive analytics; such as the standard deviation of sentence length within a text).</p>
+			<p>My initial plan was to make a "poor man's" shape of stories, one that did not rely on predictive analytics - but rather only visualization (and possibly descriptive analytics; such as the standard deviation of sentence length within a text).</p>
 		</div>
 	</div>
 
@@ -89,7 +90,7 @@
 			<ul>
 				<li>Do certain types of texts (e.g. novels, academic articles) have predictable "shapes"?</li>
 				<li>In a novel, can we visually tell - using a visualization of the text, rather than the text itself - when a character enters, exits, or dies?</li>
-				<li>Can we see a writer’s style visually? For example, how complex their prose is?</li>
+				<li>Can we see a writer's style visually? For example, how complex their prose is?</li>
 				<li>Can a text corpus have a visual "gist"?</li>
 				<li>Can we tell, from a visual gist, when an action scene is happening (short, abrupt sentences, lots of verbs) versus a scene setting description (long sentences, lots of adjectives)?</li>
 			</ul>
@@ -133,19 +134,19 @@
 		<div class="col-md-6 side-note">
 			<p>These four were selected because of their length (lots of data to visualize), their verbal complexity (high vocab counts), and their dual cross-cutting similarities (all 19th century, some genre overlap, gender balance) and differences (Moby Dick likely an outlier on a bunch of dimensions).</p>
 
-			<p>In Python, I used the <a href="http://www.nltk.org/">Natural Language Toolkit (nltk)</a> to tokenize each text into words, sentences, and paragraphs; as well as to generate some basic descriptive statistics (for example, the size of vocabulary). The objective was to create an array of <code>book</code> objects. Each <code>book</code> object would have top-level key-value pairs like <code>title</code>, <code>author</code>, <code>top words</code>, <code>vocab</code> and <code>word_count</code>. For example, for <a href="https://www.gutenberg.org/ebooks/158" target="_blank">Emma</a>:</p>
+			<p>In Python, I used the <a href="http://www.nltk.org/">Natural Language Toolkit (nltk)</a> library to tokenize each text into words, sentences, and paragraphs; as well as to generate some basic descriptive statistics (for example, the size of the vocabulary). The objective was to create an array of <code>book</code> objects. Each <code>book</code> object would have top-level key-value pairs like <code>title</code>, <code>author</code>, <code>top_words</code>, <code>vocab</code> and <code>wordcount</code>. For example, for <a href="https://www.gutenberg.org/ebooks/158" target="_blank">Emma</a>:</p>
 			<img src="img/emma-top-words.png" alt="Screenshot: Emma's top words." class="img-responsive">
-			<p class="aside">Top word is "Mr."! Feminism despair.</p>
+			<p class="aside">The top word is "Mr."! Feminism despair.</p>
 			<br>
 			<p>In addition, each book object would have a key-value pair, <code>text</code>, which was a giant array of all the paragraphs, indexed and analyzed for their length.</p>
-			<p>Here, the first challenge arose: including both the text and their natural language meta-data ballooned the file size up to 31MB. There were a number of attempts to bring it down - 
+			<p>Here, the first challenge arose: including both the text and its natural language meta-data ballooned the file size up to 31MB. There were a number of attempts to bring it down - 
 			<img src="img/screenshot-folders.png" alt="Screenshot: folders, huge file sizes." class="img-responsive">
 			-- by removing duplicated text, or by removing text entirely, so that the <code>text</code> array in each <code>book</code> object became just a series of indexes and lengths.</p>
 			<img src="img/screenshot-with-text.png" alt="Screenshot: JSON data with text." class="img-responsive">
 			<br>
 			<img src="img/screenshot-without-text.png" alt="Screenshot: JSON data without text." class="img-responsive">
 			<br>
-			<p>This seemed like a bummer, to be honest. What if users wanted to hover on any point in the viz and see the original text behind it? One compromise idea was to only keep sentences which had top words in them - allowing, at least, "top word sentences" to be displayed on hover. This didn't seem like a huge efficiency gain, though, since - by definition - many sentences will have top words in them.</p>
+			<p>This seemed like a bummer, to be honest. What if users wanted to hover on any point in the viz and see the original text behind it? One compromise idea was to only keep sentences which had top words in them - allowing, at least, "top word sentences" to be displayed on hover. This didn't seem like a huge efficiency gain, though, since - by definition - many sentences would have top words in them.</p>
 			<br>
 		</div>
 		<div class="col-md-6"><img src="img/early-data-sketch.jpg" alt="Early plan for data." class="img-responsive"></div>
@@ -156,7 +157,7 @@
 		<div class="col-md-6 side-note">
 			<br>
 			<h4 id="redesign">Never mind: The big redesign <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
-			<p>Following the <a href="http://www.cs171.org/2016/schedule/" target="_blank">CS171 individual vis exploration, the poster, and the expert evaluation</a>, as well as achieving the first prototype of my original design, I decided to radically re-envision the project. While still concentrating on story shapes, I realized that visualizing paragraph lengths was too similar to the immediate visual gist a user gets from looking at a text document itself. What additional value did my visualization provide?</p>
+			<p>Following the <a href="http://www.cs171.org/2016/schedule/" target="_blank">CS171 individual vis exploration, the poster, and the expert evaluation</a>, as well as achieving the first prototype of my original design, I decided to radically re-envision the project. While still concentrating on story shapes, I realized that visualizing paragraph lengths across 19th century novels was too similar to the immediate visual gist a user gets from looking at a text document itself. What additional value did my visualization provide?</p>
 
 			<p>Here are a series of the original designs, as they took shape:</p>
 			<div class="row">
@@ -171,7 +172,7 @@
 			<br>
 			<p>Very boring.</p>
 
-			<p>The original four books visualized were simply too long and too intra-textually diverse for clear patterns to emerge. Users had to scroll for long periods over similar-looking terrain. It didn’t seem to add much value beyond scrolling quickly through a text, as in a Word document or book.</p>
+			<p>The original four books visualized were simply too long and too intra-textually diverse for clear patterns to emerge. Users had to scroll for long periods over similar-looking terrain. It didn't seem to add much value beyond scrolling quickly through a text, as in a Word document or book.</p>
 
 			<p>I therefore decided to go back to first principles: Why was I interested in visualizing text? How can a text be visualized in a meaningful, insightful way? And, a more practical question: was trying to visualize a novel simply not going to work, because of its length? How could I find the visual patterns in the jumble of words?</p>
 		</div>
@@ -183,12 +184,12 @@
 			<img src="img/redesign-aliens.jpg" alt="Redesign: Early ideas." class="img-responsive">
 		</div>
 		<div class="col-md-6 side-note">
-			<p>After several iterations, I decided to capture the same idea - the shape of stories - using a new design, and a new data source. (For more discussion on the data source, see the below section; <a href="#data2">Data 2.0</a>). In this redesign, <b>I would use the 700+ short stories available on <a href="http://strangehorizons.com/" target="_blank">Strange Horizons</a> (one of my favorite online science fiction magazines) and analyze their complexity over time</b>. Strange Horizons has published one story per week since September 2000 until today; that was a huge amount of data, and I had several ideas on how to visualize how the types of stories changed over time.</p>
+			<p>After several iterations, I decided to capture the same idea - the shape of stories - using a new design, and a new data source. (For more discussion on the data source, see <a href="#data2">Data 2.0</a> below). In this redesign, <b>I would use the 700+ short stories available on <a href="http://strangehorizons.com/" target="_blank">Strange Horizons</a> (one of my favorite online science fiction magazines) and analyze their complexity over time</b>. Strange Horizons has published one story per week since September 2000 until today; that was a huge amount of data, and I had several ideas on how to visualize it.</p>
 			<p>In terms of user interaction, <b>must haves</b> were:</p>
 			<ul>
-				<li>On-hover tooltips of the story-rectangles and story-circles in each graph, with more information about each story: title, author, year, and top words.</li>
-				<li>On-click hyperlinks of the story-rectangles to the stories themselves.</li>
-				<li>On-hover or on-click focuses of each year-column in the heat chart, which would illuminate the relevant stories in the scatter plot and line chart.</li>
+				<li>On-hover tooltips of the story objects in each graph, with more information about each story: title, author, year, and top words.</li>
+				<li>On-click hyperlinks of the story object to the stories themselves.</li>
+				<li>On-hover or on-click focuses of each year object, which would illuminate the relevant stories in the scatter plot and line chart.</li>
 			</ul>
 			<p><b>Nice to haves</b> were:</p>		
 			<ul>
@@ -197,7 +198,7 @@
 				<li>User search text box, where users can search for author names, titles, or any word which could appear in the text, and those stories are highlighted in all three visualizations. (This is a matter of finding an efficient solution to serving the data from the server; including story text for all 700+ stories in the JSON resulted in a large file size (18MB).)</li>
 				<li>A "vanity" radio button, to highlight my own story in all three visualizations.</li>
 				<li>On-hover tooltips include word clouds of top words.</li>
-				<li>On-hover for each year-column also brings up a word cloud of top words for that year.</li>
+				<li>On-hover for each year also brings up a word cloud of top words for that year.</li>
 			</ul>
 		</div>
 	</div>
@@ -207,18 +208,18 @@
 			<img src="img/redesign-sketch1.jpg" alt="Redesign sketch." class="img-responsive">
 		</div>
 		<div class="col-md-6 side-note">
-			<p>From the CS171 assignments of individual viz exploration, wherein I was tasked with researching text visualizations (hooray), I was struck by the "literature fingerprints" idea in <a href="https://www.uni-konstanz.de/mmsp/pubsys/publishedFiles/KeOe07.pdf" target="_blank">Keim and Oelke (2007)</a> - this clearly influenced my idea of a <a href="http://www.github.com" target="_blank">GitHub</a>-style heat map encoding a text’s complexity (in my case, the unique set of words, or <code>vocab</code>).</p>
+			<p>From the CS171 assignments of individual viz exploration, wherein I was tasked with researching text visualizations (hooray), I was struck by the "literature fingerprints" idea in <a href="https://www.uni-konstanz.de/mmsp/pubsys/publishedFiles/KeOe07.pdf" target="_blank">Keim and Oelke (2007)</a> - this clearly influenced my idea of a <a href="http://www.github.com" target="_blank">GitHub</a>-style heat map encoding a text's complexity (in my case, the unique set of words, or <code>vocab</code>).</p>
 			<br>
 
 			<h4 id="data2">Data 2.0 <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
-			<p>Following my redesign, I needed to scrape all the stories available on Strange Horizons since its launch in September 2000. I followed the same process as above, using <a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">BeautifulSoup</a> to parse the Strange Horizons website, and <a href="http://www.nltk.org/" target="_blank">nltk</a> to tokenize the text and calculate basic summary statistics. As with the original four novels in my first data scrape, I calculated the most popular words for each story, as well as the year as a whole.</p>
+			<p>Following my redesign, I needed to scrape all the stories available on Strange Horizons since its launch in September 2000. I followed the same process as above, using <a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank">BeautifulSoup</a> to parse the Strange Horizons website, and <a href="http://www.nltk.org/" target="_blank">nltk</a> to tokenize the text and calculate basic summary statistics. As with the original four novels in my first data scrape, I calculated the most popular words for each story, as well as for the year as a whole.</p>
 			<br>
 			<img src="img/scrapin.gif" alt="Scraping the Strange Horizons website." class="img-responsive">
 			<br>
 			<p class="aside">An aside: My <a href="http://www.strangehorizons.com/2009/20090112/kampala-f.shtml" target="_blank">pride and joy</a>...</p>
 			<img src="img/pride-and-joy.png" alt="Screenshot of my own story." class="img-responsive">
 			<br>
-			<p>This time, I also got a bit fancier, and calculated the mean length of sentences, as well as the standard deviation of sentence length, for each story. The idea being that better writers vary their sentence lengths more. And those stories which had, for example, both high unique word count (<code>vocab</code>) <em>and</em> high sentence length standard deviation would be - well - really good stories! Of course, in the eye of the beholder, blah blah.</p>
+			<p>This time, I also got a bit fancier, and calculated the mean length of sentences, as well as the standard deviation of sentence length, for each story. The idea being that better writers vary their sentence lengths more. And those stories which had, for example, both high unique word count (<code>vocab</code>) <em>and</em> high sentence length standard deviation would be potentially very good! Of course, in the eye of the beholder, blah blah.</p>
 		</div>
 	</div>
 
@@ -229,6 +230,17 @@
 		</div>
 		
 		<div class="col-md-6 side-note">
+			<h4 id="theory">An aside on theory <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+			<p>Beyond my personal interest in narrative structures and writing (science) fiction, as well as my analytical/stats background, I didn't have any guidelines on what a meaningful natural language analysis looks like. In a way: this was great. It allowed me the space to think creatively about which quantities made the most sense. </p>
+
+			<p>For example, when comparing the unique set of words in a story (<code>vocab</code>) across stories, I realized I needed to normalize it: <code>vocab_demeaned</code> was born. <code>vocab_demeaned</code> was calculated by dividing the unique set of words in a story by the story's total wordcount - giving a value between 0 (words never vary) and 1 (words always vary). This already had interesting implications: low scores indicated repetitive writing, high scores indicated potentially esoteric writing (and, in science fiction, that usually means strange names! diminishing marginal returns to high <code>vocab_demeaned</code> == "Queen Zorbma"). I realized it had another interesting interpretation: it was the likelihood that, at any given point in the text, the next word would be a new one. Cool!</p>
+
+			<p>Another normalization issue came up when comparing sentence lengths. If I hypothesized that "good" writers varied their sentence lengths more, I needed to calculate the standard deviation of sentence lengths within stories. But how could I compare those standard deviations <em>across</em> stories? I guessed I would need to normalize that too: and thus, for each story, I divided the standard deviation by the average sentence length. (This reminded me of <a href="http://blogs.worldbank.org/impactevaluations/how-standard-standard-deviation-cautionary-note-using-sds-compare-across-impact-evaluations" target="_blank">using percent change in standard deviations as a standardized way to compare effect sizes across impact evaluations</a> - a work thing.)</p>
+
+			<p>Dividing the standard deviation of sentence lengths by the mean sentence length was, I later found out, something called the <a href="https://en.wikipedia.org/wiki/Coefficient_of_variation" target="_blank">coefficient of variation</a>.</p>
+
+			<p>I have no formal training in natural language analysis (or digital humanities, or whatever this is), which is what is making this so enjoyable.</p>
+			
 			<p>More to come...</p>
 			<br>
 		</div>

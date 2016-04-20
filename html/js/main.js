@@ -140,10 +140,10 @@ function tooltip(d) {
 
 	// console.log(d.date.toDateString());
 	var dataPoint = this;
-	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + "</a>";
+	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + " <i class='fa fa-external-link' aria-hidden='true'></i></a>";
 
 	// TODO: <table>
-	var html = "<p>" + d.author + "</p> <div id='tooltip-viz'></div><br>";
+	var html = "<p>" + d.author + "</p><br>";
 		html += "<p>This story has " + commaFormat(d.wordcount) + " words, of which " +  commaFormat(d.vocab) + " are unique.";
 		html += " The average sentence is " + Math.round(d.mean_sentence_length) + " words long, with a standard deviation of " + Math.round(d.stdv_sentence_length) + ".</p>";
 		html += "<br><p>The top word in this story is <b>" + d.top_within[0].word + "</b> (said " + d.top_within[0].count + " times).</p>";
