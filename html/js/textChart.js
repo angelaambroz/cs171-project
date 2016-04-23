@@ -17,7 +17,7 @@ textChart = function(_parentElement, _data) {
 textChart.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = { top: 60, right: 50, bottom: 50, left: 60 };
+	vis.margin = { top: 70, right: 50, bottom: 50, left: 60 };
 
 	vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -32,10 +32,10 @@ textChart.prototype.initVis = function() {
 	    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 	// Scales
+	vis.colorBrews = ["#ffeda0", "#feb24c", "#f03b20"];
+
 	vis.color = d3.scale.quantize()
-		.range(["#ffeda0",
-				"#feb24c",
-				"#f03b20"])
+		.range(vis.colorBrews)
 		.domain([0, 1]);
 
 	// Scales and axes
@@ -71,7 +71,8 @@ textChart.prototype.initVis = function() {
 		.attr("class", "y-axis axis")
 		.call(vis.yAxis);
 
-	// legend: draw a circle = story, which transitions colors over time
+	
+	// y-axis labels
 	vis.svg.append("text")
 		.attr("class", "tiny")
 		.attr("x", -60)
@@ -90,6 +91,45 @@ textChart.prototype.initVis = function() {
 		.attr("y", vis.height - 10)
 		.text("Dec");
 
+	// legend: draw a circle = story, which transitions colors over time
+	vis.circleLegend = vis.svg.append("g")
+		.attr("transform", "translate(" + (vis.width-100) + ", " + -45 + ")");
+
+	vis.circleLegend.selectAll("circle")
+		.data([5, 8, 10])
+		.enter()
+		.append("circle")
+		.attr("class", "legendcircle")
+		.attr("cx", function(d, i) { return i*(d + 10); })
+		.attr("cy", 0)
+		.attr("r", function(d) { return d; });
+		// .attr("fill", setInterval(function() {
+
+		// 		// d3.selectAll(".legendcircle")
+		// 		// 	.transition()
+		// 		// 	.attr("fill", function()
+		// 		// 		)
+
+		// 		return null;
+
+		// 		console.log("in settimeout");
+		// 	}, 1000));
+
+	vis.circleLegend.append("text")
+		.attr("x", -5)
+		.attr("y", -17)
+		.attr("class", "legend-tiny")
+		.text("Wordcount per story");
+
+		function changeElementColor(d3Element){
+	    d3Element
+	    .transition().duration(0)
+	      .style("background", "green")
+	    .transition().duration(1000)
+	      .style("background", "yellow")
+	    .transition().delay(1000).duration(5000)
+	      .style("background", "red");
+	}
 
 	// TODO: Update data summary
 

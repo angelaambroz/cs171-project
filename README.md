@@ -110,13 +110,23 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * include some visual keys about what the size means of each dot as well as what the colors mean
 * include trends across texts? Like what words are top throughout? What words are trending over time?
 * What do you mean by unique word anyhow? 
-* have a rollover on each dot of just the most popular unique word and then the other info comes when you click it?
+* ~~have a rollover on each dot of just the most popular unique word and then the other info comes when you click it?~~
 * when you say a word is unique, do you mean it is unique to that story? Or is is that the word is occurring once in that particular story?  That is, the classic interpretation of Oelke & Keim's hapax legomena?
 * It could be interesting to also see the words that are unique ​_in the corpus_​ to each story.
 * It seems like there are yellow lines in the background of the vocab over time - they are very faint, not sure what they are for. 
 * Though, for some reason, it took me a minute to realize I could click the title in the popup. It looks a bit like a title.
 * Finally, have you considered authorship analysis? Do many authors write multiple stories? Are their stories similar or different from each other?
 * What about a comparison to some canonical speculative fiction novels as a reference point?
+* put it back, but align (CRAP)
+* meaningful story in the title; ask a question in the title (subtitle is more technical)
+* what is bookmarking for? hidden functionality!
+* User-adjustable opacity on `scatterplot.js`?
+* What do you think of adjusting the opacity in the scatter?
+* Bin scatter plot?
+* Is there any useful category that you can use to color the points in the scatter? 
+* Have you thought about animating the scatterplot transitions? 
+* Link to Github doesn't work.
+* Excellent option for analysis: [readability.py](https://github.com/mmautner/readability)!
 
  
 

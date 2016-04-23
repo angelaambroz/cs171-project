@@ -83,24 +83,12 @@ a:hover {
   stroke: gray;
   fill: #dbdbdb;
 }
-/*
-#tooltip {
-  position: absolute;
-  width: 250px;
-  height: auto;
-  padding: 10px;
-  opacity: 0.8;
-  background-color: white;
-  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-}
 
-#tooltip.hidden {
-  display: none;
+.legendcircle {
+  stroke: gray;
+  stroke: 1px;
+  fill: none;
 }
-*/
 
 /* SIDE VIZ 1: SCATTERPLOT */
 
@@ -108,6 +96,7 @@ a:hover {
   stroke: #894b00;
   stroke-width: 0.5;
   fill: white;
+  opacity: 0.5;
 }
 
 .storycircle:hover {
@@ -139,6 +128,11 @@ a:hover {
 .storycircle.bookmarked {
   fill: #bac7ff;
   stroke: #bac7ff;;
+}
+
+.legend-tiny {
+  font-size: 10px;
+  fill: gray;
 }
 
 

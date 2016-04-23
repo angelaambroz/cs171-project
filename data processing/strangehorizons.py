@@ -45,7 +45,6 @@ MORESTOP = [
 STOP.extend(MORESTOP)
 CLEAN = ["CDATA", "comments found", "following HTML tags"]
 SPACE = " "
-pp = pprint.PrettyPrinter(indent=4)
 
 
 #########################
