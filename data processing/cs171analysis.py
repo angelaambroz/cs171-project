@@ -18,11 +18,8 @@ pp = pprint.PrettyPrinter(indent=4)
 GENDER = "https://api.genderize.io/?name="
 
 
-
-
 # df = pd.read_json(DIR + "/processed/sh-data5-no-text.json")
 # print df
-
 
 
 #########################
@@ -30,7 +27,6 @@ GENDER = "https://api.genderize.io/?name="
 #########################
 
 def Genderize(name):
-	
 	print "Now guessing the gender of " + name
 	r = requests.get(GENDER + name)
 	
@@ -68,7 +64,9 @@ def Genderize(name):
 with open(DIR + "/processed/sh-textless.json", "r") as f:
 	data = json.load(f)
 
-for year in data:
+for year in data[0:2]:
+	print "Now going through " + year['year'] + " and genderizing."
+
 	for story in year['stories']: 
 		names = story['author'].split()
 		if names[1]: 
@@ -79,4 +77,6 @@ for year in data:
 		else:
 			print "No name"
 
-pp.pprint(data)
+pp.pprint(data[0:2])
+
+

@@ -15,6 +15,9 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * [Kurt Vonnegut's actual story shapes](http://visual.ly/kurt-vonnegut-shapes-stories-0)
 * [indico: Exploring the shapes of stories using Python and sentiment APIs](https://indico.io/blog/plotlines/)
 * [OpenVisConf 2015 video visualization](https://openvisconf.com/2015/#videos)
+* [Ben Fry's _Origin of Species_](https://fathom.info/traces/)
+* Popular Science archive explorer
+* Everything in the [Bocoup text viz exploration slides](https://bocoup-education.github.io/text-vis-ovc/24-text-vis-examples/slides.htmls)
 
 ### Resources
 * [CS171 official website - Project](http://www.cs171.org/2016/project/)
@@ -26,7 +29,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
     * [Emma](https://en.wikipedia.org/wiki/File:Emma_title_page_1909.jpg)
 * [d3 Scalability – Virtual Scrolling for Large Visualizations](http://www.billdwhite.com/wordpress/2014/05/17/d3-scalability-virtual-scrolling-for-large-visualizations/)
 * [Tony Hschu - Scroll linked animations](http://blog.tonyhschu.ca/post/49488608263/technical-write-up-scroll-linked-animations)
-* [Jim Valladingham - Scroller.js](http://vallandingham.me/scroller.html)
+* [Jim Vallandingham - Scroller.js](http://vallandingham.me/scroller.html)
 * [StackOverflow - Fisheye distortion on simple scatterplot](https://stackoverflow.com/questions/23407421/d3-fisheye-distortion-on-simple-scatter-plot)
 * [bl.ocks - Zoomable plot](http://bl.ocks.org/peterssonjonas/4a0e7cb8d23231243e0e)
 
@@ -103,6 +106,11 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Show bookmarked stories on "See bookmarks" click.~~
 * ~~Get year-week for y-axis on `textChart.js`.~~ 
 * ~~De-mean the standard deviation.~~
+* Excellent option for analysis: [readability.py](https://github.com/mmautner/readability)!
+* Use [genderize.io](https://genderize.io/) - $9/mo. for 100k names
+* Clean up puncts in `wordcount` and `vocab` (you can use a list comprehension: `[w for w in words if w not in r'[\.\?!]']`)
+* `tf-idf`: how much does a word occur in a story, divided by the number of stories with that word.
+
 
 ###### Prototype v1.0 --> v2.0 (Reviewer comments)
 * ~~less text up top and just get to the viz~~
@@ -126,7 +134,10 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Is there any useful category that you can use to color the points in the scatter? 
 * Have you thought about animating the scatterplot transitions? 
 * Link to Github doesn't work.
-* Excellent option for analysis: [readability.py](https://github.com/mmautner/readability)!
+* Tooltip word cloud, similar to dem/rep wordle (see [Bocoup slides](https://bocoup-education.github.io/text-vis-ovc/24-text-vis-examples/slides.html#5)).
+* Reveal on interaction? (see [Bocoup Stereotropes](http://stereotropes.bocoup.com/))
+
+
 
  
 

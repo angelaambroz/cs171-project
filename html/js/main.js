@@ -131,7 +131,7 @@ function mouseover(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", true);
 
 	// Tooltip
-	var toolWidth = d.top_within[0].word.length*15 + 100;
+	var toolWidth = (d.top_within[0].word.length + d.top_within[1].word.length + 2.5)*15 + 100;
 
 	d3.select("#tooltip").remove();
 
@@ -149,7 +149,7 @@ function mouseover(d) {
 	tooltip.append("text")	
 		.attr("x", 20)
 		.attr("y", 20)
-		.text("top word: " + d.top_within[0].word);
+		.text("top two words: " + d.top_within[0].word + ", " + d.top_within[1].word);
 
 }
 
