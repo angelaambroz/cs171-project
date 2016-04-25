@@ -92,7 +92,18 @@ function loadData() {
 			  // Flatten the JSON into an array of stories
 			cleanData.forEach(function(year) {
 				year.storiesClean.forEach(function(story) {
-					if (story.date) {
+					// how can I check if a key-value exists?
+					if (story.year == 2003) {
+						// console.log(story.id);
+						flatStories.some(function(other_story) {
+							if (other_story.id == story.id) {
+								console.log("Skipping " + story.id);
+							} else {
+								return story;
+							}
+						})
+
+					} else if (story.date) {
 						flatStories.push(story);  	
 					}
 				})
@@ -100,11 +111,10 @@ function loadData() {
 
 			// Getting rid of an outlier... :/ 
 			var storyOutlier = d3.max(flatStories, function(d) { return d.wordcount; });
-
 			cleanStories = flatStories.filter(function(story) {
 				if (story.wordcount != storyOutlier) {
 					return story;
-				}
+				} 
 			})
 
 			cleanStories.sort(function(a, b) {
@@ -131,7 +141,7 @@ function mouseover(d) {
 	// d3.selectAll("#story" + d.id).classed("highlighted", true);
 
 	d3.select(this)
-		.classed("legendcircle", false)
+		.classed("faint", false)
 		.classed("maincircle", true)
 		.attr("r", 10)
 		.attr("fill", function(d) { return mainChart.color(d.mean_sentence_length); });
@@ -163,7 +173,7 @@ function mouseout(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", false);
 	d3.select("#tooltip").remove();
 	d3.select(this)
-		.classed("legendcircle", true)
+		.classed("faint", true)
 		.attr("r", 4)
 		.attr("fill", "none");
 }

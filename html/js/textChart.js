@@ -143,7 +143,7 @@ textChart.prototype.updateVis = function() {
 		.enter()
 		.append("circle")
 		.attr("id", function(d) { return "story" + d.id; })
-		.attr("class", "legendcircle")
+		.attr("class", "faint")
 		.attr("cx", function(d) { return vis.x(d.year); })
 		.attr("cy", function(d, i) { return vis.y(d.week); })
 		// .attr("width", vis.rectWidth)

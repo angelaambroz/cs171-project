@@ -84,6 +84,12 @@ a:hover {
   fill: #dbdbdb;
 }
 
+.faint {
+  stroke: gray;
+  stroke-width: 0.5px;
+  fill: none;
+}
+
 .legendcircle {
   stroke: gray;
   stroke: 1px;
