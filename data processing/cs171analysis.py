@@ -128,8 +128,8 @@ for year in cleanDataset:
 	for story in year['stories']:
 		story[u'award'] = AwardWinner(story, awarded)
 
-pp.pprint(cleanDataset)
+# pp.pprint(cleanDataset)
 
-# with open(DIR + "/processed/sh-data8-no-text.json", "w") as f:
-# 	json.dump(cleanDataset, f)
+with open(DIR + "/processed/sh-data8-no-text.json", "w") as f:
+	json.dump(cleanDataset, f)
 

@@ -17,7 +17,7 @@ textChart = function(_parentElement, _data) {
 textChart.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = { top: 20, right: 50, bottom: 50, left: 60 };
+	vis.margin = { top: 20, right: 50, bottom: 60, left: 60 };
 
 	vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -93,7 +93,7 @@ textChart.prototype.initVis = function() {
 
 	// legend: draw a circle = story, which transitions colors over time
 	vis.circleLegend = vis.svg.append("g")
-		.attr("transform", "translate(" + (vis.width-100) + ", " + -45 + ")");
+		.attr("transform", "translate(" + (vis.width-100) + ", " + (vis.height + 30) + ")");
 
 	vis.circleLegend.selectAll("circle")
 		.data([5, 8, 10])
@@ -103,33 +103,37 @@ textChart.prototype.initVis = function() {
 		.attr("cx", function(d, i) { return i*(d + 10); })
 		.attr("cy", 0)
 		.attr("r", function(d) { return d; });
-		// .attr("fill", setInterval(function() {
-
-		// 		// d3.selectAll(".legendcircle")
-		// 		// 	.transition()
-		// 		// 	.attr("fill", function()
-		// 		// 		)
-
-		// 		return null;
-
-		// 		console.log("in settimeout");
-		// 	}, 1000));
 
 	vis.circleLegend.append("text")
 		.attr("x", -5)
-		.attr("y", -17)
+		.attr("y", 20)
 		.attr("class", "legend-tiny")
 		.text("Wordcount per story");
 
-		function changeElementColor(d3Element){
-	    d3Element
-	    .transition().duration(0)
-	      .style("background", "green")
-	    .transition().duration(1000)
-	      .style("background", "yellow")
-	    .transition().delay(1000).duration(5000)
-	      .style("background", "red");
-	}
+	// draw color legend
+	// draw stroke-width legend (fat = award winner)
+	vis.strokeLegend = vis.svg.append("g")
+		.attr("transform", "translate(30," + (vis.height + 30) + ")");
+
+
+	vis.strokeLegend.selectAll("circle")
+		.data([8, 8])
+		.enter()
+		.append("circle")
+		.attr("class", "strokecircle")
+		.attr("cx", function(d, i) { return i*(d + 15); })
+		.attr("cy", 0)
+		.attr("r", function(d) { return d; })
+		.attr("stroke-width", function(d, i) {
+			if (i==0) { return 0.5; }
+			else { return 2; }
+		});
+
+	vis.strokeLegend.append("text")
+		.attr("x", -5)
+		.attr("y", 20)
+		.attr("class", "legend-tiny")
+		.text("Did the story win an award?");
 
 	// TODO: Update data summary
 
@@ -162,6 +166,10 @@ textChart.prototype.updateVis = function() {
 		.attr("cy", function(d) { return vis.y(d.week); })
 		.attr("r", function(d) { return vis.radius(d.wordcount); })
 		.attr("fill", function(d) { return vis.color(d.vocab_demeaned); })
+		.attr("stroke-width", function(d) {
+			if (d.award == 0) { return 0.5; }
+			else { return 2; }
+		})
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout)
 		.on("click", tooltip);
