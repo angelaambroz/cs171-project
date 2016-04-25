@@ -22,6 +22,7 @@ pp = pprint.PrettyPrinter(indent=4)
 GENDER = "https://api.genderize.io/?name="
 
 AWARDS = "http://www.strangehorizons.com/awards/"
+RECENT_AWARDS = "http://www.strangehorizons.com/Awards.shtml"
 TOP = "http://www.strangehorizons.com"
 
 
@@ -64,15 +65,21 @@ def Genderize(name):
 def getAwardList(awards_index):
 	print "Getting list of award stories."
 
-	awards = Souping(AWARDS)
+	awards = Souping(awards_index)
 	award_pages = [link.text for link in awards.find_all("a", href=True) if "awards-" in link["href"]]
+	award_pages.append(RECENT_AWARDS)
 
 	all_awards = []
 	for page in award_pages:
-		this_url = AWARDS + page
+		if "awards-" in page:
+			this_url = awards_index + page
+		else:
+			this_url = page
 		award_soup = Souping(this_url)
-		award_fiction = [TOP + url["href"] for url in award_soup.find_all("a", href=True) if "-f.shtml" in url["href"] and url["href"][0:4] != "http"]
-		all_awards.extend(award_fiction)
+		award_fiction = [url["href"] for url in award_soup.find_all("a", href=True)]
+		clean_awards = [TOP + url for url in award_fiction if url[0:4] != "http"]
+
+		all_awards.extend(clean_awards)
 
 	only_awards = set(all_awards)
 
@@ -80,7 +87,7 @@ def getAwardList(awards_index):
 
 
 def AwardWinner(story, award_list):
-	print "Did this story win any awards?"
+	# print "Did this story win any awards?"
 
 	# check url, loop through all BeautifulSoup
 	if story['url'] in award_list:
@@ -124,12 +131,15 @@ with open(DIR + "/processed/sh-data6-no-text.json", "r") as f:
 cleanDataset = deduplicate(data)
 awarded = getAwardList(AWARDS)
 
+
 for year in cleanDataset:
+	print "Now checking awards for " + year['year']
+
 	for story in year['stories']:
 		story[u'award'] = AwardWinner(story, awarded)
 
 # pp.pprint(cleanDataset)
 
-with open(DIR + "/processed/sh-data8-no-text.json", "w") as f:
+with open(DIR + "/processed/sh-data10-no-text.json", "w") as f:
 	json.dump(cleanDataset, f)
 

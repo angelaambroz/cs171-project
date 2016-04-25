@@ -174,19 +174,19 @@ function tooltip(d) {
 	  html: true,
 	  animation: false,
 	  "allowOutsideClick": true, 
-	  showCancelButton: true,
+	  // showCancelButton: true,
 	  confirmButtonColor: "#bac7ff",
-	  confirmButtonText: "Bookmark",
-	  cancelButtonText: "OK",
+	  confirmButtonText: "OK",
+	  // cancelButtonText: "OK",
 	  closeOnConfirm: true,
 	  closeOnCancel: true
-	},
-	function(isConfirm){
-		  if (isConfirm) {
-		  	d3.selectAll("#story" + d.id).classed("highlighted", false);
-		  	d3.selectAll("#story" + d.id).classed("bookmarked", true);
-		  } 
-		});
+	});
+	// function(isConfirm){
+	// 	  if (isConfirm) {
+	// 	  	d3.selectAll("#story" + d.id).classed("highlighted", false);
+	// 	  	d3.selectAll("#story" + d.id).classed("bookmarked", true);
+	// 	  } 
+	// 	});
 
 }
 

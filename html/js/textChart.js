@@ -110,7 +110,10 @@ textChart.prototype.initVis = function() {
 		.attr("class", "legend-tiny")
 		.text("Wordcount per story");
 
+
 	// draw color legend
+
+
 	// draw stroke-width legend (fat = award winner)
 	vis.strokeLegend = vis.svg.append("g")
 		.attr("transform", "translate(30," + (vis.height + 30) + ")");
@@ -135,7 +138,9 @@ textChart.prototype.initVis = function() {
 		.attr("class", "legend-tiny")
 		.text("Did the story win an award?");
 
-	// TODO: Update data summary
+
+
+
 
 	// Draw viz
 	vis.updateVis();
