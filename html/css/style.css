@@ -84,12 +84,6 @@ a:hover {
   fill: #dbdbdb;
 }
 
-.faint {
-  stroke: gray;
-  stroke-width: 0.5px;
-  fill: none;
-}
-
 .legendcircle {
   stroke: gray;
   stroke: 1px;
@@ -104,7 +98,6 @@ a:hover {
   fill: white;
   opacity: 0.5;
 }
-
 
 .storycircle:hover {
   cursor: pointer;
@@ -124,10 +117,6 @@ a:hover {
   stroke: #000;
   stroke-width: 0.25;
   shape-rendering: crispEdges;
-}
-
-.storycircle:hover {
-  r: 20;
 }
 
 .storycircle.highlighted {

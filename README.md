@@ -148,6 +148,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Bring it all up into one frame!
 * ~~Remove "says"/"said" as `stopword`.~~
 * POS tag `top_words`, find proper nouns and remove? Or tag/highlight?
+* REVERT BACK TO `0f35193` FOR `.js` FILES!
 
 
 
