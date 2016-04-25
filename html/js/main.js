@@ -128,7 +128,13 @@ function createVis() {
 
 function mouseover(d) {
 	// Highlight in red
-	d3.selectAll("#story" + d.id).classed("highlighted", true);
+	// d3.selectAll("#story" + d.id).classed("highlighted", true);
+
+	d3.select(this)
+		.classed("legendcircle", false)
+		.classed("maincircle", true)
+		.attr("r", 10)
+		.attr("fill", function(d) { return mainChart.color(d.mean_sentence_length); });
 
 	// Tooltip
 	var toolWidth = (d.top_within[0].word.length + d.top_within[1].word.length + 2.5)*15 + 100;
@@ -156,6 +162,10 @@ function mouseover(d) {
 function mouseout(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", false);
 	d3.select("#tooltip").remove();
+	d3.select(this)
+		.classed("legendcircle", true)
+		.attr("r", 4)
+		.attr("fill", "none");
 }
 
 function tooltip(d) {

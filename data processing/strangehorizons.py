@@ -5,6 +5,7 @@ import urllib2
 import pprint
 import numpy
 import nltk
+import math
 import json
 import csv
 import ast
@@ -19,8 +20,11 @@ from unidecode import unidecode
 
 SH = "http://www.strangehorizons.com/Archive.alt.pl?Dept=f"
 TOP = "http://www.strangehorizons.com"
+GENDER = "https://api.genderize.io/?name="
+
 DIR = os.getcwd()
 pp = pprint.PrettyPrinter(indent=4)
+
 STOP = nltk.corpus.stopwords.words('english')
 MORESTOP = [
 			u",",
@@ -40,12 +44,13 @@ MORESTOP = [
 			u"'m",
 			u"'ve",
 			u"'re",
-			u"'ll"
+			u"'ll",
+			u"said",
+			u"says"
 			]
 STOP.extend(MORESTOP)
 CLEAN = ["CDATA", "comments found", "following HTML tags"]
 SPACE = " "
-
 
 #########################
 #	Helper functions	#
@@ -60,7 +65,7 @@ def Souping(url):
 
 def cleanWordTokenize(rawWords):
 	words = nltk.word_tokenize(rawWords)
-	words = [w.lower() for w in words if w not in MORESTOP]
+	words = [w.lower() for w in words if w not in MORESTOP and w not in r'[\.\?!]']
 	return words
 
 def overallTokenizing(rawFile):
@@ -68,10 +73,11 @@ def overallTokenizing(rawFile):
 	words = cleanWordTokenize(rawFile)
 	vocab = sorted(set(words))
 	fdist = nltk.FreqDist(words)
-	top_words = [(x, y) for (x, y) in fdist.most_common(100) if x not in STOP]
+	top_words = [(x, y) for (x, y) in fdist.most_common(50) if x not in STOP]
 	
 	print "Finished tokenizing."
 	return words, vocab, top_words
+
 
 def sentenceLengths(rawFile):
 	print "Sentence tokenizing..."
@@ -84,6 +90,16 @@ def sentenceLengths(rawFile):
 
 	return sent_lengths
 
+
+def ARI(words, sentences, rawText):
+	print "Calculating the Automated Readability Index..."
+	try:	
+		ari = 4.71*(len(rawText)/len(words)) + 0.5*(len(words)/len(sentences)) - 21.43
+		ari = math.ceil(ari)
+	except:
+		ari = None
+		
+	return ari
 
 
 #################################
@@ -111,8 +127,10 @@ def storyContent(top_url, story_links):
 	print "Pulling text from stories..."
 	for index, story_url in enumerate(story_links):
 
-		# If podcast, skip
+		# Skip podcasts, pull everything else
 		if "podcast" not in story_url:
+
+			# Pull raw stuff
 			story_soup = Souping(top_url + story_url)
 			story_title = unidecode(story_soup.h1.text)
 			story_author = unidecode(story_soup.h2.text)
@@ -123,10 +141,13 @@ def storyContent(top_url, story_links):
 							and "following HTML tags" not in unidecode(p.text)
 							and "Archived Fiction Dating" not in unidecode(p.text)]
 			story_text = SPACE.join(story_text)
+
+			# Simple NLP
 			story_words, story_vocab, story_top = overallTokenizing(story_text)
 			story_sents = sentenceLengths(story_text)
 			story_sent_mean = numpy.mean(story_sents)
 			story_sent_sd = numpy.std(story_sents)
+			story_ari = ARI(story_words, story_sents, story_text)
 
 
 			try:
@@ -134,8 +155,6 @@ def storyContent(top_url, story_links):
 				story_date = unidecode(story_soup.find_all(class_="content-date")[0].text)
 			except: 
 				story_year = story_soup.find_all(class_="content-date")
-
-			# num_words = len(cleanWordTokenize(story_text))
 
 			allObject.append({
 					'year': story_year,
@@ -153,6 +172,7 @@ def storyContent(top_url, story_links):
 				'mean_sentence_length': str(story_sent_mean),
 				'stdv_sentence_length': str(story_sent_sd),
 				# 'raw': story_text,
+				'readability': story_ari,
 				'url': top_url + story_url,
 				'top_within': [{'word': x, 'count': y } for (x, y) in story_top]
 				})
@@ -195,8 +215,9 @@ for year in years:
 		if year['year'] == story['year']:
 			year['stories'].append(story)
 
+# pp.pprint(years)
 
-with open(DIR + "/processed/sh-data5-no-text.json", "w") as f:
+with open(DIR + "/processed/sh-data6-no-text.json", "w") as f:
 	json.dump(years, f)
 
 

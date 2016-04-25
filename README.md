@@ -8,6 +8,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 ### Lit review
 * [Corpus linguistics](https://en.wikipedia.org/wiki/Corpus_linguistics)
 * [Hapax legomenon](https://en.wikipedia.org/wiki/Hapax_legomenon)
+* [Summarization](http://www.fastforwardlabs.com/luhn/)
 
 
 ### Inspiration
@@ -32,7 +33,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * [Jim Vallandingham - Scroller.js](http://vallandingham.me/scroller.html)
 * [StackOverflow - Fisheye distortion on simple scatterplot](https://stackoverflow.com/questions/23407421/d3-fisheye-distortion-on-simple-scatter-plot)
 * [bl.ocks - Zoomable plot](http://bl.ocks.org/peterssonjonas/4a0e7cb8d23231243e0e)
-
+* [Automated Readability Index (ARI)](https://en.wikipedia.org/wiki/Automated_readability_index)
 
 
 ### TODO
@@ -47,7 +48,6 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
       * ~~Collapse paras into chapter objects? (Using average sentence length per para?)~~
 * ~~`font-awesome`?~~
 * **Process book**: Screencast.
-* 
 
 
 ###### Data processing
@@ -65,6 +65,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~I need full date-time objects for each story for the line chart.~~
 * ~~Make unique identifier for all stories.~~ Used index - but why is it 100+ stories over?! (2003 duplicates?)
 * ~~Sentence length variance.~~ Did `mean`, `std`.  
+* Add story `award` (`1/0`) based on [this](http://www.strangehorizons.com/Awards.shtml).
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
@@ -122,22 +123,31 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * when you say a word is unique, do you mean it is unique to that story? Or is is that the word is occurring once in that particular story?  That is, the classic interpretation of Oelke & Keim's hapax legomena?
 * It could be interesting to also see the words that are unique ​_in the corpus_​ to each story.
 * It seems like there are yellow lines in the background of the vocab over time - they are very faint, not sure what they are for. 
-* Though, for some reason, it took me a minute to realize I could click the title in the popup. It looks a bit like a title.
+* ~~Though, for some reason, it took me a minute to realize I could click the title in the popup. It looks a bit like a title.~~
 * Finally, have you considered authorship analysis? Do many authors write multiple stories? Are their stories similar or different from each other?
 * What about a comparison to some canonical speculative fiction novels as a reference point?
 * put it back, but align (CRAP)
 * meaningful story in the title; ask a question in the title (subtitle is more technical)
-* what is bookmarking for? hidden functionality!
 * User-adjustable opacity on `scatterplot.js`?
-* What do you think of adjusting the opacity in the scatter?
+* ~~What do you think of adjusting the opacity in the scatter?~~
 * Bin scatter plot?
 * Is there any useful category that you can use to color the points in the scatter? 
 * Have you thought about animating the scatterplot transitions? 
-* Link to Github doesn't work.
+* ~~Link to Github doesn't work.~~
 * Tooltip word cloud, similar to dem/rep wordle (see [Bocoup slides](https://bocoup-education.github.io/text-vis-ovc/24-text-vis-examples/slides.html#5)).
 * Reveal on interaction? (see [Bocoup Stereotropes](http://stereotropes.bocoup.com/))
+* Reduce data points shown (gray circles with null fill, excepting award winners, similar to [this](https://bocoup-education.github.io/text-vis-ovc/24-text-vis-examples/slides.html#21)).
+* ~~Remove bookmarks functionality. What is bookmarking for? hidden functionality!~~
+* Add author filter functionality.
+* Remove scatterplot.
+* Add sentence length variance as user option to timeline.
+* ~~Top words tooltip: Filter "said"/"say" and names.~~
+* Gender of protagonist?
+* Change size encoding to something with better variance: Readability? Sentence variance? 
+* More obvious/labelled functionality.
+* Bring it all up into one frame!
+* ~~Remove "says"/"said" as `stopword`.~~
+* POS tag `top_words`, find proper nouns and remove? Or tag/highlight?
 
 
-
- 
 

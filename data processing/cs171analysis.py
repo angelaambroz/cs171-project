@@ -2,6 +2,7 @@
 
 from unidecode import unidecode
 import pandas as pd
+import readability 
 import requests
 import pprint
 import json
@@ -45,6 +46,9 @@ def Genderize(name):
 
 	return gender, gender_prob
 
+def AwardWinner(story):
+	print None
+
 
 #################################
 #	Data cleaning functions	#
@@ -57,11 +61,15 @@ def Genderize(name):
 #############################
 
 
+
 #########
 #  Run	#
 #########
 
-with open(DIR + "/processed/sh-textless.json", "r") as f:
+
+
+
+with open(DIR + "/processed/sh-data6-no-text.json", "r") as f:
 	data = json.load(f)
 
 for year in data[0:2]:

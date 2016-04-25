@@ -33,14 +33,23 @@ textChart.prototype.initVis = function() {
 
 	// Scales
 	vis.colorBrews = ["#ffeda0", "#feb24c", "#f03b20"];
+	vis.diverging = ["#f1a340", "#f7f7f7", "#998ec3"];
+
+	vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 1;
+	vis.maxYear = d3.extent(vis.data, function(d) { return d.year; })[1] + 1;
+
+	vis.min_sent = 0;
+	vis.max_sent = 20;
+	vis.data.forEach(function(year) {
+		year.storiesClean.forEach(function(story) {
+			vis.min_sent = story.readability < vis.min_sent ? story.readability : vis.min_sent;
+			vis.max_sent = story.readability > vis.max_sent ? story.readability : vis.max_sent;
+		})
+	})
 
 	vis.color = d3.scale.quantize()
 		.range(vis.colorBrews)
-		.domain([0, 1]);
-
-	// Scales and axes
-	vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 1;
-	vis.maxYear = d3.extent(vis.data, function(d) { return d.year; })[1] + 1;
+		.domain([vis.min_sent, vis.max_sent]);
 
 	vis.x = d3.scale.linear()
 	  .range([0, vis.width])
@@ -51,8 +60,8 @@ textChart.prototype.initVis = function() {
 	  .domain([52, 0]);
 
 	vis.radius = d3.scale.sqrt()
-				.domain([0, 10000]) //TODO: function of total word count over all stories
-				.range([1, 6]);
+				.domain([0, 1]) //TODO: function of total word count over all stories
+				.range([2, 8]);
 
 	vis.xAxis = d3.svg.axis()
 		.scale(vis.x)
@@ -71,7 +80,6 @@ textChart.prototype.initVis = function() {
 		.attr("class", "y-axis axis")
 		.call(vis.yAxis);
 
-	
 	// y-axis labels
 	vis.svg.append("text")
 		.attr("class", "tiny")
@@ -103,17 +111,6 @@ textChart.prototype.initVis = function() {
 		.attr("cx", function(d, i) { return i*(d + 10); })
 		.attr("cy", 0)
 		.attr("r", function(d) { return d; });
-		// .attr("fill", setInterval(function() {
-
-		// 		// d3.selectAll(".legendcircle")
-		// 		// 	.transition()
-		// 		// 	.attr("fill", function()
-		// 		// 		)
-
-		// 		return null;
-
-		// 		console.log("in settimeout");
-		// 	}, 1000));
 
 	vis.circleLegend.append("text")
 		.attr("x", -5)
@@ -121,17 +118,6 @@ textChart.prototype.initVis = function() {
 		.attr("class", "legend-tiny")
 		.text("Wordcount per story");
 
-		function changeElementColor(d3Element){
-	    d3Element
-	    .transition().duration(0)
-	      .style("background", "green")
-	    .transition().duration(1000)
-	      .style("background", "yellow")
-	    .transition().delay(1000).duration(5000)
-	      .style("background", "red");
-	}
-
-	// TODO: Update data summary
 
 	// Draw viz
 	vis.updateVis();
@@ -141,9 +127,9 @@ textChart.prototype.initVis = function() {
 
 textChart.prototype.updateVis = function() {
 	var vis = this;
-
-	vis.rectWidth = vis.width / vis.data.length;
-	vis.rectHeight = vis.rectWidth / 4;
+	
+	vis.rectWidth = (vis.width / vis.data.length);
+	// vis.rectHeight = vis.rectWidth / 7;
 	
 	vis.year = vis.svg.selectAll(".year")
 		.data(vis.data)
@@ -157,11 +143,12 @@ textChart.prototype.updateVis = function() {
 		.enter()
 		.append("circle")
 		.attr("id", function(d) { return "story" + d.id; })
-		.attr("class", "maincircle")
+		.attr("class", "legendcircle")
 		.attr("cx", function(d) { return vis.x(d.year); })
-		.attr("cy", function(d) { return vis.y(d.week); })
-		.attr("r", function(d) { return vis.radius(d.wordcount); })
-		.attr("fill", function(d) { return vis.color(d.vocab_demeaned); })
+		.attr("cy", function(d, i) { return vis.y(d.week); })
+		// .attr("width", vis.rectWidth)
+		// .attr("height", 10)
+		.attr("r", 4)
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout)
 		.on("click", tooltip);

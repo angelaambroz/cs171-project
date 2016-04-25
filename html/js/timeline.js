@@ -13,8 +13,6 @@ timeline = function(_parentElement, _data){
 }
 
 
-
-
 timeline.prototype.initVis = function(){
   var vis = this; 
 
