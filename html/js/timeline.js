@@ -43,8 +43,8 @@ timeline.prototype.initVis = function(){
   vis.yAxis = d3.svg.axis()
       .scale(vis.y)
       .orient("left")
-      .ticks(2)
-      .tickFormat(d3.format("%"));
+      .ticks(2);
+      // .tickFormat(d3.format("%"));
 
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
