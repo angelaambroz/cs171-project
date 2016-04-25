@@ -17,7 +17,7 @@ timeline.prototype.initVis = function(){
   var vis = this; 
 
   // Draw the canvas
-  vis.margin = {top: 10, right: 50, bottom: 30, left: 50};
+  vis.margin = {top: 10, right: 50, bottom: 10, left: 60 };
 
   vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -26,25 +26,31 @@ timeline.prototype.initVis = function(){
 
   vis.r = 1.5;
 
+  // vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 0.5;
+  vis.minYear = new Date('3/1/2000')
+
+  // vis.maxYear = d3.extent(vis.data, function(d) { return d.year; })[1] + 0.5;
+  vis.maxYear = new Date('10/1/2016');
+
   // Scales and axes
   vis.x = d3.time.scale()
       .range([0, vis.width])
-      .domain(d3.extent(vis.data, function(d) { return d.date; }));
+      .domain([vis.minYear, vis.maxYear]);
 
   vis.y = d3.scale.linear()
   		.range([vis.height, 0])
       .domain([0, 1]);
 
-  vis.xAxis = d3.svg.axis()
-  	  .scale(vis.x)
-  	  .orient("bottom")
-      .ticks(3);
+  // vis.xAxis = d3.svg.axis()
+  // 	  .scale(vis.x)
+  // 	  .orient("bottom")
+  //     .ticks(3);
 
   vis.yAxis = d3.svg.axis()
       .scale(vis.y)
       .orient("left")
-      .ticks(2);
-      // .tickFormat(d3.format("%"));
+      .ticks(2)
+      .tickFormat(d3.format("%"));
 
   // SVG drawing area
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -56,6 +62,7 @@ timeline.prototype.initVis = function(){
 
   // Draw line chart
   vis.line = d3.svg.line()
+    .interpolate("bundle")
     .x(function(d) { return vis.x(d.date); })
     .y(function(d) { return vis.y(d.vocab_demeaned); });
   
@@ -63,23 +70,23 @@ timeline.prototype.initVis = function(){
     .attr("class", "line")
     .attr("d", vis.line(vis.data));
 
-  vis.circles = vis.svg.selectAll(".linecircle")
-    .data(vis.data)
-    .enter()
-    .append("circle")
-    .attr("class", "linecircle")
-    .attr("id", function(d) { return "story" + d.id; })
-    .attr("r", vis.r)
-    .attr("cx", function(d) { return vis.x(d.date); })
-    .attr("cy", function(d) { return vis.y(d.vocab_demeaned); })
-    .on("mouseover", mouseover)
-    .on("mouseout", mouseout)
-    .on("click", tooltip);
+  // vis.circles = vis.svg.selectAll(".linecircle")
+  //   .data(vis.data)
+  //   .enter()
+  //   .append("circle")
+  //   .attr("class", "linecircle")
+  //   .attr("id", function(d) { return "story" + d.id; })
+  //   .attr("r", vis.r)
+  //   .attr("cx", function(d) { return vis.x(d.date); })
+  //   .attr("cy", function(d) { return vis.y(d.vocab_demeaned); })
+  //   .on("mouseover", mouseover)
+  //   .on("mouseout", mouseout)
+  //   .on("click", tooltip);
 
-  vis.svg.append("g")
-      .attr("class", "x-axis axis")
-      .attr("transform", "translate(0," + vis.height + ")")
-      .call(vis.xAxis);
+  // vis.svg.append("g")
+  //     .attr("class", "x-axis axis")
+  //     .attr("transform", "translate(0," + vis.height + ")")
+  //     .call(vis.xAxis);
 
     vis.svg.append("g")
     .attr("class", "y-axis axis")

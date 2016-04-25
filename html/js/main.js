@@ -92,9 +92,7 @@ function loadData() {
 			  // Flatten the JSON into an array of stories
 			cleanData.forEach(function(year) {
 				year.storiesClean.forEach(function(story) {
-					if (story.date) {
-						flatStories.push(story);  	
-					}
+					flatStories.push(story);
 				})
 			})
 

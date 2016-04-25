@@ -34,6 +34,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * [StackOverflow - Fisheye distortion on simple scatterplot](https://stackoverflow.com/questions/23407421/d3-fisheye-distortion-on-simple-scatter-plot)
 * [bl.ocks - Zoomable plot](http://bl.ocks.org/peterssonjonas/4a0e7cb8d23231243e0e)
 * [Automated Readability Index (ARI)](https://en.wikipedia.org/wiki/Automated_readability_index)
+* [Smoothing out lines in d3.js](http://www.d3noob.org/2013/01/smoothing-out-lines-in-d3js.html)
 
 
 ### TODO
@@ -57,7 +58,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Paragraph-level objects capturing para text, length (sentences vs. characters?), sentences, whether they have any top words in there.~~
 * ~~Convert all `len(x)` into word tokenizers counting words, instead of characters.~~
 * ~~Fix above -- specifically, fix `cleanWordTokenize()`.~~ 
-* **Design 2 (SH scrape)**: Fix 2003 story.
+* ~~**Design 2 (SH scrape)**: Fix 2003 story.~~
 * ~~Re-run to get `word-count` objects in year object.~~
 * ~~General questions:~~
     1. ~~Should I separate out each book into its own json? What would be most efficient to pull from the server?~~

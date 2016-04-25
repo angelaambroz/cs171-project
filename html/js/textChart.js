@@ -17,7 +17,7 @@ textChart = function(_parentElement, _data) {
 textChart.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = { top: 70, right: 50, bottom: 50, left: 60 };
+	vis.margin = { top: 20, right: 50, bottom: 50, left: 60 };
 
 	vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -39,8 +39,8 @@ textChart.prototype.initVis = function() {
 		.domain([0, 1]);
 
 	// Scales and axes
-	vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 1;
-	vis.maxYear = d3.extent(vis.data, function(d) { return d.year; })[1] + 1;
+	vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 0.5;
+	vis.maxYear = d3.extent(vis.data, function(d) { return d.year; })[1] + 0.5;
 
 	vis.x = d3.scale.linear()
 	  .range([0, vis.width])

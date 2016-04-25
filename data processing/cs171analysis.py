@@ -49,6 +49,17 @@ def Genderize(name):
 def AwardWinner(story):
 	print None
 
+def deduplicate(dataset):
+	cleaned = []
+
+	for year in dataset:
+		print "Now cleaning " + str(year['year'])
+
+		if year['year'] and not any(d['year'] == year['year'] for d in cleaned):
+			cleaned.append(year)
+
+	return cleaned
+
 
 #################################
 #	Data cleaning functions	#
@@ -72,19 +83,9 @@ def AwardWinner(story):
 with open(DIR + "/processed/sh-data6-no-text.json", "r") as f:
 	data = json.load(f)
 
-for year in data[0:2]:
-	print "Now going through " + year['year'] + " and genderizing."
 
-	for story in year['stories']: 
-		names = story['author'].split()
-		if names[1]: 
-			first_name = names[1]
-			gender, gender_probability = Genderize(first_name)
-			story['gender'] = gender
-			story['gender_p'] = gender_probability
-		else:
-			print "No name"
+cleanDataset = deduplicate(data)
 
-pp.pprint(data[0:2])
-
+with open(DIR + "/processed/sh-data7-no-text.json", "w") as f:
+	json.dump(cleanDataset, f)
 
