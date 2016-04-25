@@ -32,7 +32,7 @@ textChart.prototype.initVis = function() {
 	    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 	// Scales
-	vis.colorBrews = ["#ffeda0", "#feb24c", "#f03b20"];
+	vis.colorBrews = ["#ffeda0", "#f03b20"];
 	vis.diverging = ["#f1a340", "#f7f7f7", "#998ec3"];
 
 	vis.minYear = d3.extent(vis.data, function(d) { return d.year; })[0] - 1;
@@ -42,10 +42,12 @@ textChart.prototype.initVis = function() {
 	vis.max_sent = 20;
 	vis.data.forEach(function(year) {
 		year.storiesClean.forEach(function(story) {
-			vis.min_sent = story.readability < vis.min_sent ? story.readability : vis.min_sent;
-			vis.max_sent = story.readability > vis.max_sent ? story.readability : vis.max_sent;
+			vis.min_sent = story.mean_sentence_length < vis.min_sent ? story.mean_sentence_length : vis.min_sent;
+			vis.max_sent = story.mean_sentence_length > vis.max_sent ? story.mean_sentence_length : vis.max_sent;
 		})
 	})
+
+	console.log(vis.min_sent + ", " + vis.max_sent);
 
 	vis.color = d3.scale.quantize()
 		.range(vis.colorBrews)
@@ -143,11 +145,12 @@ textChart.prototype.updateVis = function() {
 		.enter()
 		.append("circle")
 		.attr("id", function(d) { return "story" + d.id; })
-		.attr("class", "faint")
+		.attr("class", "maincircle")
 		.attr("cx", function(d) { return vis.x(d.year); })
 		.attr("cy", function(d, i) { return vis.y(d.week); })
 		// .attr("width", vis.rectWidth)
 		// .attr("height", 10)
+		.attr("fill", function(d) { return vis.color(d.mean_sentence_length)})
 		.attr("r", 4)
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout)
