@@ -66,7 +66,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~I need full date-time objects for each story for the line chart.~~
 * ~~Make unique identifier for all stories.~~ Used index - but why is it 100+ stories over?! (2003 duplicates?)
 * ~~Sentence length variance.~~ Did `mean`, `std`.  
-* Add story `award` (`1/0`) based on [this](http://www.strangehorizons.com/Awards.shtml).
+* ~~Add story `award` (`1/0`) based on [this](http://www.strangehorizons.com/Awards.shtml).~~
 
 ###### Data visualization
 * ~~Add templates from best HWs and Labs.~~
@@ -108,9 +108,9 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * ~~Show bookmarked stories on "See bookmarks" click.~~
 * ~~Get year-week for y-axis on `textChart.js`.~~ 
 * ~~De-mean the standard deviation.~~
-* Excellent option for analysis: [readability.py](https://github.com/mmautner/readability)!
+* ~~Excellent option for analysis: [readability.py](https://github.com/mmautner/readability)!~~
 * Use [genderize.io](https://genderize.io/) - $9/mo. for 100k names
-* Clean up puncts in `wordcount` and `vocab` (you can use a list comprehension: `[w for w in words if w not in r'[\.\?!]']`)
+* ~~Clean up puncts in `wordcount` and `vocab` (you can use a list comprehension: `[w for w in words if w not in r'[\.\?!]']`)~~
 * `tf-idf`: how much does a word occur in a story, divided by the number of stories with that word.
 
 
@@ -131,16 +131,16 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * meaningful story in the title; ask a question in the title (subtitle is more technical)
 * User-adjustable opacity on `scatterplot.js`?
 * ~~What do you think of adjusting the opacity in the scatter?~~
-* Bin scatter plot?
-* Is there any useful category that you can use to color the points in the scatter? 
-* Have you thought about animating the scatterplot transitions? 
+* ~~Bin scatter plot?~~
+* ~~Is there any useful category that you can use to color the points in the scatter?~~
+* ~~Have you thought about animating the scatterplot transitions?~~ 
 * ~~Link to Github doesn't work.~~
 * Tooltip word cloud, similar to dem/rep wordle (see [Bocoup slides](https://bocoup-education.github.io/text-vis-ovc/24-text-vis-examples/slides.html#5)).
 * Reveal on interaction? (see [Bocoup Stereotropes](http://stereotropes.bocoup.com/))
 * Reduce data points shown (gray circles with null fill, excepting award winners, similar to [this](https://bocoup-education.github.io/text-vis-ovc/24-text-vis-examples/slides.html#21)).
 * ~~Remove bookmarks functionality. What is bookmarking for? hidden functionality!~~
 * Add author filter functionality.
-* Remove scatterplot.
+* ~~Remove scatterplot.~~
 * Add sentence length variance as user option to timeline.
 * ~~Top words tooltip: Filter "said"/"say" and names.~~
 * Gender of protagonist?
@@ -149,7 +149,8 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * Bring it all up into one frame!
 * ~~Remove "says"/"said" as `stopword`.~~
 * POS tag `top_words`, find proper nouns and remove? Or tag/highlight?
-* REVERT BACK TO `0f35193` FOR `.js` FILES!
+* ~~REVERT BACK TO `0f35193` FOR `.js` FILES!~~
+* Data summary/table in each tooltip.
 
 
 

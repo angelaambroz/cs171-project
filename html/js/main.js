@@ -147,7 +147,7 @@ function mouseover(d) {
 	tooltip.append("text")	
 		.attr("x", 20)
 		.attr("y", 20)
-		.text("top two words: " + d.top_within[0].word + ", " + d.top_within[1].word);
+		.text("TOP WORD: " + d.top_within[0].word);
 
 }
 

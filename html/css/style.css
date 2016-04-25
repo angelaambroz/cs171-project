@@ -15,12 +15,10 @@ body {
   margin-top: 50px;
 }
 
-.padding-needed {
-  padding-top: 30px;
-  padding-bottom: 30px;
+.side-note {
+  padding: 30px;
   margin-bottom: 50px;
 }
-
 
 .caption .tiny-header {
   font-variant: small-caps;

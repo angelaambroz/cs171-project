@@ -1,9 +1,12 @@
 # !/usr/local/bin/python 
 
 from unidecode import unidecode
+from bs4 import BeautifulSoup
+
 import pandas as pd
 import readability 
 import requests
+import urllib2
 import pprint
 import json
 import os
@@ -18,6 +21,9 @@ DIR = os.getcwd()
 pp = pprint.PrettyPrinter(indent=4)
 GENDER = "https://api.genderize.io/?name="
 
+AWARDS = "http://www.strangehorizons.com/awards/"
+TOP = "http://www.strangehorizons.com"
+
 
 # df = pd.read_json(DIR + "/processed/sh-data5-no-text.json")
 # print df
@@ -26,6 +32,14 @@ GENDER = "https://api.genderize.io/?name="
 #########################
 #	Helper functions	#
 #########################
+
+def Souping(url):
+	print "Parsing " + url + "."
+	response = urllib2.urlopen(url)
+	html = response.read()
+	soup = BeautifulSoup(html, 'html.parser')
+	return soup
+
 
 def Genderize(name):
 	print "Now guessing the gender of " + name
@@ -46,8 +60,34 @@ def Genderize(name):
 
 	return gender, gender_prob
 
-def AwardWinner(story):
-	print None
+
+def getAwardList(awards_index):
+	print "Getting list of award stories."
+
+	awards = Souping(AWARDS)
+	award_pages = [link.text for link in awards.find_all("a", href=True) if "awards-" in link["href"]]
+
+	all_awards = []
+	for page in award_pages:
+		this_url = AWARDS + page
+		award_soup = Souping(this_url)
+		award_fiction = [TOP + url["href"] for url in award_soup.find_all("a", href=True) if "-f.shtml" in url["href"] and url["href"][0:4] != "http"]
+		all_awards.extend(award_fiction)
+
+	only_awards = set(all_awards)
+
+	return only_awards
+
+
+def AwardWinner(story, award_list):
+	print "Did this story win any awards?"
+
+	# check url, loop through all BeautifulSoup
+	if story['url'] in award_list:
+		return 1
+	else:
+		return 0
+
 
 def deduplicate(dataset):
 	cleaned = []
@@ -77,15 +117,19 @@ def deduplicate(dataset):
 #  Run	#
 #########
 
-
-
-
 with open(DIR + "/processed/sh-data6-no-text.json", "r") as f:
 	data = json.load(f)
 
 
 cleanDataset = deduplicate(data)
+awarded = getAwardList(AWARDS)
 
-with open(DIR + "/processed/sh-data7-no-text.json", "w") as f:
-	json.dump(cleanDataset, f)
+for year in cleanDataset:
+	for story in year['stories']:
+		story[u'award'] = AwardWinner(story, awarded)
+
+pp.pprint(cleanDataset)
+
+# with open(DIR + "/processed/sh-data8-no-text.json", "w") as f:
+# 	json.dump(cleanDataset, f)
 
