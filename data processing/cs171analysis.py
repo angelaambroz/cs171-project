@@ -8,6 +8,7 @@ import readability
 import requests
 import urllib2
 import pprint
+import nltk
 import json
 import os
 import re
@@ -25,9 +26,30 @@ AWARDS = "http://www.strangehorizons.com/awards/"
 RECENT_AWARDS = "http://www.strangehorizons.com/Awards.shtml"
 TOP = "http://www.strangehorizons.com"
 
-
-# df = pd.read_json(DIR + "/processed/sh-data5-no-text.json")
-# print df
+STOP = nltk.corpus.stopwords.words('english')
+MORESTOP = [
+			u",",
+			u".",
+			u"''",
+			u";",
+			u"--",
+			u'``',
+			u'!',
+			u"'s",
+			u"*",
+			u":",
+			u"?",
+			u"'",
+			u"n't",
+			u"'d",
+			u"'m",
+			u"'ve",
+			u"'re",
+			u"'ll",
+			u"said",
+			u"says"
+			]
+STOP.extend(MORESTOP)
 
 
 #########################
@@ -87,9 +109,6 @@ def getAwardList(awards_index):
 
 
 def AwardWinner(story, award_list):
-	# print "Did this story win any awards?"
-
-	# check url, loop through all BeautifulSoup
 	if story['url'] in award_list:
 		return 1
 	else:
@@ -106,6 +125,16 @@ def deduplicate(dataset):
 			cleaned.append(year)
 
 	return cleaned
+
+def Heinlein():
+	brown = nltk.corpus.brown
+	heinlein = brown.words(categories='science_fiction')
+	words = [w.lower() for w in heinlein if w not in MORESTOP and w not in r'[\.\?!]']
+	vocab = sorted(set(words))
+
+	vocab_demeaned = len(vocab) / float(len(words))
+
+	return vocab_demeaned
 
 
 #################################
@@ -131,15 +160,20 @@ with open(DIR + "/processed/sh-data6-no-text.json", "r") as f:
 cleanDataset = deduplicate(data)
 awarded = getAwardList(AWARDS)
 
-
 for year in cleanDataset:
 	print "Now checking awards for " + year['year']
 
+	year['heinlein'] = Heinlein()
+	year['awards'] = 0
+	year['avg_vocab'] = year['vocab'] / float(year['words'])
+
 	for story in year['stories']:
-		story[u'award'] = AwardWinner(story, awarded)
+		story['award'] = AwardWinner(story, awarded)
 
-# pp.pprint(cleanDataset)
+		if story['award'] == 1:
+			year['awards'] += 1
 
-with open(DIR + "/processed/sh-data10-no-text.json", "w") as f:
+
+with open(DIR + "/processed/sh-data12-no-text.json", "w") as f:
 	json.dump(cleanDataset, f)
 

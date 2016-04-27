@@ -15,7 +15,7 @@ body {
   margin-top: 50px;
 }
 
-.side-note {
+.padding-needed {
   padding: 30px;
   margin-bottom: 50px;
 }
@@ -54,8 +54,58 @@ a:hover {
   color: gray;
 }
 
+/* LINE CHART */
 
-/* MAIN VIZ: HEAT MAP */
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 0.25;
+  shape-rendering: crispEdges;
+}
+
+
+.line {
+  fill: none;
+  stroke-width: 0.5px;
+  stroke: #894b00;
+}
+
+.linecircle {
+  stroke: #894b00;
+  stroke-width: 0.5;
+  fill: white;
+}
+
+.linecircle:hover {
+  cursor: pointer;
+}
+
+.linecircle.highlighted {
+  stroke-width: 1;
+  stroke: red;
+  fill: red;
+}
+
+.linecircle.bookmarked {
+  fill: #bac7ff;
+  stroke: #bac7ff;;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.extratiny {
+  font-size: 9px;
+  fill: #894b00;
+}
+
+
+
+/* HEAT BUBBLES */
 
 .maincircle {
   stroke: #894b00;
@@ -92,86 +142,12 @@ a:hover {
   fill: none;
 }
 
-/* SIDE VIZ 1: SCATTERPLOT */
-
-.storycircle {
-  stroke: #894b00;
-  stroke-width: 0.5;
-  fill: white;
-  opacity: 0.5;
-}
-
-.storycircle:hover {
-  cursor: pointer;
-}
-
-.axis {
-  font-size: 11px;
-}
-
-#scatterplot .axis:hover {
-  cursor: pointer;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  stroke-width: 0.25;
-  shape-rendering: crispEdges;
-}
-
-.storycircle.highlighted {
-  stroke-width: 1;
-  stroke: red;
-  fill: red;
-}
-
-.storycircle.bookmarked {
-  fill: #bac7ff;
-  stroke: #bac7ff;;
-}
-
 .legend-tiny {
   font-size: 10px;
   fill: gray;
 }
 
 
-/* SIDE VIZ 2: LINE CHART */
-
-.line {
-  fill: none;
-  stroke-width: 0.5px;
-  stroke: #894b00;
-}
-
-.linecircle {
-  stroke: #894b00;
-  stroke-width: 0.5;
-  fill: white;
-}
-
-.linecircle:hover {
-  cursor: pointer;
-}
-
-.linecircle.highlighted {
-  stroke-width: 1;
-  stroke: red;
-  fill: red;
-}
-
-.linecircle.bookmarked {
-  fill: #bac7ff;
-  stroke: #bac7ff;;
-}
-
-.brush .extent {
-  stroke: #fff;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
-}
 
 
 

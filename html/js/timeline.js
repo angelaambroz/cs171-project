@@ -9,15 +9,42 @@ timeline = function(_parentElement, _data){
 	this.parentElement = _parentElement;
   this.data = _data;
 
-  this.initVis();
+  this.cleanData();
+}
+
+timeline.prototype.cleanData = function() {
+
+  var vis = this;
+
+  vis.flatStories = [];
+
+  // Flatten the JSON into an array of stories
+  vis.data.forEach(function(year) {
+    year.storiesClean.forEach(function(story) {
+      vis.flatStories.push(story);
+    })
+  })
+
+  // Getting rid of an outlier... :/ 
+  vis.storyOutlier = d3.max(vis.flatStories, function(d) { return d.wordcount; });
+
+  vis.cleanStories = vis.flatStories.filter(function(story) {
+    if (story.wordcount != vis.storyOutlier) {
+      return story;
+    }
+  })
+  
+  vis.initVis();
+
 }
 
 
 timeline.prototype.initVis = function(){
   var vis = this; 
 
+
   // Draw the canvas
-  vis.margin = {top: 10, right: 50, bottom: 10, left: 60 };
+  vis.margin = {top: 10, right: 80, bottom: 10, left: 60 };
 
   vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -41,11 +68,6 @@ timeline.prototype.initVis = function(){
   		.range([vis.height, 0])
       .domain([0, 1]);
 
-  // vis.xAxis = d3.svg.axis()
-  // 	  .scale(vis.x)
-  // 	  .orient("bottom")
-  //     .ticks(3);
-
   vis.yAxis = d3.svg.axis()
       .scale(vis.y)
       .orient("left")
@@ -65,30 +87,22 @@ timeline.prototype.initVis = function(){
     .interpolate("bundle")
     .x(function(d) { return vis.x(d.date); })
     .y(function(d) { return vis.y(d.vocab_demeaned); });
+
+  vis.avgLines = d3.svg.line()
+    .interpolate("linear")
+    .x(function(d) { return vis.x(d.year)});
+    // .y(function(d) { return vis.y(d.)})
   
-  vis.svg.append("path")
+  vis.linePath = vis.svg.append("g");
+  
+  vis.linePath.append("path")
     .attr("class", "line")
-    .attr("d", vis.line(vis.data));
+    .attr("d", vis.line(vis.cleanStories));
 
-  // vis.circles = vis.svg.selectAll(".linecircle")
-  //   .data(vis.data)
-  //   .enter()
-  //   .append("circle")
-  //   .attr("class", "linecircle")
-  //   .attr("id", function(d) { return "story" + d.id; })
-  //   .attr("r", vis.r)
-  //   .attr("cx", function(d) { return vis.x(d.date); })
-  //   .attr("cy", function(d) { return vis.y(d.vocab_demeaned); })
-  //   .on("mouseover", mouseover)
-  //   .on("mouseout", mouseout)
-  //   .on("click", tooltip);
+  vis.refLines = vis.svg.append("g");
 
-  // vis.svg.append("g")
-  //     .attr("class", "x-axis axis")
-  //     .attr("transform", "translate(0," + vis.height + ")")
-  //     .call(vis.xAxis);
-
-    vis.svg.append("g")
+  // Axis
+  vis.svg.append("g")
     .attr("class", "y-axis axis")
     .call(vis.yAxis);
 
@@ -104,6 +118,16 @@ timeline.prototype.initVis = function(){
          .attr("y", -6)
          .attr("height", vis.height + 7);
 
+    // Line legend
+    vis.cleanStoriesLength = vis.cleanStories.length;
+    vis.finalY = vis.y(vis.cleanStories[vis.cleanStoriesLength - 1].vocab_demeaned);
+
+    vis.linePath.append("text")
+      .attr("class", "extratiny")
+      .attr("x", vis.width - 12)
+      .attr("y", vis.finalY)
+      .text("% of unique words per story");
+      
 
 }
 

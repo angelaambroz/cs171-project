@@ -2,7 +2,6 @@
 
 var allData = [],
 	cleanData = [],
-	flatStories = [],
 	commaFormat = d3.format(',');
 
 var selectedBook, mainData, linkData, mainChart, lineChart, scatter, scrollPoint; 
@@ -36,11 +35,10 @@ function loadData() {
 
 	var formatDate = d3.time.format("%e %B %Y");
 
-
-
 	d3.json("data/sh-textless.json", function(error, jsonData) {
 		if (!error) {
 			allData = jsonData;
+
 
 			// Get rid of weird stories (to clean in Python later)
 			cleanData = allData.filter(function(year) {
@@ -56,8 +54,6 @@ function loadData() {
 				}
 			});
 
-			// console.log("hi");
-			console.log(allData);
 
 			cleanData.forEach(function(year) {
 				year['year'] = +year['year'];
@@ -89,29 +85,12 @@ function loadData() {
 			
 			});
 
-			  // Flatten the JSON into an array of stories
-			cleanData.forEach(function(year) {
-				year.storiesClean.forEach(function(story) {
-					flatStories.push(story);
-				})
-			})
-
-			// Getting rid of an outlier... :/ 
-			var storyOutlier = d3.max(flatStories, function(d) { return d.wordcount; });
-
-			cleanStories = flatStories.filter(function(story) {
-				if (story.wordcount != storyOutlier) {
-					return story;
-				}
-			})
-
-			cleanStories.sort(function(a, b) {
-				return b.date - a.date;
-			})
-
 			createVis();
+
 		} else {
+
 			console.log(error);
+
 		}
 
 	})
@@ -120,53 +99,46 @@ function loadData() {
 function createVis() {
 	console.log("Making the vizzes.");
 	mainChart = new textChart("main-viz", cleanData);
-	scatter = new scatterChart("scatterplot", cleanStories);
-	lineChart = new timeline("line-chart", cleanStories);
+	lineChart = new timeline("line-chart", cleanData);
 }
 
 function mouseover(d) {
-	// Highlight in red
 	d3.selectAll("#story" + d.id).classed("highlighted", true);
-
-	// Tooltip
-	var toolWidth = (d.top_within[0].word.length + d.top_within[1].word.length + 2.5)*15 + 100;
-
-	d3.select("#tooltip").remove();
-
-	var tooltip = mainChart.svg.append("g")
-		.attr("id", "tooltip")
-		.attr("transform", "translate(" + (mainChart.x(d.year) + 15) + ", " + (mainChart.y(d.week) - 5) + ")")
-
-	tooltip
-		.append("rect")
-		.attr("width",  toolWidth)
-		.attr("height", 30)
-		.attr("fill", "white")
-		.attr("opacity", 0.8);
-
-	tooltip.append("text")	
-		.attr("x", 20)
-		.attr("y", 20)
-		.text("TOP WORD: " + d.top_within[0].word);
-
 }
 
 function mouseout(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", false);
-	d3.select("#tooltip").remove();
 }
 
 function tooltip(d) {
 
-	// console.log(d.date.toDateString());
-	var dataPoint = this;
-	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + " <i class='fa fa-external-link' aria-hidden='true'></i></a>";
-
-	// TODO: <table>
+	if (d.award == 1) { 
+		var awardIcon = 'Yes <i class="fa fa-trophy" aria-hidden="true"></i>'; 
+	} else {
+		var awardIcon = "No";
+	}
+	
 	var html = "<p>" + d.author + "</p><br>";
-		html += "<p>This story has " + commaFormat(d.wordcount) + " words, of which " +  commaFormat(d.vocab) + " are unique.";
-		html += " The average sentence is " + Math.round(d.mean_sentence_length) + " words long, with a standard deviation of " + Math.round(d.stdv_sentence_length) + ".</p>";
-		html += "<br><p>The top word in this story is <b>" + d.top_within[0].word + "</b> (said " + d.top_within[0].count + " times).</p>";
+		html += '<table class="table">';
+		html += '<tr>';
+		html += '<th>Word count (excl. punctuation)</th>';
+		html += '<td>' + commaFormat(d.wordcount) + '</td>';
+		html += '</tr><tr>';
+		html += '<th>Unique word count</th>';
+		html += '<td>' +  commaFormat(d.vocab) + '</td>';
+		html += '</tr><tr>';
+		html += '<th>Most-used word</th>';
+		html += '<td><em>' + d.top_within[0].word + '</em></td>';
+		html += '</tr><tr>';
+		html += '<th>Avg. sentence length</th>';
+		html += '<td>' + Math.round(d.mean_sentence_length) + '</td>';
+		html += '</tr><tr>';
+		html += '<th>Award winner?</th>';
+		html += '<td>' + awardIcon + '</td>';
+		html += '</tr></table>';
+
+
+	var title = "<a href='" + d.url + "' target='_blank'>" + d.title + " <i class='fa fa-external-link' aria-hidden='true'></i></a>";
 
 	swal({
 	  title: title,
@@ -174,34 +146,16 @@ function tooltip(d) {
 	  html: true,
 	  animation: false,
 	  "allowOutsideClick": true, 
-	  // showCancelButton: true,
 	  confirmButtonColor: "#bac7ff",
 	  confirmButtonText: "OK",
-	  // cancelButtonText: "OK",
 	  closeOnConfirm: true,
 	  closeOnCancel: true
 	});
-	// function(isConfirm){
-	// 	  if (isConfirm) {
-	// 	  	d3.selectAll("#story" + d.id).classed("highlighted", false);
-	// 	  	d3.selectAll("#story" + d.id).classed("bookmarked", true);
-	// 	  } 
-	// 	});
 
 }
 
 function brushed() {
 
-	scatter.brushToggle = lineChart.brush.empty();
-	scatter.brushData = scatter.data.filter(function(story) {
-		if (story.date >= lineChart.brush.extent()[0] && story.date <= lineChart.brush.extent()[1]) {
-			return story;
-		}
-	})
-
-	scatter.wrangleData();
-
-	// TODO: Filter heatmap.d if dates within brush.extent()
 	mainChart.circles.classed("grayed", function(d) {
 			if (lineChart.brush.empty()) {
 				return false;

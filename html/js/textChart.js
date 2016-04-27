@@ -17,7 +17,7 @@ textChart = function(_parentElement, _data) {
 textChart.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = { top: 20, right: 50, bottom: 60, left: 60 };
+	vis.margin = { top: 20, right: 80, bottom: 60, left: 60 };
 
 	vis.divWidth = $("#" + vis.parentElement).width();
 
@@ -91,7 +91,7 @@ textChart.prototype.initVis = function() {
 		.attr("y", vis.height - 10)
 		.text("Dec");
 
-	// legend: draw a circle = story, which transitions colors over time
+	// Circle size legend
 	vis.circleLegend = vis.svg.append("g")
 		.attr("transform", "translate(" + (vis.width-100) + ", " + (vis.height + 30) + ")");
 
@@ -111,10 +111,50 @@ textChart.prototype.initVis = function() {
 		.text("Wordcount per story");
 
 
-	// draw color legend
+	// Color legend
+	vis.colorLegend = vis.svg.append("g")
+		.attr("transform", "translate(" + (vis.width / 2 - 25) + ", " + (vis.height + 30) + ")");
+
+	vis.gradient = vis.svg.append("defs")
+		.append("linearGradient")
+		.attr("id", "gradient")
+		.attr("x1", "0%")
+		.attr("y1", "0%")
+		.attr("x2", "100%")
+		.attr("y2", "0%")
+		.attr("spreadMethod", "pad");
+
+	vis.gradient.append("stop")
+		.attr("offset", "0%")
+		.attr("stop-color", vis.colorBrews[0])
+		.attr("stop-opacity", 1);
+
+	vis.gradient.append("stop")
+		.attr("offset", "50%")
+		.attr("stop-color", vis.colorBrews[1])
+		.attr("stop-opacity", 1);
+
+	vis.gradient.append("stop")
+		.attr("offset", "100%")
+		.attr("stop-color", "#894b00")
+		.attr("stop-opacity", 1);
+
+	vis.colorLegend.append("rect")
+		.attr("width", 100)
+		.attr("height", 15)
+		.attr("stroke-width", "0.5px")
+		.attr("stroke", "gray")
+		.attr("y", -10)
+		.style("fill", "url(#gradient)");
+
+	vis.colorLegend.append("text")
+		.attr("x", -5)
+		.attr("y", 20)
+		.attr("class", "legend-tiny")
+		.text("Less --> More vocab");
 
 
-	// draw stroke-width legend (fat = award winner)
+	// Stroke-width legend (fat = award winner)
 	vis.strokeLegend = vis.svg.append("g")
 		.attr("transform", "translate(30," + (vis.height + 30) + ")");
 
@@ -137,9 +177,6 @@ textChart.prototype.initVis = function() {
 		.attr("y", 20)
 		.attr("class", "legend-tiny")
 		.text("Did the story win an award?");
-
-
-
 
 
 	// Draw viz

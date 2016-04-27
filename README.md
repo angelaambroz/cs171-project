@@ -151,6 +151,7 @@ Spring 2016. This project will visualize the story shapes of a ~~variety of 19th
 * POS tag `top_words`, find proper nouns and remove? Or tag/highlight?
 * ~~REVERT BACK TO `0f35193` FOR `.js` FILES!~~
 * Data summary/table in each tooltip.
-
+* Add award blocks.
+* All `timeline.js` circles are `hidden`, until found in one of the search functions. 
 
 

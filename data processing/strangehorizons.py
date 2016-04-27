@@ -45,8 +45,8 @@ MORESTOP = [
 			u"'ve",
 			u"'re",
 			u"'ll",
-			u"said",
-			u"says"
+			u"said", #argh, i think this is an error here! bad data cleaning!
+			u"says" #bad data cleaning! bad nlp :(
 			]
 STOP.extend(MORESTOP)
 CLEAN = ["CDATA", "comments found", "following HTML tags"]
