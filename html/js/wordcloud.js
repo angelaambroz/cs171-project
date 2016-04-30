@@ -17,10 +17,10 @@ wordCloud.prototype.initVis = function() {
   var vis = this;
 
   // Draw the word cloud canvas
-  vis.margin = {top: 0, right: 0, bottom: 0, left: 0 };
+  vis.margin = {top: 10, right: 0, bottom: 0, left: 0 };
   vis.divWidth = $("#" + vis.parentElement).width();
   vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-  vis.height = (vis.divWidth * 6) - vis.margin.top - vis.margin.bottom;
+  vis.height = (vis.divWidth * 5) - vis.margin.top - vis.margin.bottom;
 
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
     .attr("width", vis.width)
@@ -30,7 +30,7 @@ wordCloud.prototype.initVis = function() {
 
   // Scales
   vis.font = d3.scale.log()
-      .range([1, 40]);
+      .range([4, 40]);
 
   vis.filteredData = vis.data;
       
@@ -41,9 +41,7 @@ wordCloud.prototype.initVis = function() {
 wordCloud.prototype.wrangleData = function() {
   var vis = this;
 
-  console.log("in wrangledata");
-
-  console.log("The length of the data is " + vis.filteredData.length);
+  vis.moreStopWords = ["(", ")", "would", "could", "should", "like"];
 
   vis.raw = []
 
@@ -60,14 +58,13 @@ wordCloud.prototype.wrangleData = function() {
     .rollup(function(leaves) { return d3.sum(leaves, function(d) { return d.count; })})
     .entries(vis.raw);
 
-  // Just the top top...
+  // Just the top top, removing stopwords again...
   vis.words = vis.processing.filter(function(word) {
-    if (word.values >= 100 && word.key != "(" && word.key != ")") {
+    var notStop = $.inArray(word.key, vis.moreStopWords)
+    if (word.values >= 100 && notStop == -1) {
       return word;
     }
   })
-
-  console.log("The number of words is " + vis.words.length); 
 
   vis.updateVis();
 
@@ -97,11 +94,12 @@ wordCloud.prototype.updateVis = function() {
       return Math.floor(Math.random() * vis.height) + "px";
     })
     .attr("fill", "gray")
+    .attr("fill-opacity", 0.75)
     .attr("font-size", function(d) { return vis.font(d.values) + "px"; })
     .text(function(d) { return d.key; });
 
   vis.allTexts.exit().remove();
 
 
-
 }
+

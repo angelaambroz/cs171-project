@@ -118,6 +118,8 @@ function tooltip(d) {
 
 	if (d.award == 1) { 
 		var awardIcon = 'Yes <i class="fa fa-trophy" aria-hidden="true"></i>'; 
+	} else if (d.year >= 2015) {
+		var awardIcon = "No (not yet?)";
 	} else {
 		var awardIcon = "No";
 	}
@@ -173,8 +175,6 @@ function brushed() {
 	var minYear = lineChart.brush.extent()[0].getFullYear();
 	var maxYear = lineChart.brush.extent()[1].getFullYear();
 
-	console.log(lineChart.brush.empty());
-
 	if (lineChart.brush.empty()) {
 		wordCloud.filteredData = cleanData;
 	} else {
@@ -186,10 +186,6 @@ function brushed() {
 	}
 
 	wordCloud.wrangleData();
-
-
-	console.log(lineChart.brush.extent()[0].getFullYear());
-
 }
 
 function bookmarks() {
