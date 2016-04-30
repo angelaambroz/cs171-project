@@ -20,9 +20,22 @@ timeline.prototype.cleanData = function() {
 
   // Flatten the JSON into an array of stories
   vis.data.forEach(function(year) {
+
+    if (year.year < 2016) { 
+      year['year_date'] = new Date('12/31/' + year.year);
+    } else {
+      year['year_date'] = new Date('04/18/' + year.year);
+    }
+    
+    var vd_sum = 0;
+
     year.storiesClean.forEach(function(story) {
+      vd_sum += parseFloat(story['vocab_demeaned']);
       vis.flatStories.push(story);
     })
+
+    year['avg_vocab_per_story'] = vd_sum / year.storiesClean.length;
+
   })
 
   // Getting rid of an outlier... :/ 
@@ -84,22 +97,38 @@ timeline.prototype.initVis = function(){
 
   // Draw line chart
   vis.line = d3.svg.line()
-    .interpolate("bundle")
+    .interpolate("linear")
     .x(function(d) { return vis.x(d.date); })
     .y(function(d) { return vis.y(d.vocab_demeaned); });
 
-  vis.avgLines = d3.svg.line()
-    .interpolate("linear")
-    .x(function(d) { return vis.x(d.year)});
-    // .y(function(d) { return vis.y(d.)})
-  
   vis.linePath = vis.svg.append("g");
   
   vis.linePath.append("path")
     .attr("class", "line")
+    .attr("id", "allStories")
     .attr("d", vis.line(vis.cleanStories));
 
-  vis.refLines = vis.svg.append("g");
+
+  // Draw reference lines
+  vis.heinleinLine = d3.svg.line()
+    .interpolate("linear")
+    .x(function(d) { return vis.x(d.year_date)})
+    .y(function(d) { return vis.y(d.heinlein); });
+
+  vis.avgYearLine = d3.svg.line()
+    .interpolate("linear")
+    .x(function(d) { return vis.x(d.year_date)})
+    .y(function(d) { return vis.y(d.avg_vocab_per_story); });
+
+  vis.linePath.append("path")
+    .attr("class", "line")
+    .attr("id", "heinlein")
+    .attr("d", vis.heinleinLine(vis.data));
+
+  vis.linePath.append("path")
+    .attr("class", "line")
+    .attr("id", "avgYearLine")
+    .attr("d", vis.avgYearLine(vis.data));
 
   // Axis
   vis.svg.append("g")
@@ -126,8 +155,7 @@ timeline.prototype.initVis = function(){
       .attr("class", "extratiny")
       .attr("x", vis.width - 12)
       .attr("y", vis.finalY)
-      .text("% of unique words per story");
+      .text("vocab per story");
       
-
 }
 

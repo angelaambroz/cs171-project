@@ -33,6 +33,7 @@
 			<hr>
 			<h4 id="toc">Table of Contents</h4>
 			<ul>
+				<li><a href="#exec">Exec summary</a></li>
 				<li><a href="#background">Background and motivation</a></li>
 				<li><a href="#inspiration1">Inspiration: A great vis</a></li>
 				<li><a href="#inspiration2">More inspiration: Narrative theory + machine learning</a></li>
@@ -44,6 +45,20 @@
 				<li><a href="#ovc">OpenVis Conference 2016: Text visualization workshop</a></li>
 				<li><a href="#thanks">Thanks</a></li>
 			</ul>
+			<hr>
+			<br>
+				<h4 id="exec">EXEC SUMMARY <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
+				<p>First: Strange Horizons sci-fi stories haven't changed much over time. At least, not on the surface of things like vocab, sentence length, or award-winning-ness.</p>
+				<p>Second: I set out to tell a data-driven story, and ended up with a data exploration/re-imagined library catalog. So many sci-fi stories did I bookmark during this process!</p>
+				<p>Third: Text visualization is hard.</p>
+				<p>More stuff I learned:</p>
+				<ul>
+					<li><b>Prototype, prototype, prototype.</b> I  made the terrible mistake of discovering that my data was basically boring <em>very</em> late in the development process. Some tools for quick data exploration/prototyping: <a href="https://stanford.edu/~mwaskom/software/seaborn/" target="_blank">seaborn</a>, <a href="http://matplotlib.org/" target="_blank">matplotlib</a>, the exciting <a href="https://vega.github.io/vega-lite/" target="_blank">Vega-Lite</a>.</li>
+					<li><b>Cleaning > Analyzing > Designing > Visualizing</b>, in terms of time/mental energy. I definitely had it the other way around in my head.</li>
+					<li><b>Natural language processing has enormous (awesome) depths.</b> Yo, NLP ain't no joke. I naively thought text data would be fun/easy/novel (no pun intended) to visualize. Little did I realize what an analysis monster I would unleash. Hapax legomena, tf-idf, t-SNE, and the tinkering of stopwords. These things kept me very busy, much busier than I had originally expected.</li>
+					<li><b>Data can't make up for design.</b> I have a newfound respect for design. Especially elegant, intuitive, narrative design. The power of design! <a href="https://docs.google.com/presentation/d/1GOSyl4-iklcO0kIBFy-31zylaLC1R3uTwxX89bWt5D0/edit" target="_blank">Tony Chu's OpenVis Conf 2016 slides</a> really helped me identify why <code>the shape of text</code> didn't <em>feel</em> right.</li>
+					<li><b>Separate data collection (scraping) from analysis!</b> I ended up building a Frankenmonster scraper that analyzed stories on the fly. This was incredibly inefficient. Next time, I'll maintain a clear line between grabbing all the data once, and then churning through it for analyses.</li>
+				</ul>
 			<hr>
 			<br>
 			<h4 id="background">Background and motivation <a href="#toc" class="caption"><i class="fa fa-level-up" aria-hidden="true"></i></a></h4>
@@ -263,7 +278,7 @@
 
 			<br>
 			<h4 id="thanks">Thanks</h4>
-			<p>Thanks to the following people who took the time to give me helpfully critical and critically helpful prototype advice: Vikjam, Yannick, Lauren, Marsha, Jane, Eric, Alex, Doug, Leah, Michelle, Christopher, and Sol.</p>
+			<p>Thanks to the following people who took the time to give me helpfully critical and critically helpful prototype advice: Vikjam, Yannick, Lauren, Marsha, Jane, Eric, Alex, Doug, Leah, Michelle, Christopher, Chris, Isaac, Michael, and Sol.</p>
 			<p>Thanks to the CS171 Spring 2016 team - especially Hanspeter, Zona, Hendrik and Johanna.</p>
 			<p>And thanks especially to Max, who had a lot of patience.</p>
 

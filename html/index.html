@@ -42,7 +42,7 @@
 
 	<div class="row buffer-needed">
 
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 		
 		
 		<div class="col-md-8">
@@ -59,29 +59,25 @@
 				</div>
 			</div> -->
 
-			<h3>Around 40% of words in stories are unique</h3>
-			<p class="tiny"><code>vocab</code> is the number of a story's unique words, divided by a story's total word count. It is also the likelihood that the next word will be a new word. How did this likelihood change over time?</p>
+			<h3>The average <code>vocab</code> per story hasn't changed much</h3>
+			<p class="tiny"><code>vocab</code> is calculated as a story's total vocab divided by a story's total word count. While there are certainly outliers, Strange Horizons stories have had the same (standardized) vocab for the past 16 years.</p>
 			<div id="line-chart"></div>
 
 			<!-- <button class="btn btn-primary btn-default" id="showBookmarks">See bookmarks</button> -->
 			<div id="main-viz"></div>
-<!-- 			<h3 id="main-viz-title">all the stories, all the complexity <i class="fa fa-refresh" aria-hidden="true"></i></h3> -->
 
 		</div>
 
-		<div class="col-md-2"></div>
+		<div class="col-md-2">
+			<div id="word-cloud"></div>
+		</div>
+
+		<div class="col-md-1"></div>
 
 	</div>
 
 	<div class="row">
-<!-- 		<div class="col-md-6">
-			<h4><code>vocab</code> over time <i class="fa fa-refresh" aria-hidden="true"></i></h4>
-			<p class="tiny">For each story, what is the likelihood that the next word will be a new word? How did this likelihood change over time?</p>
-			<div id="line-chart"></div>
-			
-		</div>
-
-		<div class="col-md-6">
+<!-- 	<div class="col-md-6">
 			<h4><span id="y-label">normalized sentence variance</span> vs. <code>vocab</code> <i class="fa fa-refresh" aria-hidden="true"></i></h4>
 			<p class="tiny">For each story, how does the 'new word likelihood' relate to the amount that sentences vary? Are stories with sentences of varying lengths 'better'?</p>
 			<div id="scatterplot"></div>
@@ -117,12 +113,14 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/d3.min.js"></script>
+	<script src="js/d3.layout.cloud.js"></script>
 	<script src="js/sweetalert.min.js"></script>
 
 	<!-- Visualization objects -->
 	<script src="js/textChart.js"></script>
 	<script src="js/scatterplot.js"></script>
 	<script src="js/timeline.js"></script>
+	<script src="js/wordcloud.js"></script>
 
 	<!-- Load data, create visualizations -->
 	<script src="js/main.js"></script>

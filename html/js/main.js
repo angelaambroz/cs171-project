@@ -100,6 +100,7 @@ function createVis() {
 	console.log("Making the vizzes.");
 	mainChart = new textChart("main-viz", cleanData);
 	lineChart = new timeline("line-chart", cleanData);
+	wordCloud = new wordCloud("word-cloud", cleanData);
 }
 
 function mouseover(d) {
@@ -121,17 +122,17 @@ function tooltip(d) {
 	var html = "<p>" + d.author + "</p><br>";
 		html += '<table class="table">';
 		html += '<tr>';
-		html += '<th>Word count (excl. punctuation)</th>';
+		html += '<th>Word count</th>';
 		html += '<td>' + commaFormat(d.wordcount) + '</td>';
 		html += '</tr><tr>';
-		html += '<th>Unique word count</th>';
+		html += '<th>Vocab</th>';
 		html += '<td>' +  commaFormat(d.vocab) + '</td>';
 		html += '</tr><tr>';
 		html += '<th>Most-used word</th>';
 		html += '<td><em>' + d.top_within[0].word + '</em></td>';
 		html += '</tr><tr>';
 		html += '<th>Avg. sentence length</th>';
-		html += '<td>' + Math.round(d.mean_sentence_length) + '</td>';
+		html += '<td>' + Math.round(d.mean_sentence_length) + ' words</td>';
 		html += '</tr><tr>';
 		html += '<th>Award winner?</th>';
 		html += '<td>' + awardIcon + '</td>';
@@ -183,22 +184,10 @@ function refresh() {
 }
 
 
-function zoom() {
-    scatter.svg.select(".x-axis.axis").call(scatter.xAxis);
-    scatter.svg.select(".y-axis.axis").call(scatter.yAxis);
-    scatter.circles
-        .attr("cx", function(d) { return scatter.x(d.stdv_snt_length_demeaned)})
-        .attr("cy", function(d) { return scatter.y(d.vocab_demeaned)});
-}
-
-
 // On resizing, resize all three vizzes
 window.addEventListener("resize", function() {
 		d3.select("#main-viz").selectAll("svg").remove();
 		mainChart.initVis();
-
-		d3.select("#scatterplot").selectAll("svg").remove();
-		scatter.initVis();
 
 		d3.select("#line-chart").selectAll("svg").remove();
 		lineChart.initVis();

@@ -67,7 +67,15 @@ a:hover {
 
 .line {
   fill: none;
-  stroke-width: 0.5px;
+}
+
+#allStories {
+  stroke-width: 0.25px;
+  stroke: gray;
+}
+
+#avgYearLine {
+  stroke-width: 2px;
   stroke: #894b00;
 }
 

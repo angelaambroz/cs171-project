@@ -5,7 +5,7 @@
  * @param _data						-- the  
  */
 
-timeline = function(_parentElement, _data){
+wordCloud = function(_parentElement, _data) {
 	this.parentElement = _parentElement;
   this.data = _data;
 
@@ -13,79 +13,76 @@ timeline = function(_parentElement, _data){
 }
 
 
+wordCloud.prototype.initVis = function() {
+  var vis = this;
 
-
-timeline.prototype.initVis = function(){
-  var vis = this; 
-
-  // Draw the canvas
-  vis.margin = {top: 10, right: 50, bottom: 30, left: 50};
-
+  // Draw the word cloud canvas
   vis.divWidth = $("#" + vis.parentElement).width();
-
-  vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-  vis.height = 225 - vis.margin.top - vis.margin.bottom;
-
-  vis.r = 1.5;
-
-  // console.log(vis.data);
-
-  // Scales and axes
-  vis.x = d3.time.scale()
-      .range([0, vis.width])
-      .domain(d3.extent(vis.data, function(d) { return d.date; }));
-
-  vis.y = d3.scale.linear()
-  		.range([vis.height, 0])
-      .domain(d3.extent(vis.data, function(d) { return d.vocab; }));
-
-  vis.xAxis = d3.svg.axis()
-  	  .scale(vis.x)
-  	  .orient("bottom")
-      .ticks(3);
-
-  vis.yAxis = d3.svg.axis()
-      .scale(vis.y)
-      .orient("left")
-      .ticks(4);
-
-  // SVG drawing area
+  vis.height = vis.divWidth * 6;
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
-    .attr("width", vis.width + vis.margin.left + vis.margin.right)
-    .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+    .attr("width", vis.divWidth)
+    .attr("height", vis.height);
 
-
-  // Draw line chart
-  vis.line = d3.svg.line()
-    .x(function(d) { return vis.x(d.date); })
-    .y(function(d) { return vis.y(d.vocab); });
-  
-  vis.svg.append("path")
-    .attr("class", "line")
-    .attr("d", vis.line(vis.data));
-
-  vis.circles = vis.svg.selectAll(".linecircle")
-    .data(vis.data)
-    .enter()
-    .append("circle")
-    .attr("class", "linecircle")
-    .attr("id", function(d) { return "story" + d.id; })
-    .attr("r", vis.r)
-    .attr("cx", function(d) { return vis.x(d.date); })
-    .attr("cy", function(d) { return vis.y(d.vocab); })
-    .on("mouseover", linkHighlight)
-    .on("click", clicked);
-
-  vis.svg.append("g")
-      .attr("class", "x-axis axis")
-      .attr("transform", "translate(0," + vis.height + ")")
-      .call(vis.xAxis);
-
-    vis.svg.append("g")
-    .attr("class", "y-axis axis")
-    .call(vis.yAxis);
+  // Scales
+  vis.font = d3.scale.log()
+      .range([1, 40]);
+      
+  vis.cleanData();
 
 }
 
+wordCloud.prototype.cleanData = function() {
+  var vis = this;
+
+  vis.raw = []
+
+  vis.data.forEach(function(year) {
+    year['storiesClean'].forEach(function(story) {
+      story['top_within'].forEach(function(word) {
+        vis.raw.push(word);
+        })
+      })
+    })
+
+  vis.processing = d3.nest()
+    .key(function(d) { return d.word; })
+    .rollup(function(leaves) { return d3.sum(leaves, function(d) { return d.count; })})
+    .entries(vis.raw);
+
+  // Just the top top...
+  vis.words = vis.processing.filter(function(word) {
+    if (word.values >= 150 && word.key != "(" && word.key != ")") {
+      return word;
+    }
+  })
+
+  vis.updateVis();
+
+}
+
+
+
+wordCloud.prototype.updateVis = function() {
+
+    var vis = this;
+
+    vis.font.domain(d3.extent(vis.words, function(d) { return d.values; }));
+
+    vis.allTexts = vis.svg.selectAll("text")
+      .data(vis.words)
+      .enter()
+      .append("text");
+
+  vis.allTexts
+    .attr("x", function() { 
+      return Math.floor(Math.random() * vis.divWidth) + "px";
+    })
+    .attr("y", function() {
+      return Math.floor(Math.random() * vis.height) + "px";
+    })
+    .attr("fill", "gray")
+    .attr("font-size", function(d) { return vis.font(d.values) + "px"; })
+    .text(function(d) { return d.key; });
+
+
+}

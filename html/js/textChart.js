@@ -65,6 +65,7 @@ textChart.prototype.initVis = function() {
 
 	vis.yAxis = d3.svg.axis()
 		.scale(vis.y)
+		.ticks(0)
 		.orient("left");
 
 	vis.svg.append("g")
@@ -75,19 +76,19 @@ textChart.prototype.initVis = function() {
 	// y-axis labels
 	vis.svg.append("text")
 		.attr("class", "tiny")
-		.attr("x", -60)
+		.attr("x", -30)
 		.attr("y", 30)
 		.text("Jan");
 
 	vis.svg.append("text")
 		.attr("class", "tiny")
-		.attr("x", -60)
+		.attr("x", -30)
 		.attr("y", vis.height/2)
 		.text("Jun");
 
 	vis.svg.append("text")
 		.attr("class", "tiny")
-		.attr("x", -60)
+		.attr("x", -30)
 		.attr("y", vis.height - 10)
 		.text("Dec");
 
