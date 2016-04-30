@@ -17,26 +17,37 @@ wordCloud.prototype.initVis = function() {
   var vis = this;
 
   // Draw the word cloud canvas
+  vis.margin = {top: 0, right: 0, bottom: 0, left: 0 };
   vis.divWidth = $("#" + vis.parentElement).width();
-  vis.height = vis.divWidth * 6;
+  vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
+  vis.height = (vis.divWidth * 6) - vis.margin.top - vis.margin.bottom;
+
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
-    .attr("width", vis.divWidth)
-    .attr("height", vis.height);
+    .attr("width", vis.width)
+    .attr("height", vis.height)
+    .append("g")
+    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
   // Scales
   vis.font = d3.scale.log()
       .range([1, 40]);
+
+  vis.filteredData = vis.data;
       
-  vis.cleanData();
+  vis.wrangleData();
 
 }
 
-wordCloud.prototype.cleanData = function() {
+wordCloud.prototype.wrangleData = function() {
   var vis = this;
+
+  console.log("in wrangledata");
+
+  console.log("The length of the data is " + vis.filteredData.length);
 
   vis.raw = []
 
-  vis.data.forEach(function(year) {
+  vis.filteredData.forEach(function(year) {
     year['storiesClean'].forEach(function(story) {
       story['top_within'].forEach(function(word) {
         vis.raw.push(word);
@@ -51,10 +62,12 @@ wordCloud.prototype.cleanData = function() {
 
   // Just the top top...
   vis.words = vis.processing.filter(function(word) {
-    if (word.values >= 150 && word.key != "(" && word.key != ")") {
+    if (word.values >= 100 && word.key != "(" && word.key != ")") {
       return word;
     }
   })
+
+  console.log("The number of words is " + vis.words.length); 
 
   vis.updateVis();
 
@@ -69,13 +82,16 @@ wordCloud.prototype.updateVis = function() {
     vis.font.domain(d3.extent(vis.words, function(d) { return d.values; }));
 
     vis.allTexts = vis.svg.selectAll("text")
-      .data(vis.words)
+      .data(vis.words);
+
+    vis.allTexts
       .enter()
       .append("text");
 
   vis.allTexts
+    .transition()
     .attr("x", function() { 
-      return Math.floor(Math.random() * vis.divWidth) + "px";
+      return Math.floor(Math.random() * (vis.width - 75)) + "px";
     })
     .attr("y", function() {
       return Math.floor(Math.random() * vis.height) + "px";
@@ -83,6 +99,9 @@ wordCloud.prototype.updateVis = function() {
     .attr("fill", "gray")
     .attr("font-size", function(d) { return vis.font(d.values) + "px"; })
     .text(function(d) { return d.key; });
+
+  vis.allTexts.exit().remove();
+
 
 
 }

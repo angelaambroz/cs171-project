@@ -103,6 +103,9 @@ function createVis() {
 	wordCloud = new wordCloud("word-cloud", cleanData);
 }
 
+
+
+
 function mouseover(d) {
 	d3.selectAll("#story" + d.id).classed("highlighted", true);
 }
@@ -166,6 +169,26 @@ function brushed() {
 				return false;
 			}
 		});
+
+	var minYear = lineChart.brush.extent()[0].getFullYear();
+	var maxYear = lineChart.brush.extent()[1].getFullYear();
+
+	console.log(lineChart.brush.empty());
+
+	if (lineChart.brush.empty()) {
+		wordCloud.filteredData = cleanData;
+	} else {
+		wordCloud.filteredData = cleanData.filter(function(year) {
+			if (year.year >= minYear && year.year <= maxYear) {
+				return year;
+			}
+		})
+	}
+
+	wordCloud.wrangleData();
+
+
+	console.log(lineChart.brush.extent()[0].getFullYear());
 
 }
 
