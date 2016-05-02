@@ -1,11 +1,11 @@
 
 /*
- * Timeline - Object constructor function
+ * wordCloudConstruct - Object constructor function
  * @param _parentElement 	-- the HTML element in which to draw the visualization
  * @param _data						-- the  
  */
 
-wordCloud = function(_parentElement, _data) {
+wordCloudConstruct = function(_parentElement, _data) {
 	this.parentElement = _parentElement;
   this.data = _data;
 
@@ -13,14 +13,14 @@ wordCloud = function(_parentElement, _data) {
 }
 
 
-wordCloud.prototype.initVis = function() {
+wordCloudConstruct.prototype.initVis = function() {
   var vis = this;
 
   // Draw the word cloud canvas
   vis.margin = {top: 10, right: 0, bottom: 0, left: 0 };
   vis.divWidth = $("#" + vis.parentElement).width();
-  vis.width = vis.divWidth - vis.margin.left - vis.margin.right,
-  vis.height = (vis.divWidth * 5) - vis.margin.top - vis.margin.bottom;
+  vis.width = vis.divWidth - vis.margin.left - vis.margin.right;
+  vis.height = (vis.divWidth * 5) - vis.margin.top - vis.margin.bottom;  
 
   vis.svg = d3.select("#" + vis.parentElement).append("svg")
     .attr("width", vis.width)
@@ -38,12 +38,12 @@ wordCloud.prototype.initVis = function() {
 
 }
 
-wordCloud.prototype.wrangleData = function() {
+wordCloudConstruct.prototype.wrangleData = function() {
   var vis = this;
 
   vis.moreStopWords = ["(", ")", "would", "could", "should", "like"];
 
-  vis.raw = []
+  vis.raw = [];
 
   vis.filteredData.forEach(function(year) {
     year['storiesClean'].forEach(function(story) {
@@ -71,8 +71,7 @@ wordCloud.prototype.wrangleData = function() {
 }
 
 
-
-wordCloud.prototype.updateVis = function() {
+wordCloudConstruct.prototype.updateVis = function() {
 
     var vis = this;
 

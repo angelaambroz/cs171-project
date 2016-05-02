@@ -155,7 +155,7 @@ timeline.prototype.initVis = function(){
       .attr("class", "extratiny")
       .attr("x", vis.width - 12)
       .attr("y", vis.finalY)
-      .text("vocab per story");
+      .text("avg story vocab");
       
 }
 

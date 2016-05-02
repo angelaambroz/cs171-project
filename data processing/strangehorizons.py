@@ -45,8 +45,8 @@ MORESTOP = [
 			u"'ve",
 			u"'re",
 			u"'ll",
-			u"said", #argh, i think this is an error here! bad data cleaning!
-			u"says" #bad data cleaning! bad nlp :(
+			u"said", 
+			u"says" 
 			]
 STOP.extend(MORESTOP)
 CLEAN = ["CDATA", "comments found", "following HTML tags"]
@@ -215,7 +215,6 @@ for year in years:
 		if year['year'] == story['year']:
 			year['stories'].append(story)
 
-# pp.pprint(years)
 
 with open(DIR + "/processed/sh-data6-no-text.json", "w") as f:
 	json.dump(years, f)

@@ -163,10 +163,9 @@ for txt in books:
 
 	bigJson.append(bookData)
 
-	# with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
-	# 	json.dump(bookData, f)
+	with open(DIR + "/processed/disagg/" + txt + ".json", "w") as f:
+		json.dump(bookData, f)
 
-# pp.pprint(bigJson)
 
 with open(DIR + "/processed/data10.json", "w") as f:
 	json.dump(bigJson, f)

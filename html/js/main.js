@@ -4,11 +4,7 @@ var allData = [],
 	cleanData = [],
 	commaFormat = d3.format(',');
 
-var selectedBook, mainData, linkData, mainChart, lineChart, scatter, scrollPoint; 
-
-
-$(".fa-refresh").on("click", refresh);
-$("#showBookmarks").on("click", bookmarks);
+var selectedBook, mainData, linkData, mainChart, lineChart; 
 
 
 // Age of Strange Horizons
@@ -100,7 +96,7 @@ function createVis() {
 	console.log("Making the vizzes.");
 	mainChart = new textChart("main-viz", cleanData);
 	lineChart = new timeline("line-chart", cleanData);
-	wordCloud = new wordCloud("word-cloud", cleanData);
+	wordCloud = new wordCloudConstruct("word-cloud", cleanData);
 }
 
 

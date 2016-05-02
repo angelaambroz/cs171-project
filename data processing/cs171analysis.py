@@ -137,17 +137,6 @@ def Heinlein():
 	return vocab_demeaned
 
 
-#################################
-#	Data cleaning functions	#
-#################################
-
-
-
-#############################
-#	Data analysis functions	#
-#############################
-
-
 
 #########
 #  Run	#
