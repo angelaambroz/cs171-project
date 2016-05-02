@@ -5,6 +5,21 @@ CS171 Project: The shape of text
 
 Spring 2016. This project will visualize the story shapes of a ~~variety of 19th century novels~~ about ~~300~~ 800+ science fiction short stories. Ideally, I'd like to build something that's extendable to a wide variety of texts. This is the final project for [CS171 Spring 2016](http://www.cs171.org/2016/). 
 
+**Final project website is [here](http://angelaambroz.com/cs171/).** Screencast is [here](https://www.youtube.com/watch?v=nt7CcmOeQIE).
+
+Code | What it does | Attribution (if not me)
+--- | --- | ---
+`html/js/main.js` | Calls in all visualizations, runs everything. | --
+`html/js/scatterplot.js` | A scatterplot visualization (not used in final website). | --
+`html/js/sweetalert.min.js` | Pretty alerts. | [Tristan Edwards (Sweet Alerts library)](https://t4t5.github.io/sweetalert/)
+`html/js/textChart.js` | The bubble heat map. | --
+`html/js/timeline.js` | The average `vocab` over time line chart. | --
+`html/js/wordcloud.js` | The word cloud on the right-hand side. | --
+`data processing/cs171analysis.py` | Post-processing of Strange Horizons data. | --
+`data processing/preparingData.py` | The initial scrape of Gutenberg texts. | --
+`data processing/strangehorizons.py` | The scrape of Strange Horizons. | --
+
+
 ### Lit review
 * [Corpus linguistics](https://en.wikipedia.org/wiki/Corpus_linguistics)
 * [Hapax legomenon](https://en.wikipedia.org/wiki/Hapax_legomenon)
